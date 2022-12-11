@@ -26,5 +26,6 @@ While there are great applications out there that help small and talented artist
   - Flask
 - APIs/external data sources:
   - Stripe API
+  - Image hosting
 - Browser/client-side dependencies:
   - Sass
