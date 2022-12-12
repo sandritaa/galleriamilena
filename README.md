@@ -29,3 +29,9 @@ While there are great applications out there that help small and talented artist
   - Image hosting
 - Browser/client-side dependencies:
   - Sass
+
+### Installation
+
+To set up the repository, run the following command:
+
+`pip3 install -r requirements.txt`
