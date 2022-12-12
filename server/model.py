@@ -63,4 +63,50 @@ class Mandala(db.Model):
    
     # class representation 
     def __repr__(self):
-        return f'Art {self.id} {self.description} {self.price} {self.year} {self.color} {self.in_stock}'
+        return f'Mandala {self.id} {self.price} {self.year} {self.color} {self.in_stock}'
+
+# create shipment class
+class Shipment(db.Model):
+
+    # create shipments table 
+    __tablename__ = 'shipments'
+
+    # create attributes
+    id = db.Column(db.Integer, autoincrement=True, primaryKey= True)
+    fname = db.Column(db.Float) 
+    lname = db.Column(db.String)
+    address1 = db.Column(db.Text)
+    address2 = db.Column(db.String)
+    city = db.Column(db.String)
+    state = db.Column(db.String)
+    zipcode = db.Column(db.String)
+    country = db.Column(db.String)
+    email = db.Column(db.String)
+    phone = db.Column(db.String(10))
+
+    # class representation 
+    def __repr__(self):
+        return f'Shipment {self.id} {self.fname} {self.lname} {self.city} {self.state} {self.zipcode} {self.country} {self.email} {self.phone}'
+
+# create invoice class
+class Invoice(db.Model):
+
+    # create invoices table 
+    __tablename__ = 'invoices'
+
+    # create attributes
+    id = db.Column(db.Integer, autoincrement=True, primaryKey= True)
+    fname = db.Column(db.Float) 
+    lname = db.Column(db.String)
+    address1 = db.Column(db.Text)
+    address2 = db.Column(db.String)
+    city = db.Column(db.String)
+    state = db.Column(db.String)
+    zipcode = db.Column(db.String)
+    country = db.Column(db.String)
+    email = db.Column(db.String)
+    phone = db.Column(db.String(10))
+
+    # class representation 
+    def __repr__(self):
+        return f'Invoice {self.id} {self.fname} {self.lname} {self.city} {self.state} {self.zipcode} {self.country} {self.email} {self.phone}'
