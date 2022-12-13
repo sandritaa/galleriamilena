@@ -104,12 +104,12 @@ class Shipment(db.Model):
     def __repr__(self):
         return f'Shipment {self.id} {self.fname} {self.lname} {self.city} {self.state} {self.zipcode} {self.country} {self.email} {self.phone}'
 
-# create invoice class
+# create Artist class
 
 
 class Artist(db.Model):
 
-    # create invoices table
+    # create artists table
     __tablename__ = 'artists'
 
     # create attributes
@@ -129,4 +129,4 @@ class Artist(db.Model):
 
     # class representation
     def __repr__(self):
-        return f'Invoice {self.id} {self.fname} {self.lname} {self.email} {self.country} {self.alias}'
+        return f'Artist {self.id} {self.fname} {self.lname} {self.email} {self.country} {self.alias}'
