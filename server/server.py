@@ -24,7 +24,7 @@ def gallery():
 
 @app.route('/gallery/<item>')
 def homepage():
-    return render_template("index.html")
+    return render_template("item.html")
 
 
 @app.route('/profile/<customer>')
