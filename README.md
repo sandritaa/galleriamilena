@@ -1,4 +1,4 @@
-# MandalArt
+# Galleria Milena
 
 A web application that allows an artist to showcase and sell their artwork
 
