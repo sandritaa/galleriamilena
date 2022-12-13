@@ -1,112 +1,130 @@
-# import sqlalchemy class from the flak-sqlalchemy module 
+# import sqlalchemy class from the flak-sqlalchemy module
 from flask_sqlalchemy import SQLAlchemy
 
-# create an object from the class sqlalchemy 
+# create an object from the class sqlalchemy
 db = SQLAlchemy()
 
 # create customer class
+
+
 class Customer(db.Model):
 
-    # create customers table 
+    # create customers table
     __tablename__ = 'customers'
 
     # create attributes
-    id = db.Column(db.Integer, autoincrement=True, primaryKey= True)
+    id = db.Column(db.Integer, autoincrement=True, primaryKey=True)
     fname = db.Column(db.String)
     lname = db.Column(db.String)
     email = db.Column(db.String)
     phone = db.Column(db.String(11))
     password = db.Column(db.String(10))
 
-    # class representation 
+    # class representation
     def __repr__(self):
         return f'Customer {self.id} {self.fname} {self.lname} {self.email} {self.phone}'
 
 # create order class
+
+
 class Order(db.Model):
 
-    # create orders table 
+    # create orders table
     __tablename__ = 'orders'
 
     # create attributes
-    id = db.Column(db.Integer, autoincrement=True, primaryKey= True)
+    id = db.Column(db.Integer, autoincrement=True, primaryKey=True)
     date = db.Column(db.DateTime)
     total = db.Column(db.Float)
-    # TODO: mandalart #15 add stripe api
-    payment_id = db.Column(db.String) 
     status = db.Column(db.String)
-    # add foreign keys 
-    customer_id = db.Column(db.Integer, db.ForeignKey ('customers.id)'))
-    ship_id = db.Column(db.Integer, db.ForeignKey ('shippings.id)'))
-    bill_id = db.Column(db.Integer, db.ForeignKey ('billing.id)'))
+    transaction_id = db.Column(db.String)
 
-    # class representation 
+    # add foreign keys
+    customer_id = db.Column(db.Integer, db.ForeignKey('customers.id)'))
+    ship_id = db.Column(db.Integer, db.ForeignKey('shipments.id)'))
+    artist_id = db.Column(db.Integer, db.ForeignKey('artists.id)'))
+
+    # class representation
     def __repr__(self):
-         return f'Order {self.id} {self.date} {self.total} {self.payment_id} {self.status}'
+        return f'Order {self.id} {self.date} {self.total} {self.status} {self.transaction_id}'
 
-# create mandala class
-class Mandala(db.Model):
+# create item class
 
-    # create mandalas table 
-    __tablename__ = 'mandalas'
+
+class Item(db.Model):
+
+    # create items table
+    __tablename__ = 'items'
 
     # create attributes
-    id = db.Column(db.Integer, autoincrement=True, primaryKey= True)
+    id = db.Column(db.Integer, autoincrement=True, primaryKey=True)
     description = db.Column(db.Text)
     dimensions = db.Column(db.String)
-    price = db.Column(db.Float) 
+    price = db.Column(db.Float)
     year = db.Column(db.DateTime)
     color = db.Column(db.String)
-    in_stock= db.Column(db.Boolean)
-     # add foreign keys 
-    order_id = db.Column(db.Integer, db.ForeignKey ('orders.id)'), Nullable = True)
-   
-    # class representation 
+    in_stock = db.Column(db.Boolean)
+
+    # add foreign keys
+    order_id = db.Column(db.Integer, db.ForeignKey(
+        'orders.id)'), Nullable=True)
+    artist_id = db.Column(db.Integer, db.ForeignKey('artists.id)'))
+
+    # class representation
+
     def __repr__(self):
-        return f'Mandala {self.id} {self.price} {self.year} {self.color} {self.in_stock}'
+        return f'Item {self.id} {self.price} {self.year} {self.color} {self.in_stock}'
 
 # create shipment class
+
+
 class Shipment(db.Model):
 
-    # create shipments table 
+    # create shipments table
     __tablename__ = 'shipments'
 
     # create attributes
-    id = db.Column(db.Integer, autoincrement=True, primaryKey= True)
-    fname = db.Column(db.Float) 
+    id = db.Column(db.Integer, autoincrement=True, primaryKey=True)
+    fname = db.Column(db.String)
     lname = db.Column(db.String)
-    address1 = db.Column(db.Text)
+    address1 = db.Column(db.String)
     address2 = db.Column(db.String)
     city = db.Column(db.String)
     state = db.Column(db.String)
     zipcode = db.Column(db.String)
     country = db.Column(db.String)
     email = db.Column(db.String)
-    phone = db.Column(db.String(10))
+    phone = db.Column(db.String(11))
 
-    # class representation 
+    # add foreign keys
+    order_id = db.Column(db.Integer, db.ForeignKey(
+        'orders.id)'), Nullable=True)
+
+    # class representation
     def __repr__(self):
         return f'Shipment {self.id} {self.fname} {self.lname} {self.city} {self.state} {self.zipcode} {self.country} {self.email} {self.phone}'
 
 # create invoice class
+
+
 class Invoice(db.Model):
 
-    # create invoices table 
+    # create invoices table
     __tablename__ = 'invoices'
 
     # create attributes
-    id = db.Column(db.Integer, autoincrement=True, primaryKey= True)
-    fname = db.Column(db.Float) 
+    id = db.Column(db.Integer, autoincrement=True, primaryKey=True)
+    fname = db.Column(db.String)
     lname = db.Column(db.String)
-    address1 = db.Column(db.Text)
+    address1 = db.Column(db.String)
     address2 = db.Column(db.String)
     city = db.Column(db.String)
     state = db.Column(db.String)
     zipcode = db.Column(db.String)
     country = db.Column(db.String)
     email = db.Column(db.String)
-    phone = db.Column(db.String(10))
+    phone = db.Column(db.String(11))
 
-    # class representation 
+    # class representation
     def __repr__(self):
         return f'Invoice {self.id} {self.fname} {self.lname} {self.city} {self.state} {self.zipcode} {self.country} {self.email} {self.phone}'
