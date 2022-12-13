@@ -34,7 +34,7 @@ class Order(db.Model):
 
     # create attributes
     id = db.Column(db.Integer, autoincrement=True, primaryKey=True)
-    date = db.Column(db.DateTime)
+    date = db.Column(db.Date)
     total = db.Column(db.Float)
     status = db.Column(db.String)
     transaction_id = db.Column(db.String)
@@ -61,7 +61,7 @@ class Item(db.Model):
     description = db.Column(db.Text)
     dimensions = db.Column(db.String)
     price = db.Column(db.Float)
-    year = db.Column(db.DateTime)
+    year = db.Column(db.Date)
     color = db.Column(db.String)
     in_stock = db.Column(db.Boolean)
 
@@ -107,24 +107,26 @@ class Shipment(db.Model):
 # create invoice class
 
 
-class Invoice(db.Model):
+class Artist(db.Model):
 
     # create invoices table
-    __tablename__ = 'invoices'
+    __tablename__ = 'artists'
 
     # create attributes
     id = db.Column(db.Integer, autoincrement=True, primaryKey=True)
     fname = db.Column(db.String)
     lname = db.Column(db.String)
-    address1 = db.Column(db.String)
-    address2 = db.Column(db.String)
-    city = db.Column(db.String)
-    state = db.Column(db.String)
-    zipcode = db.Column(db.String)
-    country = db.Column(db.String)
     email = db.Column(db.String)
-    phone = db.Column(db.String(11))
+    password = db.Column(db.String(10))
+    country = db.Column(db.String)
+    alias = db.Column(db.String)
+    about = db.Column(db.Text)
+    logo = db.Column(db.String)
+    profile_pic = db.Column(db.String)
+    social = db.Column(db.String)
+    navbar_color = db.Column(db.String)
+    footer_color = db.Column(db.String)
 
     # class representation
     def __repr__(self):
-        return f'Invoice {self.id} {self.fname} {self.lname} {self.city} {self.state} {self.zipcode} {self.country} {self.email} {self.phone}'
+        return f'Invoice {self.id} {self.fname} {self.lname} {self.email} {self.country} {self.alias}'
