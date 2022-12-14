@@ -12,16 +12,33 @@ app.jinja_env.undefined = StrictUndefined
 def homepage():
     return render_template("index.html",  artists=Artist.query.all())
 
-# @app.route('/login')
-# def login():
-#     return render_template("login.html")
+
+@app.route('/login')
+def login():
+
+    # get request from client to retrieve user input in the server
+    user_email = request.args.get('email')
+    user_password = request.args.get('password')
+
+    # query from the database if the email and password exist under the same account
+    customer = Customer.query.filter((Customer.email == user_email) & (
+        Customer.password == user_password)).first()
+
+    print(customer)
+
+    if customer:
+
+        customer_route = '/profile/' + str(customer.customer_id)
+        return redirect(customer_route)
+    else:
+        return render_template("login.html")
 
 
-@app.route('/gallery/<alias>')
+@ app.route('/gallery/<alias>')
 def gallery(alias):
 
     # Given the artist alias, query the artist selected and pass the required info (all of it?) to the template
-    artist = Artist.query.filter_by(alias=alias).first()
+    artist = Artist.query.filter(Artist.alias == alias).first()
 
     return render_template("artistGallery.html", artist=artist)
 
@@ -31,9 +48,12 @@ def gallery(alias):
 #     return render_template("item.html")
 
 
-# @app.route('/profile/<customer>')
-# def customer_profile():
-#     return render_template("customerProfile.html")
+@app.route('/profile/<customer_id>')
+def customer_profile(customer_id):
+
+    customer = Customer.query.get(customer_id)
+
+    return render_template("customerProfile.html", customer=customer)
 
 
 # @app.route('/profile/<artist>')

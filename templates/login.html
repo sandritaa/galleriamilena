@@ -1,0 +1,16 @@
+<!-- inherit from base.html -->
+{% extends 'base.html' %}
+
+<!-- insert content block -->
+{% block body %}
+<div class="login">
+    <form action="/login">
+        <label for="email">Email</label><br>
+        <input type="text" id="email" name="email"><br>
+        <label for="password">Password</label><br>
+        <input type="text" id="password" name="password"><br>
+        <!-- add button for each artist -->
+        <input type='submit'></input>
+    </form>
+</div>
+{% endblock %}
