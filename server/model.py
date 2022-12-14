@@ -4,103 +4,69 @@ from flask_sqlalchemy import SQLAlchemy
 # create an object from the class sqlalchemy
 db = SQLAlchemy()
 
+
 # create customer class
-
-
 class Customer(db.Model):
 
     # create customers table
     __tablename__ = 'customers'
 
     # create attributes
-    id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    customer_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     fname = db.Column(db.String)
     lname = db.Column(db.String)
     email = db.Column(db.String)
-    phone = db.Column(db.String(11))
-    password = db.Column(db.String(10))
+    phone = db.Column(db.String)
+    password = db.Column(db.String(12))
 
     # add relationships
-    orders = db.relationship('Order', back_populates='customers')
-    items = db.relationship('Customer', back_populates='customers')
-    artists = db.relationship('Artist', back_populates='customers')
+    order = db.relationship('Order', back_populates='customer')
+    favitem = db.relationship('FavoriteItem', back_populates='customer')
+    favartist = db.relationship('FavoriteArtist', back_populates='customer')
 
     # class representation
     def __repr__(self):
-        return f'<Customer id={self.id} fname={self.fname} lname={self.lname} email={self.email} phone={self.phone}>'
-
-# create order class
+        return f'<Customer customer_id={self.customer_id} fname={self.fname} lname={self.lname} email={self.email} phone={self.phone}>'
 
 
-class Order(db.Model):
+# create artist class
+class Artist(db.Model):
 
-    # create orders table
-    __tablename__ = 'orders'
+    # create artists table
+    __tablename__ = 'artists'
 
     # create attributes
-    id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    date = db.Column(db.Date)
-    total = db.Column(db.Float)
-    status = db.Column(db.String)
-    transaction_id = db.Column(db.String)
-
-    # add foreign keys
-    customer_id = db.Column(db.Integer, db.ForeignKey('customers.id)'))
-    ship_id = db.Column(db.Integer, db.ForeignKey('shipments.id)'))
-    artist_id = db.Column(db.Integer, db.ForeignKey('artists.id)'))
+    artist_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    fname = db.Column(db.String)
+    lname = db.Column(db.String)
+    email = db.Column(db.String)
+    password = db.Column(db.String(12))
+    country = db.Column(db.String)
+    alias = db.Column(db.String)
+    about = db.Column(db.Text)
+    logo = db.Column(db.String)
+    profile_pic = db.Column(db.String)
+    social = db.Column(db.String)
 
     # add relationships
-    items = db.relationship('Item', back_populates='orders')
-    customers = db.relationship('Customer', back_populates='orders')
-    artists = db.relationship('Artist', back_populates='orders')
+    item = db.relationship('Item', back_populates='artist')
+    order = db.relationship('Order', back_populates='artist')
+    favartist = db.relationship('FavoriteArtist', back_populates='artist')
 
     # class representation
 
     def __repr__(self):
-        return f'<Order id={self.id} date={self.date} total={self.total} status={self.status} transaction_id={self.transaction_id}>'
+        return f'<Artist artist_id={self.artist_id} fname={self.fname} lname={self.lname} email={self.email} country={self.country} alias={self.alias}>'
 
-# create item class
-
-
-class Item(db.Model):
-
-    # create items table
-    __tablename__ = 'items'
-
-    # create attributes
-    id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    description = db.Column(db.Text)
-    dimensions = db.Column(db.String)
-    price = db.Column(db.Float)
-    year = db.Column(db.Date)
-    color = db.Column(db.String)
-    in_stock = db.Column(db.Boolean)
-
-    # add foreign keys
-    order_id = db.Column(db.Integer, db.ForeignKey(
-        'orders.id)'), Nullable=True)
-    artist_id = db.Column(db.Integer, db.ForeignKey('artists.id)'))
-
-    # add relationship
-    orders = db.relationship('Order', back_populates='items')
-    customers = db.relationship('Item', back_populates='items')
-    artists = db.relationship('Artist', back_populates='items')
-
-    # class representation
-
-    def __repr__(self):
-        return f'<Item id={self.id} price={self.price} year={self.year} color={self.color} in_stock={self.in_stock}>'
 
 # create shipment class
-
-
 class Shipment(db.Model):
 
     # create shipments table
     __tablename__ = 'shipments'
 
     # create attributes
-    id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    shipment_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     fname = db.Column(db.String)
     lname = db.Column(db.String)
     address1 = db.Column(db.String)
@@ -110,49 +76,126 @@ class Shipment(db.Model):
     zipcode = db.Column(db.String)
     country = db.Column(db.String)
     email = db.Column(db.String)
-    phone = db.Column(db.String(11))
+    phone = db.Column(db.String)
+
+    # class representation
+    def __repr__(self):
+        return f'<Shipment shipment_id={self.shipment_id} fname={self.fname} lname={self.lname} city={self.city} state={self.state} zipcode={self.zipcode} country={self.country} email={self.email} phone={self.phone}>'
+
+
+# create order class
+class Order(db.Model):
+
+    # create orders table
+    __tablename__ = 'orders'
+
+    # create attributes
+    order_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    date = db.Column(db.DateTime)
+    total = db.Column(db.Float)
+    status = db.Column(db.String)
+    transaction_id = db.Column(db.String)
+
+    # add foreign keys
+    customer_id = db.Column(
+        db.Integer, db.ForeignKey('customers.customer_id'))
+    shipment_id = db.Column(
+        db.Integer, db.ForeignKey('shipments.shipment_id'))
+    artist_id = db.Column(db.Integer, db.ForeignKey('artists.artist_id'))
+
+    # add relationships
+    item = db.relationship('Item', back_populates='order')
+    # TODO: test line 55 and 56
+    customer = db.relationship('Customer', back_populates='order')
+    artist = db.relationship('Artist', back_populates='order')
+
+    # class representation
+
+    def __repr__(self):
+        return f'<Order order_id={self.order_id} date={self.date} total={self.total} status={self.status} transaction_id={self.transaction_id}>'
+
+
+# create item class
+class Item(db.Model):
+
+    # create items table
+    __tablename__ = 'items'
+
+    # create attributes
+    item_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    description = db.Column(db.Text)
+    dimensions = db.Column(db.String)
+    price = db.Column(db.Float)
+    date = db.Column(db.DateTime)
+    color = db.Column(db.String)
+    in_stock = db.Column(db.Boolean)
 
     # add foreign keys
     order_id = db.Column(db.Integer, db.ForeignKey(
-        'orders.id)'), Nullable=True)
+        'orders.order_id'), nullable=True)
+    artist_id = db.Column(db.Integer, db.ForeignKey('artists.artist_id'))
+
+    # add relationship
+    # TODO: test 87-89
+    order = db.relationship('Order', back_populates='item')
+    artist = db.relationship('Artist', back_populates='item')
+    favitem = db.relationship('FavoriteItem', back_populates='item')
 
     # class representation
+
     def __repr__(self):
-        return f'<Shipment id={self.id} fname={self.fname} lname={self.lname} city={self.city} state={self.state} zipcode={self.zipcode} country={self.country} email={self.email} phone={self.phone}>'
-
-# create Artist class
+        return f'<Item item_id={self.item_id} price={self.price} year={self.year} color={self.color} in_stock={self.in_stock}>'
 
 
-class Artist(db.Model):
+# create favorite items class
+class FavoriteItem(db.Model):
 
-    # create artists table
-    __tablename__ = 'artists'
+    # create fav items table
+    __tablename__ = 'favitems'
 
     # create attributes
-    id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    fname = db.Column(db.String)
-    lname = db.Column(db.String)
-    email = db.Column(db.String)
-    password = db.Column(db.String(10))
-    country = db.Column(db.String)
-    alias = db.Column(db.String)
-    about = db.Column(db.Text)
-    logo = db.Column(db.String)
-    profile_pic = db.Column(db.String)
-    social = db.Column(db.String)
-    navbar_color = db.Column(db.String)
-    footer_color = db.Column(db.String)
+    favitem_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
 
-    # add relationships
-    items = db.relationship('Item', back_populates='artists')
-    orders = db.relationship('Order', back_populates='artists')
+    # add foreign keys
+    customer_id = db.Column(db.Integer, db.ForeignKey(
+        'customers.customer_id'), nullable=True)
+    item_id = db.Column(db.Integer, db.ForeignKey('items.item_id'))
+
+    # add relationship
+    customer = db.relationship('Customer', back_populates='favitem')
+    item = db.relationship('Item', back_populates='favitem')
 
     # class representation
+
     def __repr__(self):
-        return f'<Artist id={self.id} fname={self.fname} lname={self.lname} email={self.email} country={self.country} alias={self.alias}>'
+        return f'<FavoriteItem favitem_id={self.favitem_id} customer_id={self.customer_id} item_id={self.item_id}>'
 
 
-def connect_to_db(flask_app, db_uri="postgresql:///orders", echo=True):
+# create favorite artists class
+class FavoriteArtist(db.Model):
+
+    # create fav artists table
+    __tablename__ = 'favartists'
+
+    # create attributes
+    favartist_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+
+    # add foreign keys
+    customer_id = db.Column(db.Integer, db.ForeignKey(
+        'customers.customer_id'), nullable=True)
+    artist_id = db.Column(db.Integer, db.ForeignKey('artists.artist_id'))
+
+    # add relationship
+    customer = db.relationship('Customer', back_populates='favartist')
+    artist = db.relationship('Artist', back_populates='favartist')
+
+    # class representation
+
+    def __repr__(self):
+        return f'<FavoriteArtist favartist_id={self.favartists} customer_id={self.customer_id} artist_id={self.artist_id}>'
+
+
+def connect_to_db(flask_app, db_uri="postgresql:///galleriadb", echo=True):
     flask_app.config["SQLALCHEMY_DATABASE_URI"] = db_uri
     flask_app.config["SQLALCHEMY_ECHO"] = echo
     flask_app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False

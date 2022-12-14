@@ -1,8 +1,9 @@
 from flask import Flask, render_template, request, flash, session, redirect
-from model import connect_to_db, db, Customer, Order, Item, Shipment, Artist
+# from model import connect_to_db, db, Customer, Order, Item, Shipment, Artist
 from jinja2 import StrictUndefined
 
 app = Flask(__name__)
+# TODO: line 7 .gitignore
 app.secret_key = 'dev'
 app.jinja_env.undefined = StrictUndefined
 
@@ -35,3 +36,7 @@ def customer_profile():
 @app.route('/profile/<artist>')
 def artist_profile():
     return render_template("artistProfile.html")
+
+
+if __name__ == "__main__":
+    app.run(debug=True, host='0.0.0.0')
