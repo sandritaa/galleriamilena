@@ -1,0 +1,10 @@
+<!-- inherit from base.html -->
+{% extends 'base.html' %}
+
+{% block body %}
+{% for artist in artists%}
+<div class="artist">
+    <button type='button'>{{ artist.fname + ' ' + artist.lname  }}</button>
+</div>
+{% endfor %}
+{% endblock %}

@@ -105,7 +105,6 @@ class Order(db.Model):
 
     # add relationships
     item = db.relationship('Item', back_populates='order')
-    # TODO: test line 55 and 56
     customer = db.relationship('Customer', back_populates='order')
     artist = db.relationship('Artist', back_populates='order')
 
@@ -136,7 +135,6 @@ class Item(db.Model):
     artist_id = db.Column(db.Integer, db.ForeignKey('artists.artist_id'))
 
     # add relationship
-    # TODO: test 87-89
     order = db.relationship('Order', back_populates='item')
     artist = db.relationship('Artist', back_populates='item')
     favitem = db.relationship('FavoriteItem', back_populates='item')
