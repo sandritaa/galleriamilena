@@ -10,8 +10,6 @@ app.jinja_env.undefined = StrictUndefined
 
 @app.route('/')
 def homepage():
-    """View homepage"""
-
     return render_template("index.html",  artists=Artist.query.all())
 
 # @app.route('/login')
@@ -19,9 +17,13 @@ def homepage():
 #     return render_template("login.html")
 
 
-# @app.route('/gallery/<artist>')
-# def gallery():
-#     return render_template("gallery.html")
+@app.route('/gallery/<alias>')
+def gallery(alias):
+
+    # Given the artist alias, query the artist selected and pass the required info (all of it?) to the template
+    artist = Artist.query.filter_by(alias=alias).first()
+
+    return render_template("artistGallery.html", artist=artist)
 
 
 # @app.route('/gallery/<item>')

@@ -1,10 +1,20 @@
 <!-- inherit from base.html -->
 {% extends 'base.html' %}
 
+<!-- insert content block -->
 {% block body %}
+
+<!-- loop through artists  -->
 {% for artist in artists%}
 <div class="artist">
-    <button type='button'>{{ artist.fname + ' ' + artist.lname  }}</button>
+
+    <!-- add button for each artist -->
+    <button type='button'>
+
+        <!-- add customize url for each artist using alias and pass information to inner html -->
+        <a href="{{ url_for('gallery', alias = artist.alias) }}">{{ artist.fname + ' ' + artist.lname  }}</a>
+
+    </button>
 </div>
 {% endfor %}
 {% endblock %}
