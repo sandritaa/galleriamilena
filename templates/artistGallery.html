@@ -5,4 +5,21 @@
 {% block body %}
 <h1> {{ artist.fname + ' ' + artist.lname }}</h1>
 <p>{{ artist.about }}</p>
+
+
+<!-- add home button -->
+<button type='button'>
+
+    <a href="/ ">home</a>
+
+</button>
+
+<!-- add login button -->
+<button type='button'>
+
+    <!-- add customize url for each artist using alias and pass information to inner html -->
+    <a href='/login'>login</a>
+
+</button>
+
 {% endblock %}

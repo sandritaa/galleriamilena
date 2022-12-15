@@ -5,4 +5,20 @@
 {% block body %}
 <h1> welcome {{ customer.fname + ' ' + customer.lname }}</h1>
 <p>{{ customer }}</p>
+
+<!-- add home button -->
+<button type='button'>
+
+    <a href="/ ">home</a>
+
+</button>
+
+<!-- add login button -->
+<button type='button'>
+
+    <!-- add customize url for each artist using alias and pass information to inner html -->
+    <a href='/cart'>cart</a>
+
+</button>
+
 {% endblock %}

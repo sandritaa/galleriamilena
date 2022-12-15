@@ -3,16 +3,7 @@
 
 <!-- insert content block -->
 {% block body %}
-<h1> welcome {{ artist.fname + ' ' + artist.lname }}</h1>
-<p>{{ customer }}</p>
-
-<!-- add home button -->
-<button type='button'>
-
-    <a href="/ ">home</a>
-
-</button>
-
+<h2>cart</h2>
 <!-- add login button -->
 <button type='button'>
 
@@ -20,5 +11,15 @@
     <a href='/login'>login</a>
 
 </button>
+
+<!-- add cart button-->
+<button type='button'>
+
+    <!-- add customize url for each artist using alias and pass information to inner html -->
+    <a href='/ '>cart</a>
+
+</button>
+
+
 
 {% endblock %}

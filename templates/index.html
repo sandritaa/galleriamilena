@@ -15,6 +15,24 @@
         <a href="{{ url_for('gallery', alias = artist.alias) }}">{{ artist.fname + ' ' + artist.lname  }}</a>
 
     </button>
+
 </div>
 {% endfor %}
+
+<!-- add login button -->
+<button type='button'>
+
+    <!-- add customize url for each artist using alias and pass information to inner html -->
+    <a href='/login'>login</a>
+
+</button>
+
+<!-- add cart button-->
+<button type='button'>
+
+    <!-- add customize url for each artist using alias and pass information to inner html -->
+    <a href='/templates/cart.html'>cart</a>
+
+</button>
+
 {% endblock %}
