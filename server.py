@@ -91,6 +91,18 @@ def artist_profile(alias):
     else:
         return redirect('/login')
 
+
+# create account route
+@app.route('/profile', methods=['POST'])
+def customer_profile():
+
+    fname_customer = request.form.get('fname')
+    lname_customer = request.form.get('lname')
+    email_customer = request.form.get('email')
+    phone_customer = request.form.get('phone')
+    password_customer = request.form.get('password')
+
+
 # # create item route
 # @app.route('/gallery/<item>')
 # def item():
@@ -107,7 +119,6 @@ def artist_profile(alias):
 # @app.route('/checkout')
 # def checkout():
 #     return render_template("checkout.html")
-
 if __name__ == "__main__":
     connect_to_db(app)
     app.run(debug=True, host='0.0.0.0', port=5009)
