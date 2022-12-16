@@ -94,7 +94,7 @@ def artist_profile(alias):
 
 # create account route
 @app.route('/profile', methods=['POST'])
-def customer_profile():
+def profile():
 
     fname_customer = request.form.get('fname')
     lname_customer = request.form.get('lname')
