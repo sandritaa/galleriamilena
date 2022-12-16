@@ -4,7 +4,19 @@
 <!-- insert content block -->
 {% block body %}
 <h1> welcome {{ artist.fname + ' ' + artist.lname }}</h1>
-<p>{{ customer }}</p>
+<p>{{ artist }}</p>
+
+{% for order in artist.order %}
+<p>artist orders {{ order }}</p>
+{% endfor %}
+
+<input type='radio' name='order received' value='order received'>order received</input>
+<input type='radio' name='preparing' value='preparing'>preparing</input>
+<input type='radio' name='on the way' value='on the way'>on the way</input>
+<input type='radio' name='sent' value='sent'>sent</input>
+<input type='radio' name='delayed' value='delayed'>delayed</input>
+<input type='radio' name='delivered' value='delivered'>delivered</input>
+
 
 <!-- add home button -->
 <button type='button'>

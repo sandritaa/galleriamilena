@@ -6,6 +6,19 @@
 <h1> welcome {{ customer.fname + ' ' + customer.lname }}</h1>
 <p>{{ customer }}</p>
 
+{% for order in customer.order %}
+<p> customer orders {{ order }}</p>
+{% endfor %}
+
+{% for favitem in customer.favitem %}
+<p>customer favorite items {{ favitem }} </p>
+{% endfor %}
+
+{% for favartist in customer.favartist %}
+<p>customer favorite artist {{ favartist }} </p>
+{% endfor %}
+
+
 <!-- add home button -->
 <button type='button'>
 

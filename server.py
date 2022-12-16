@@ -91,7 +91,6 @@ def artist_profile(alias):
     else:
         return redirect('/login')
 
-
 # # create item route
 # @app.route('/gallery/<item>')
 # def item():
@@ -104,11 +103,11 @@ def artist_profile(alias):
 #     return render_template("cart.html")
 
 
-# # create checkout route
+# # create checkout route / order
 # @app.route('/checkout')
 # def checkout():
 #     return render_template("checkout.html")
 
 if __name__ == "__main__":
     connect_to_db(app)
-    app.run(debug=True, host='0.0.0.0', port=5008)
+    app.run(debug=True, host='0.0.0.0', port=5009)
