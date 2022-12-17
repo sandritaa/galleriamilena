@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, flash, session, redirect
 from model import connect_to_db, db, Customer, Artist, Shipment, Order, Item, FavoriteItem, FavoriteArtist
 from jinja2 import StrictUndefined
+import crud
 
 app = Flask(__name__)
 # TODO: line 7 .gitignore
@@ -15,7 +16,7 @@ def homepage():
 
 
 # create artist gallery route
-@ app.route('/gallery/<alias>')
+@app.route('/gallery/<alias>')
 def gallery(alias):
 
     # Given the artist alias, query the artist selected and pass the required info (all of it?) to the template
@@ -92,33 +93,45 @@ def artist_profile(alias):
         return redirect('/login')
 
 
-# create account route
-@app.route('/profile', methods=['POST'])
+# create register customer route
+@app.route('/profile')
 def profile():
-
-    fname_customer = request.form.get('fname')
-    lname_customer = request.form.get('lname')
-    email_customer = request.form.get('email')
-    phone_customer = request.form.get('phone')
-    password_customer = request.form.get('password')
+    return render_template('createAccount.html')
 
 
-# # create item route
-# @app.route('/gallery/<item>')
-# def item():
-#     return render_template("item.html")
+@app.route('/profile', methods=['POST'])
+def create_profile():
 
+    fname = request.form.get('fname')
+    lname = request.form.get('lname')
+    email = request.form.get('email')
+    phone = request.form.get('phone')
+    password = request.form.get('password')
 
-# # create cart route
-# @app.route('/cart')
-# def cart():
-#     return render_template("cart.html")
+    user = Customer.query.filter(Customer.email == email).first()
+    if user:
+        flash("Cannot create an account with that email. Try again.")
+    else:
+        user = crud.createProfile(fname, lname, email, phone, password)
+        db.session.add(user)
+        db.session.commit()
+        flash("Account created! Please log in.")
+        return redirect("/login")
 
+        # # create item route
+        # @app.route('/gallery/<item>')
+        # def item():
+        #     return render_template("item.html")
 
-# # create checkout route / order
-# @app.route('/checkout')
-# def checkout():
-#     return render_template("checkout.html")
+        # # create cart route
+        # @app.route('/cart')
+        # def cart():
+        #     return render_template("cart.html")
+
+        # # create checkout route / order
+        # @app.route('/checkout')
+        # def checkout():
+        #     return render_template("checkout.html")
 if __name__ == "__main__":
     connect_to_db(app)
-    app.run(debug=True, host='0.0.0.0', port=5009)
+    app.run(debug=True, host='0.0.0.0', port=5008)
