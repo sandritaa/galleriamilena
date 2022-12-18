@@ -10,8 +10,6 @@ app.jinja_env.undefined = StrictUndefined
 
 
 # create home route
-
-
 @app.route('/')
 def homepage():
 
@@ -19,6 +17,7 @@ def homepage():
     return render_template("index.html",  artists=Artist.query.all(), login_button=login_button)
 
 
+# create logout and delete account route
 @app.route('/', methods=['POST'])
 def logout_delete():
 
@@ -28,6 +27,7 @@ def logout_delete():
     if logout:
         print('logged out')
         session['customer_id'] = None
+        session['artist_id'] = None
 
     elif delete:
         crud.deleteProfileById(session['customer_id'])
@@ -45,7 +45,7 @@ def gallery(alias):
 
     login_button = helper.switch_profile_login(session)
 
-    return render_template("artistGallery.html", artist=artist_user, login_button=login_button)
+    return render_template("artistGallery.html", artist=artist_user, login_button=login_button, customer_id=session['customer_id'])
 
 
 # create login route
@@ -81,16 +81,15 @@ def login():
 
         session['artist_id'] = artist.artist_id
 
-        artist_route = '/admin/' + str(artist.alias)
+        artist_route = helper.get_artist_route(artist)
 
         return redirect(artist_route)
     else:
 
         return redirect('/login')
 
-        # create customer route
 
-
+# create customer route
 @app.route('/profile/<customer_route>')
 def customer_profile(customer_route):
 
@@ -107,7 +106,7 @@ def customer_profile(customer_route):
 
 
 # create artist route
-@ app.route('/admin/<alias>')
+@app.route('/admin/<alias>')
 def artist_profile(alias):
 
     artist = Artist.query.filter(Artist.alias == alias).first()
@@ -120,12 +119,13 @@ def artist_profile(alias):
 
 
 # create register customer route
-@ app.route('/profile')
+@app.route('/profile')
 def profile():
     return render_template('createAccount.html')
 
 
-@ app.route('/profile', methods=['POST'])
+# create new profile route
+@app.route('/profile', methods=['POST'])
 def create_profile():
 
     fname = request.form.get('fname')
@@ -158,6 +158,8 @@ def create_profile():
         # @app.route('/checkout')
         # def checkout():
         #     return render_template("checkout.html")
+
+
 if __name__ == "__main__":
     connect_to_db(app)
     app.run(debug=True, host='0.0.0.0', port=5008)

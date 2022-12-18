@@ -3,6 +3,8 @@
 
 <!-- insert content block -->
 {% block body %}
+
+<!-- add artist full name -->
 <h1> welcome {{ artist.fname + ' ' + artist.lname }}</h1>
 <p>{{ artist }}</p>
 
@@ -25,10 +27,8 @@
 
 </button>
 
-<!-- add login button -->
-<button type='button'>
-    <!-- add customize url for each artist using alias and pass information to inner html -->
-    <a href="{{ login_button['route'] }}">{{ login_button['label'] }}</a>
-</button>
+<form action="/" method="POST">
+    <input type="submit" value="logout" name="logout" />
+</form>
 
 {% endblock %}

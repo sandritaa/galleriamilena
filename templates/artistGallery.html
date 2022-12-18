@@ -3,27 +3,41 @@
 
 <!-- insert content block -->
 {% block body %}
+
+<!-- add artists full name   -->
 <h1> {{ artist.fname + ' ' + artist.lname }}</h1>
+
+<!-- add about the artist -->
 <p>{{ artist.about }}</p>
 
-
+<!-- TODO: create favorite items button -->
 {% for item in artist.item %}
-<p>{{ item.item_id }}</p>
-<button type="button" id='itemLikeButton'>like</button>
-<button type="button" id='addToCart'>add to cart</button>
+
+<label for="button">Item n. {{ item.item_id }}</label> <br> <br>
+
 {% endfor %}
+
+<!-- TODO: create favorite items button logic -->
+
+<button type="button" class='itemLikeButton'>🖤</button> <br>
+
+<!-- TODO: create add to cart button  -->
+<button type="button" id='addToCart'>add to cart</button>
+
+
 <!-- add home button -->
 <button type='button'>
-
     <a href="/ ">home</a>
-
 </button>
 
-<!-- add login button -->
+<!-- add dynamic login button -->
 <button type='button'>
-    <!-- add customize url for each artist using alias and pass information to inner html -->
     <a href="{{ login_button['route'] }}">{{ login_button['label'] }}</a>
 </button>
 
+
+<!-- TODO: add ajax -->
+<!-- Ajax file -->
+<!-- <script src="ajax.js"></script> -->
 
 {% endblock %}
