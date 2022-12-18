@@ -10,6 +10,10 @@ def createProfile(fname, lname, email, phone, password):
     return user
 
 
+def deleteProfileById(id):
+    Customer.query.filter(Customer.customer_id == id).delete()
+
+
 if __name__ == "__main__":
     from server import app
 

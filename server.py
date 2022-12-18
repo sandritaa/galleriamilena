@@ -15,6 +15,23 @@ def homepage():
     return render_template("index.html",  artists=Artist.query.all())
 
 
+@app.route('/', methods=['POST'])
+def logout_delete():
+
+    logout = request.form.get('logout') == 'logout'
+    delete = request.form.get('delete_account') == 'delete account'
+
+    if logout:
+        print('logged out')
+        session['customer_id'] = None
+
+    elif delete:
+        crud.deleteProfileById(session['customer_id'])
+        db.session.commit()
+
+    return redirect('/')
+
+
 # create artist gallery route
 @app.route('/gallery/<alias>')
 def gallery(alias):
@@ -39,8 +56,11 @@ def login():
     artist = Artist.query.filter((Artist.email == user_email) & (
         Artist.password == user_password)).first()
 
+    if not user_email or not user_password:
+        return render_template('login.html')
+
     # check if customer query above checks out - if it does, redirect to be below customer route
-    if customer:
+    elif customer:
 
         # add a session
         session['customer_id'] = customer.customer_id
@@ -61,11 +81,13 @@ def login():
 
         return redirect(artist_route)
     else:
-        return render_template('login.html')
+
+        return redirect('/login')
+
+        # create customer route
 
 
-# create customer route
-@app.route('/profile/<customer_route>')
+@ app.route('/profile/<customer_route>')
 def customer_profile(customer_route):
 
     customer_route_list = customer_route.split('_')
@@ -81,7 +103,7 @@ def customer_profile(customer_route):
 
 
 # create artist route
-@app.route('/admin/<alias>')
+@ app.route('/admin/<alias>')
 def artist_profile(alias):
 
     artist = Artist.query.filter(Artist.alias == alias).first()
@@ -94,12 +116,12 @@ def artist_profile(alias):
 
 
 # create register customer route
-@app.route('/profile')
+@ app.route('/profile')
 def profile():
     return render_template('createAccount.html')
 
 
-@app.route('/profile', methods=['POST'])
+@ app.route('/profile', methods=['POST'])
 def create_profile():
 
     fname = request.form.get('fname')
@@ -127,6 +149,7 @@ def create_profile():
         # @app.route('/cart')
         # def cart():
         #     return render_template("cart.html")
+
 
         # # create checkout route / order
         # @app.route('/checkout')
