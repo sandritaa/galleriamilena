@@ -7,29 +7,22 @@
 <h2>Create an Account</h2>
 <form action="/profile" method="POST">
 
-    <p>
-        First name <input type="text" name="fname">
-    </p>
-
-    <p>
-        Last name <input type="text" name="lname">
-    </p>
-
-    <p>
-        Email <input type="text" name="email">
-    </p>
-
-    <p>
-        Phone <input type="text" name="phone">
-    </p>
-
-    <p>
-        Password <input type="password" name="password">
-    </p>
-
-    <p>
-        <input type="submit">
-    </p>
+    <label>First name </label> <br> <input type="text" name="fname" required minlength='1' maxlength='50'> <br>
+    <label>Last name </label> <br> <input type="text" name="lname" required minlength='1' maxlength='50'> <br>
+    <label>Email</label> <br> <input type="email" name="email" required minlength='4' maxlength='50'> <br>
+    <label>Phone</label> <br><input type="tel" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required minlength='1'
+        maxlength='20'>
+    <small>Format: 123-456-7890</small> <br>
+    <label>Password</label> <br><input type="password" name="password" required minlength='8' maxlength='12'><small>
+        Format: 8 to 12
+        characters</small> <br>
+    <input type="submit">
 
 </form>
+<!-- add home button -->
+<button type='button'>
+
+    <a href="/ ">home</a>
+
+</button>
 {% endblock %}
