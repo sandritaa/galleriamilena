@@ -7,6 +7,11 @@
 <p>{{ artist.about }}</p>
 
 
+{% for item in artist.item %}
+<p>{{ item.item_id }}</p>
+<button type="button" id='itemLikeButton'>like</button>
+<button type="button" id='addToCart'>add to cart</button>
+{% endfor %}
 <!-- add home button -->
 <button type='button'>
 
@@ -16,10 +21,9 @@
 
 <!-- add login button -->
 <button type='button'>
-
     <!-- add customize url for each artist using alias and pass information to inner html -->
-    <a href='/login'>login</a>
-
+    <a href="{{ login_button['route'] }}">{{ login_button['label'] }}</a>
 </button>
+
 
 {% endblock %}

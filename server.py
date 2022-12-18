@@ -2,17 +2,21 @@ from flask import Flask, render_template, request, flash, session, redirect
 from model import connect_to_db, db, Customer, Artist, Shipment, Order, Item, FavoriteItem, FavoriteArtist
 from jinja2 import StrictUndefined
 import crud
+import helper
 
 app = Flask(__name__)
-# TODO: line 7 .gitignore
 app.secret_key = 'dev'
 app.jinja_env.undefined = StrictUndefined
 
 
 # create home route
+
+
 @app.route('/')
 def homepage():
-    return render_template("index.html",  artists=Artist.query.all())
+
+    login_button = helper.switch_profile_login(session)
+    return render_template("index.html",  artists=Artist.query.all(), login_button=login_button)
 
 
 @app.route('/', methods=['POST'])
@@ -39,7 +43,9 @@ def gallery(alias):
     # Given the artist alias, query the artist selected and pass the required info (all of it?) to the template
     artist_user = Artist.query.filter(Artist.alias == alias).first()
 
-    return render_template("artistGallery.html", artist=artist_user)
+    login_button = helper.switch_profile_login(session)
+
+    return render_template("artistGallery.html", artist=artist_user, login_button=login_button)
 
 
 # create login route
@@ -65,10 +71,8 @@ def login():
         # add a session
         session['customer_id'] = customer.customer_id
 
-        #
-        customer_route = '/profile/' + \
-            str(customer.fname.lower() + customer.lname.lower() +
-                '_' + str(customer.customer_id))
+        # get customer route
+        customer_route = helper.get_customer_route(customer)
 
         return redirect(customer_route)
 
@@ -87,7 +91,7 @@ def login():
         # create customer route
 
 
-@ app.route('/profile/<customer_route>')
+@app.route('/profile/<customer_route>')
 def customer_profile(customer_route):
 
     customer_route_list = customer_route.split('_')
@@ -149,7 +153,6 @@ def create_profile():
         # @app.route('/cart')
         # def cart():
         #     return render_template("cart.html")
-
 
         # # create checkout route / order
         # @app.route('/checkout')
