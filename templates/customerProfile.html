@@ -3,9 +3,11 @@
 
 <!-- insert content block -->
 {% block body %}
-<h1> welcome {{ customer.fname + ' ' + customer.lname }}</h1>
+<h1> welcome customer: {{ customer.fname + ' ' + customer.lname }}</h1>
+<h3>customer details:</h3>
 <p>{{ customer }}</p>
 
+<h3>order history:</h3>
 {% for order in customer.order %}
 <p> customer orders {{ order }}</p>
 {% endfor %}

@@ -128,6 +128,7 @@ class Item(db.Model):
     date = db.Column(db.DateTime)
     color = db.Column(db.String)
     in_stock = db.Column(db.Boolean)
+    picture_path = db.Column(db.String)
 
     # add foreign keys
     order_id = db.Column(db.Integer, db.ForeignKey(

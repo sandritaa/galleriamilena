@@ -5,28 +5,32 @@
 {% block body %}
 
 <!-- add artist full name -->
-<h1> welcome {{ artist.fname + ' ' + artist.lname }}</h1>
+<h1> welcome artist: {{ artist.fname + ' ' + artist.lname }}</h1>
+<h3>artist details:</h3>
 <p>{{ artist }}</p>
 
+<!-- check for orders that tie back to the artist -->
+<h3>orders for artist: </h3>
 {% for order in artist.order %}
-<p>artist orders {{ order }}</p>
+<p>artist orders: {{ order }}</p>
 {% endfor %}
 
+<h3>order status:</h3>
+<!-- TODO: Add menu options for order update -->
 <input type='radio' name='order received' value='order received'>order received</input>
 <input type='radio' name='preparing' value='preparing'>preparing</input>
 <input type='radio' name='on the way' value='on the way'>on the way</input>
 <input type='radio' name='sent' value='sent'>sent</input>
 <input type='radio' name='delayed' value='delayed'>delayed</input>
 <input type='radio' name='delivered' value='delivered'>delivered</input>
+<br><br>
 
-
-<!-- add home button -->
+<!-- home button -->
 <button type='button'>
-
     <a href="/ ">home</a>
-
 </button>
 
+<!-- logout button -->
 <form action="/" method="POST">
     <input type="submit" value="logout" name="logout" />
 </form>

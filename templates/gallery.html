@@ -4,10 +4,10 @@
 <!-- insert content block -->
 {% block body %}
 
-<!-- add artists full name   -->
-<h1> {{ artist.fname + ' ' + artist.lname }}</h1>
+<!-- add artists full name and about   -->
+<h1> Artist gallery: {{ artist.fname + ' ' + artist.lname }}</h1>
 
-<!-- add about the artist -->
+<h3>about the artist: </h3>
 <p>{{ artist.about }}</p>
 
 <!-- TODO: create favorite items button -->
@@ -16,6 +16,8 @@
 <label for="button">Item n. {{ item.item_id }}</label> <br> <br>
 
 {% endfor %}
+
+
 
 <!-- TODO: create favorite items button logic -->
 
@@ -30,7 +32,7 @@
     <a href="/ ">home</a>
 </button>
 
-<!-- add dynamic login button -->
+<!-- add dynamic login button that changes from login to profile-->
 <button type='button'>
     <a href="{{ login_button['route'] }}">{{ login_button['label'] }}</a>
 </button>

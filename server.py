@@ -45,7 +45,7 @@ def gallery(alias):
 
     login_button = helper.switch_profile_login(session)
 
-    return render_template("artistGallery.html", artist=artist_user, login_button=login_button, customer_id=session['customer_id'])
+    return render_template("gallery.html", artist=artist_user, login_button=login_button, customer_id=session.get('customer_id', None))
 
 
 # create login route
@@ -144,20 +144,23 @@ def create_profile():
         flash("Account created! Please log in.")
         return redirect("/login")
 
-        # # create item route
-        # @app.route('/gallery/<item>')
-        # def item():
-        #     return render_template("item.html")
+     # create cart route
 
-        # # create cart route
-        # @app.route('/cart')
-        # def cart():
-        #     return render_template("cart.html")
 
-        # # create checkout route / order
-        # @app.route('/checkout')
-        # def checkout():
-        #     return render_template("checkout.html")
+@app.route('/cart')
+def cart():
+    login_button = helper.switch_profile_login(session)
+    return render_template("cart.html", login_button=login_button)
+
+    # # create item route
+    # @app.route('/gallery/<item>')
+    # def item():
+    #     return render_template("item.html")
+
+    # # create checkout route / order
+    # @app.route('/checkout')
+    # def checkout():
+    #     return render_template("checkout.html")
 
 
 if __name__ == "__main__":

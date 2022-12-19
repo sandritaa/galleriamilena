@@ -15,7 +15,6 @@ def switch_profile_login(session):
     else:
         button['label'] = 'login'
         button['route'] = '/login'
-
     return button
 
 
