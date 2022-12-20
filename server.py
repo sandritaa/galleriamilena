@@ -161,7 +161,21 @@ def newItemForm():
 @app.route('/addItem', methods=['POST'])
 def addItem():
 
+    description = request.form.get('description')
+    dimensions = request.form.get('dimensions')
+    price = request.form.get('price')
+    date = request.form.get('date')
+    color = request.form.get('color')
+    in_stock = request.form.get('in_stock')
+    picture_path = request.form.get('picture_path')
+
     artist = Artist.query.get(session['artist_id'])
+
+    artist = crud.createItem(
+        description, dimensions, price, date, color, in_stock, picture_path)
+    db.session.add(artist)
+    db.session.commit()
+    flash("new item has been created")
 
     return redirect('/admin/' + artist.alias)
 
