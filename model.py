@@ -143,7 +143,7 @@ class Item(db.Model):
     # class representation
 
     def __repr__(self):
-        return f'<Item item_id={self.item_id} price={self.price} year={self.year} color={self.color} in_stock={self.in_stock}>'
+        return f'<Item item_id={self.item_id} price={self.price} date={self.date} color={self.color} in_stock={self.in_stock}>'
 
 
 # create favorite items class
