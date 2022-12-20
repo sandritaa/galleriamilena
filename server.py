@@ -144,9 +144,8 @@ def create_profile():
         flash("Account created! Please log in.")
         return redirect("/login")
 
-     # create cart route
 
-
+# create cart route
 @app.route('/cart')
 def cart():
     login_button = helper.switch_profile_login(session)
