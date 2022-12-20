@@ -151,6 +151,20 @@ def cart():
     login_button = helper.switch_profile_login(session)
     return render_template("cart.html", login_button=login_button)
 
+
+@app.route('/addItem', methods=['GET'])
+def newItemForm():
+
+    return render_template('addItem.html')
+
+
+@app.route('/addItem', methods=['POST'])
+def addItem():
+
+    artist = Artist.query.get(session['artist_id'])
+
+    return redirect('/admin/' + artist.alias)
+
     # # create item route
     # @app.route('/gallery/<item>')
     # def item():

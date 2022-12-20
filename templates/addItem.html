@@ -5,11 +5,11 @@
 {% block body %}
 
 <h2>artist item form:</h2>
-<form action="/artist" method="POST">
+<form action='/addItem' method="POST">
 
     <label>Item id:</label> <br> <input type="number" name="id" required minlength='1' maxlength='10'> <br>
-    <label>Item description </label> <br> <input type="text" name="description" required minlength='1' maxlength='50'>
-    <br>
+    <label>Item description </label> <br> <input type="text" name="description" required minlength='1'
+        maxlength='50'><br>
     <label>Item price</label> <br> <input type="text" name="price" required minlength='4' maxlength='10'> <br>
     <label>Item image</label> <br> <input type="image" name="image"> <br>
     <input type="submit">
