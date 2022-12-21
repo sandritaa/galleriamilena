@@ -5,26 +5,29 @@
 {% block body %}
 
 <!-- add artists full name and about   -->
-<h1> Artist gallery: {{ artist.fname + ' ' + artist.lname }}</h1>
-
+<h2> Artist gallery: {{ artist.fname + ' ' + artist.lname }}</h2>
 <h3>about the artist: </h3>
 <p>{{ artist.about }}</p>
 
 
-<!-- add gallery of images -->
+<!-- add artist items to gallery (images) -->
 {% for item in artist.item %}
 <div>
     <img src="{{ item.picture_path }}" alt="">
 </div>
 {% endfor %}
+
 <!-- TODO: create favorite items button -->
 <!-- TODO: create favorite items button logic -->
 
 <button type="button" class='itemLikeButton'>🖤</button> <br>
 
-<!-- TODO: create add to cart button  -->
+<!-- TODO: cart button + need to add logic -->
 <button type="button" id='addToCart'>add to cart</button>
 
+<!-- TODO: add ajax -->
+<!-- Ajax file -->
+<!-- <script src="ajax.js"></script> -->
 
 <!-- add home button -->
 <button type='button'>
@@ -35,10 +38,5 @@
 <button type='button'>
     <a href="{{ login_button['route'] }}">{{ login_button['label'] }}</a>
 </button>
-
-
-<!-- TODO: add ajax -->
-<!-- Ajax file -->
-<!-- <script src="ajax.js"></script> -->
 
 {% endblock %}

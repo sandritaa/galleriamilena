@@ -3,39 +3,41 @@
 
 <!-- insert content block -->
 {% block body %}
+
+<!-- add customer name and details -->
 <h1> welcome customer: {{ customer.fname + ' ' + customer.lname }}</h1>
 <h3>customer details:</h3>
 <p>{{ customer }}</p>
 
 <h3>order history:</h3>
+
+<!-- check customer orders -->
 {% for order in customer.order %}
 <p> customer orders {{ order }}</p>
 {% endfor %}
 
+<!-- TODO: check customers favorite items -->
 {% for favitem in customer.favitem %}
 <p>customer favorite items {{ favitem }} </p>
 {% endfor %}
 
+<!-- TODO: check customers favorite artist -->
 {% for favartist in customer.favartist %}
 <p>customer favorite artist {{ favartist }} </p>
 {% endfor %}
 
-
 <!-- add home button -->
 <button type='button'>
-
     <a href="/ ">home</a>
-
 </button>
 
 
-<!-- add login button -->
+<!-- add cart button -->
 <button type='button'>
-
     <a href='/cart'>cart</a>
-
 </button>
 
+<!-- logout and delete account buttons -->
 <form action="/" method="POST">
     <input type="submit" value="logout" name="logout" />
     <input type="submit" value="delete account" name="delete_account" />

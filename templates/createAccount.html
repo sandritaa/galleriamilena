@@ -5,8 +5,11 @@
 {% block body %}
 
 <h2>Create an Account</h2>
+
+<!-- send post request to server to create new user account and update database -->
 <form action="/profile" method="POST">
 
+    <!-- customer attributes -->
     <label>First name </label> <br> <input type="text" name="fname" required minlength='1' maxlength='50'> <br>
     <label>Last name </label> <br> <input type="text" name="lname" required minlength='1' maxlength='50'> <br>
     <label>Email</label> <br> <input type="email" name="email" required minlength='4' maxlength='50'> <br>
@@ -19,10 +22,10 @@
     <input type="submit">
 
 </form>
+
 <!-- add home button -->
 <button type='button'>
-
     <a href="/ ">home</a>
-
 </button>
+
 {% endblock %}

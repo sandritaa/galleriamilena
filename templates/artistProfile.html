@@ -4,13 +4,14 @@
 <!-- insert content block -->
 {% block body %}
 
-<!-- add artist full name -->
-<h1> welcome artist: {{ artist.fname + ' ' + artist.lname }}</h1>
+<!-- add artist full name and details-->
+<h2> welcome artist: {{ artist.fname + ' ' + artist.lname }}</h2>
 <h3>artist details:</h3>
 <p>{{ artist }}</p>
 
-<!-- check for orders that tie back to the artist -->
 <h3>orders for artist: </h3>
+
+<!-- check for orders that tie back to the artist -->
 <ul>
     {% for order in artist.order %}
     <li>
@@ -25,14 +26,12 @@
         <input type='radio' name='delivered' value='delivered'>delivered</input>
         <br><br>
     </li>
-
     {% endfor %}
 </ul>
 
 <h3>my items:</h3>
-<button type="'button">
-    <a href="/addItem">add new</a>
-</button>
+
+<!-- summary of items that tie back to the artist -->
 <ul>
     {% for item in artist.item %}
     <li>
@@ -44,10 +43,15 @@
     {% endfor %}
 </ul>
 
+<!-- new item button -->
+<button type="'button">
+    <a href="/addItem">add new</a>
+</button> <br> <br>
+
 <!-- home button -->
 <button type='button'>
     <a href="/ ">home</a>
-</button>
+</button> <br> <br>
 
 <!-- logout button -->
 <form action="/" method="POST">

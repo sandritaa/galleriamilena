@@ -14,7 +14,9 @@ app.jinja_env.undefined = StrictUndefined
 def homepage():
 
     login_button = helper.switch_profile_login(session)
-    return render_template("index.html",  artists=Artist.query.all(), login_button=login_button)
+    artist = crud.get_artist()
+
+    return render_template("index.html",  artists=artist, login_button=login_button)
 
 
 # create logout and delete account route
@@ -41,7 +43,7 @@ def logout_delete():
 def gallery(alias):
 
     # Given the artist alias, query the artist selected and pass the required info (all of it?) to the template
-    artist_user = Artist.query.filter(Artist.alias == alias).first()
+    artist_user = crud.get_artist_alias(alias)
 
     login_button = helper.switch_profile_login(session)
 
@@ -57,10 +59,8 @@ def login():
     user_password = request.args.get('password')
 
     # query from the database if the email and password exist under the same account
-    customer = Customer.query.filter((Customer.email == user_email) & (
-        Customer.password == user_password)).first()
-    artist = Artist.query.filter((Artist.email == user_email) & (
-        Artist.password == user_password)).first()
+    customer = crud.get_customer_login(user_email, user_password)
+    artist = crud.get_artist_login(user_email, user_password)
 
     if not user_email or not user_password:
         return render_template('login.html')
@@ -98,7 +98,7 @@ def customer_profile(customer_route):
     customer_id_int = int(customer_id)
 
     if session["customer_id"] == customer_id_int:
-        customer = Customer.query.get(customer_id_int)
+        customer = crud.get_customer_id(customer_id_int)
 
         return render_template("customerProfile.html", customer=customer)
     else:
@@ -109,7 +109,7 @@ def customer_profile(customer_route):
 @app.route('/admin/<alias>')
 def artist_profile(alias):
 
-    artist = Artist.query.filter(Artist.alias == alias).first()
+    artist = crud.get_artist_alias(alias)
 
     if session['artist_id'] == artist.artist_id:
 
@@ -117,8 +117,9 @@ def artist_profile(alias):
     else:
         return redirect('/login')
 
-
 # create register customer route
+
+
 @app.route('/profile')
 def profile():
     return render_template('createAccount.html')
@@ -134,7 +135,7 @@ def create_profile():
     phone = request.form.get('phone')
     password = request.form.get('password')
 
-    user = Customer.query.filter(Customer.email == email).first()
+    user = crud.get_customer_email()
     if user:
         flash("Cannot create an account with that email. Try again.")
     else:
@@ -170,7 +171,7 @@ def addItem():
     picture_path = request.form.get('picture_path')
 
     # going to notification_url to get the url
-    artist = Artist.query.get(session['artist_id'])
+    artist = crud.get_artist_id()
 
     item = crud.createItem(
         description, dimensions, price, date, color, in_stock, picture_path, session['artist_id'])

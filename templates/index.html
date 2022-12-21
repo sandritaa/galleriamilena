@@ -3,17 +3,16 @@
 
 <!-- insert content block -->
 {% block body %}
-<h1>galleria</h1>
 
+<h2>galleria</h2>
+
+<!-- check all artists -->
 {% for artist in artists %}
 <div class="artist">
-
     <!-- add button for each artist -->
     <button type='button'>
-
         <!-- add customize url for each artist using alias and pass information to inner html -->
         <a href="{{ url_for('gallery', alias = artist.alias) }}">{{ artist.fname + ' ' + artist.lname }}</a>
-
     </button>
 
 </div>

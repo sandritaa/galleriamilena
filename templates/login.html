@@ -4,20 +4,23 @@
 <!-- insert content block -->
 {% block body %}
 
-<h1>login</h1>
+<h2>login</h2>
 
+<!-- login form -->
 <div class="login">
     <form action="/login">
         <label for="email">Email</label><br>
         <input type="email" id="email" name="email"><br>
         <label for="password">Password</label><br>
         <input type="text" id="password" name="password"><br>
-        <!-- add button for each artist -->
         <input type='submit'></input>
     </form>
 </div>
 
-
+<!-- add create account button-->
+<button type='button'>
+    <a href='/profile'>not a member yet? create an account!</a>
+</button>
 
 <!-- add home button -->
 <button type='button'>
@@ -29,8 +32,4 @@
     <a href='/cart'>cart</a>
 </button>
 
-<!-- add create account button-->
-<button type='button'>
-    <a href='/profile'>not a member yet? create an account!</a>
-</button>
 {% endblock %}
