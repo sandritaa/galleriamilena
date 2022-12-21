@@ -4,13 +4,7 @@
 <!-- insert content block -->
 {% block body %}
 
-<!-- cloudinary upload widget -->
-<script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript">
-</script>
 
-<!-- local upload instantiation -->
-<script src="/static/js/upload_widget.js" type="text/javascript">
-</script>
 
 <h2>artist item form:</h2>
 <label>Image </label> <br>
@@ -23,6 +17,7 @@
 <!-- placeholder for uploaded image using the thumbnail url attribute -->
 <img id="uploadedimage" src="">
 </img>
+
 
 <!-- send post request to server to create new item and update database when added -->
 <form action='/addItem' method="POST">
@@ -55,6 +50,14 @@
 <form action="/" method="POST">
     <input type="submit" value="logout" name="logout" />
 </form>
+
+<!-- cloudinary upload widget -->
+<script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript">
+</script>
+
+<!-- local upload instantiation -->
+<script src="/static/js/upload_widget.js" type="text/javascript">
+</script>
 
 
 {% endblock %}

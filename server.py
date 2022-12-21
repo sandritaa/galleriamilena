@@ -171,7 +171,7 @@ def addItem():
     in_stock = True  # request.form.get('in_stock')
     picture_path = request.form.get('picture_path')
 
-    artist = crud.get_artist_id()
+    artist = crud.get_artist_id(session['artist_id'])
 
     item = crud.createItem(
         description, dimensions, price, date, color, in_stock, picture_path, session['artist_id'])

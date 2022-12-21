@@ -43,23 +43,20 @@ def deleteProfileById(id):
 def get_artist():
     return Artist.query.all()
 
+
 # return artists ids
+def get_artist_id(id):
+    return Artist.query.get(id)
 
-
-def get_artist_id():
-    return Artist.query.get(session['artist_id'])
 
 #  return artist login details
-
-
 def get_artist_login(user_email, user_password):
     artist = Artist.query.filter((Artist.email == user_email) & (
         Artist.password == user_password)).first()
     return artist
 
+
 # return alias
-
-
 def get_artist_alias(alias):
     return Artist.query.filter(Artist.alias == alias).first()
 
