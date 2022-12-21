@@ -117,15 +117,14 @@ def artist_profile(alias):
     else:
         return redirect('/login')
 
+
 # create register customer route
-
-
 @app.route('/profile')
 def profile():
     return render_template('createAccount.html')
 
 
-# create new profile route
+# create new customer profile route
 @app.route('/profile', methods=['POST'])
 def create_profile():
 
@@ -153,12 +152,14 @@ def cart():
     return render_template("cart.html", login_button=login_button)
 
 
+# create add time route - get request
 @app.route('/addItem', methods=['GET'])
 def newItemForm():
 
     return render_template('addItem.html')
 
 
+# create add item route - post request
 @app.route('/addItem', methods=['POST'])
 def addItem():
 
@@ -170,7 +171,6 @@ def addItem():
     in_stock = True  # request.form.get('in_stock')
     picture_path = request.form.get('picture_path')
 
-    # going to notification_url to get the url
     artist = crud.get_artist_id()
 
     item = crud.createItem(
