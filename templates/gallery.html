@@ -14,13 +14,15 @@
 {% for item in artist.item %}
 <div>
     <img src="{{ item.picture_path }}" alt="">
+    <!-- TODO: create favorite items button -->
+    <button type="button" id='{{ "buttonLike" + "_" + (item.item_id) | string}}' class='itemLikeButton'>🖤</button>
+    <br>
+
 </div>
 {% endfor %}
 
-<!-- TODO: create favorite items button -->
-<!-- TODO: create favorite items button logic -->
 
-<button type="button" class='itemLikeButton'>🖤</button> <br>
+<!-- TODO: create favorite items button logic -->
 
 <!-- TODO: cart button + need to add logic -->
 <button type="button" id='addToCart'>add to cart</button>
