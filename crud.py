@@ -1,4 +1,4 @@
-from model import connect_to_db, db, Customer, Artist, Item
+from model import connect_to_db, db, Customer, Artist, Item, FavoriteItem
 
 # CUSTOMER
 
@@ -62,7 +62,7 @@ def get_artist_alias(alias):
 
 
 # ITEM
-
+# TODO: Change name to python style
 # create and return a new item
 def createItem(description, dimensions, price, date, color, in_stock, picture_path, artist_id):
 
@@ -70,6 +70,15 @@ def createItem(description, dimensions, price, date, color, in_stock, picture_pa
                 date=date, color=color, in_stock=in_stock, picture_path=picture_path, artist_id=artist_id)
 
     return item
+
+
+# FAVOURITE ITEM
+# create and return a new favorite item
+def create_fav_item(customer_id, item_id):
+
+    fav_item = FavoriteItem(customer_id=customer_id, item_id=item_id)
+
+    return fav_item
 
 
 if __name__ == "__main__":

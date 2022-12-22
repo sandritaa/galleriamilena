@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, flash, session, redirect
+from flask import Flask, render_template, request, flash, session, redirect, jsonify
 from model import connect_to_db, db, Customer, Artist, Shipment, Order, Item, FavoriteItem, FavoriteArtist
 from jinja2 import StrictUndefined
 import crud
@@ -228,6 +228,37 @@ def addItem():
 
     # once the item has been added to the db redirect to the artists profile page
     return redirect('/admin/' + artist.alias)
+
+# create favitem route - POST request
+
+
+@app.route('/add-favorite-item', methods=['POST'])
+def add_fav_item():
+    # add a favorite item to the database
+    item_id = request.json.get('itemId')
+    customer_id = session["customer_id"]
+
+    fav_item = crud.create_fav_item(customer_id, item_id)
+    db.session.add(fav_item)
+    db.session.commit()
+
+    return {
+        "success": True,
+        "status": f"fav item id: {fav_item.favitem_id}"}
+
+
+# @app.route("/new-order", methods=["POST"])
+# def add_order():
+#     """Add a melon order to our database."""
+#     melon_type = request.json.get("type")
+#     amount = request.json.get("amount")
+
+#     # in real life, we would add this data to a DB instead
+#     MELON_ORDERS.append({"melon_type": melon_type, "amount": amount})
+
+#     return {
+#         "success": True,
+#         "status": f"Your order of {amount} {melon_type} melons has been confirmed"}
 
 
 # create checkout route / order
