@@ -203,7 +203,7 @@ def cart():
     return render_template("cart.html", login_button=login_button)
 
 
-# create add time route - GET request
+# create add item route - GET request
 @app.route('/addItem', methods=['GET'])
 def newItemForm():
 
@@ -228,7 +228,7 @@ def addItem():
     artist = crud.get_artist_id(session['artist_id'])
 
     # create a new item with the data from the form and the logged in artist (since an item belongs to an artist)
-    item = crud.createItem(
+    item = crud.create_item(
         description, dimensions, price, date, color, in_stock, picture_path, session['artist_id'])
     db.session.add(item)
     db.session.commit()
@@ -237,9 +237,8 @@ def addItem():
     # once the item has been added to the db redirect to the artists profile page
     return redirect('/admin/' + artist.alias)
 
+
 # create favitem route - POST request
-
-
 @app.route('/add-favorite-item', methods=['POST'])
 def add_fav_item():
     # add a favorite item to the database

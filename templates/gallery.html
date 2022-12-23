@@ -15,6 +15,7 @@
 <div>
     <img src="{{ item.picture_path }}" alt="">
     <!-- TODO: create favorite items button -->
+    <!-- TODO: create favorite items button logic -->
 
     <button type="button" id='{{ "buttonLike" + "_" + (item.item_id) | string}}' class='itemLikeButton'>heart
         {{ button_label_dict[item.item_id] }}</button>
@@ -23,13 +24,9 @@
 </div>
 {% endfor %}
 
-
-<!-- TODO: create favorite items button logic -->
-
 <!-- TODO: cart button + need to add logic -->
 <button type="button" id='addToCart'>add to cart</button>
 
-<!-- TODO: add ajax -->
 <!-- Ajax file -->
 <script src="/static/js/ajax.js"></script>
 
