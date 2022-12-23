@@ -8,6 +8,7 @@ let likeButtons = document.querySelectorAll(".itemLikeButton");
 for (let button of likeButtons) {
   button.addEventListener("click", (evt) => {
     evt.preventDefault();
+    // button.classList.remove("new-color");
     let buttonIdArray = button.id.split("_");
     let itemId = buttonIdArray.at(-1);
 
@@ -20,7 +21,9 @@ for (let button of likeButtons) {
     })
       .then((response) => response.json())
       .then((responseJson) => {
-        alert(responseJson.status);
+        button.classList.add("new-color");
       });
+
+    // change color of button
   });
 }

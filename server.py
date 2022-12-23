@@ -58,8 +58,16 @@ def gallery(alias):
     # get login or logout depending if a customer/artist is logged in or not
     login_button = helper.switch_profile_login(session)
 
+    # favourite logic
+    button_label_dict = {}
+    for item in artist_user.item:
+        button_label_dict[item.item_id] = 'no'
+        for favitem in item.favitem:
+            if session.get('customer_id', None) == favitem.customer_id:
+                button_label_dict[favitem.item_id] = 'yes'
+
     # render the gallery.html and pass the selected artist, the login button and the logged in customer (if any - if not pass None) as data
-    return render_template("gallery.html", artist=artist_user, login_button=login_button, customer_id=session.get('customer_id', None))
+    return render_template("gallery.html", artist=artist_user, login_button=login_button, button_label_dict=button_label_dict)
 
 
 # create login route
@@ -245,20 +253,6 @@ def add_fav_item():
     return {
         "success": True,
         "status": f"fav item id: {fav_item.favitem_id}"}
-
-
-# @app.route("/new-order", methods=["POST"])
-# def add_order():
-#     """Add a melon order to our database."""
-#     melon_type = request.json.get("type")
-#     amount = request.json.get("amount")
-
-#     # in real life, we would add this data to a DB instead
-#     MELON_ORDERS.append({"melon_type": melon_type, "amount": amount})
-
-#     return {
-#         "success": True,
-#         "status": f"Your order of {amount} {melon_type} melons has been confirmed"}
 
 
 # create checkout route / order
