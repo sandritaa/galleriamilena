@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, flash, session, redirect, jsonify
+from flask import Flask, render_template, request, flash, session, redirect, jsonify, flash
 from model import connect_to_db, db, Customer, Artist, Shipment, Order, Item, FavoriteItem, FavoriteArtist
 from jinja2 import StrictUndefined
 import crud
@@ -244,24 +244,31 @@ def add_fav_item():
 
     # add a favorite item to the database
     item_id = request.json.get('itemId')
-    customer_id = session["customer_id"]
+    customer_id = session.get("customer_id", None)
 
     # Query a favourite item using both customer id and item id
     favitem = FavoriteItem.query.filter((FavoriteItem.customer_id == customer_id) & (
         FavoriteItem.item_id == item_id)).first()
 
-    if favitem:
+    if customer_id == None:
+        flash('please login or create account')
+
+    elif favitem:
+
         crud.delete_fav_item(customer_id, item_id)
         db.session.commit()
     else:
-        # create
+
         fav_item = crud.create_fav_item(customer_id, item_id)
         db.session.add(fav_item)
         db.session.commit()
 
     return {
         "success": True,
-        "status": f"fav item id: {fav_item.favitem_id}"}
+        "status": "yayy"
+    }
+
+    # "status": f"fav item id: {fav_item.favitem_id}"}
 
 
 # create checkout route / order

@@ -85,8 +85,8 @@ def delete_fav_item(customer_id, item_id):
 
 
 # # add favorite item
-def add_fav_item(customer_id, item_id):
-    return FavoriteItem(customer_id=customer_id, item_id=item_id)
+# def add_fav_item(customer_id, item_id):
+#     return FavoriteItem(customer_id=customer_id, item_id=item_id)
 
 
 if __name__ == "__main__":

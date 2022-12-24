@@ -21,12 +21,12 @@ for (let button of likeButtons) {
     })
       .then((response) => response.json())
       .then((responseJson) => {
-        // if current innerHTML is "yes"
-        //    change the innerHTML to "no"
-        // elseif current innerHTML is "no"
-        //    change the innerHTML to "no"
+        console.log(responseJson);
+        if (button.innerHTML === "yes") {
+          button.innerHTML = "no";
+        } else if (button.innerHTML === "no") {
+          button.innerHTML = "yes";
+        }
       });
-
-    // change color of button
   });
 }
