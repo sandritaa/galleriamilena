@@ -2,8 +2,9 @@ from model import connect_to_db, db, Customer, Artist, Item, FavoriteItem
 
 # CUSTOMER
 
-
 # return customer email
+
+
 def get_customer_email(email):
     return Customer.query.filter(Customer.email == email).first()
 
@@ -29,7 +30,7 @@ def createProfile(fname, lname, email, phone, password):
 
 # delete customer profile
 def deleteProfileById(id):
-    return Customer.query.filter(Customer.customer_id == id).delete()
+    Customer.query.filter(Customer.customer_id == id).delete()
 
 
 # ARTIST
@@ -67,6 +68,7 @@ def create_item(description, dimensions, price, date, color, in_stock, picture_p
 
 
 # FAVORITE ITEM
+
 # create and return a new favorite item
 def create_fav_item(customer_id, item_id):
 
@@ -78,12 +80,13 @@ def create_fav_item(customer_id, item_id):
 # delete favorite item
 def delete_fav_item(customer_id, item_id):
 
-    return FavoriteItem(customer_id=customer_id, item_id=item_id).delete()
+    FavoriteItem.query.filter(FavoriteItem.customer_id ==
+                              customer_id & FavoriteItem.item_id == item_id).delete()
 
 
 # # add favorite item
 def add_fav_item(customer_id, item_id):
-    return FavoriteItem(customer_id=customer_id, item_id=item_id).create()
+    return FavoriteItem(customer_id=customer_id, item_id=item_id)
 
 
 if __name__ == "__main__":

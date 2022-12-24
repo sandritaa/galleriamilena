@@ -241,13 +241,23 @@ def addItem():
 # create favitem route - POST request
 @app.route('/add-favorite-item', methods=['POST'])
 def add_fav_item():
+
     # add a favorite item to the database
     item_id = request.json.get('itemId')
     customer_id = session["customer_id"]
 
-    fav_item = crud.create_fav_item(customer_id, item_id)
-    db.session.add(fav_item)
-    db.session.commit()
+    # Query a favourite item using both customer id and item id
+    favitem = FavoriteItem.query.filter((FavoriteItem.customer_id == customer_id) & (
+        FavoriteItem.item_id == item_id)).first()
+
+    if favitem:
+        crud.delete_fav_item(customer_id, item_id)
+        db.session.commit()
+    else:
+        # create
+        fav_item = crud.create_fav_item(customer_id, item_id)
+        db.session.add(fav_item)
+        db.session.commit()
 
     return {
         "success": True,

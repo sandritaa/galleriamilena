@@ -21,7 +21,10 @@ for (let button of likeButtons) {
     })
       .then((response) => response.json())
       .then((responseJson) => {
-        button.classList.add("new-color");
+        // if current innerHTML is "yes"
+        //    change the innerHTML to "no"
+        // elseif current innerHTML is "no"
+        //    change the innerHTML to "no"
       });
 
     // change color of button

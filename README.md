@@ -1,6 +1,6 @@
 # Galleria Milena
 
-A web application that allows an artist to showcase and sell their artwork
+A web application that allows an artists to showcase and sell their artwork
 
 ## Background
 
