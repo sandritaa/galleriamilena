@@ -84,9 +84,13 @@ def delete_fav_item(customer_id, item_id):
                               customer_id) & (FavoriteItem.item_id == item_id)).delete()
 
 
-# # add favorite item
-# def add_fav_item(customer_id, item_id):
-#     return FavoriteItem(customer_id=customer_id, item_id=item_id)
+# get favorite item
+def get_fav_item(item_id, customer_id):
+
+    fav_item = FavoriteItem.query.filter((FavoriteItem.customer_id == customer_id) & (
+        FavoriteItem.item_id == item_id)).first()
+
+    return fav_item
 
 
 if __name__ == "__main__":

@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, flash, session, redirect, flash
-from model import connect_to_db, db, FavoriteItem
+from model import connect_to_db, db
 from jinja2 import StrictUndefined
 import crud
 import helper
@@ -255,8 +255,7 @@ def add_fav_item():
         customer_logged_in = True
 
         # Query a favorite item using both customer id and item id
-        favitem = FavoriteItem.query.filter((FavoriteItem.customer_id == customer_id) & (
-            FavoriteItem.item_id == item_id)).first()
+        favitem = crud.get_fav_item(customer_id, item_id)
 
         if favitem:
             print(customer_id)
