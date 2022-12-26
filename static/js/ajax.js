@@ -21,11 +21,16 @@ for (let button of likeButtons) {
     })
       .then((response) => response.json())
       .then((responseJson) => {
-        console.log(responseJson);
-        if (responseJson.status == true) {
-          button.innerHTML = "no";
-        } else if (responseJson.status == false) {
-          button.innerHTML = "yes";
+        // Check if the server is sending a success = True flag
+        if (responseJson.customer_logged_in == true) {
+          if (responseJson.added_item == true) {
+            button.innerHTML = "unlike";
+          } else if (responseJson.added_item == false) {
+            button.innerHTML = "like";
+          }
+        } else {
+          // redirect the user to the login page
+          window.location.href = "/login";
         }
       });
   });

@@ -58,13 +58,13 @@ def gallery(alias):
     # get login or logout depending if a customer/artist is logged in or not
     login_button = helper.switch_profile_login(session)
 
-    # favourite logic
+    # favorite logic
     button_label_dict = {}
     for item in artist_user.item:
-        button_label_dict[item.item_id] = 'no'
+        button_label_dict[item.item_id] = 'like'
         for favitem in item.favitem:
             if session.get('customer_id', None) == favitem.customer_id:
-                button_label_dict[favitem.item_id] = 'yes'
+                button_label_dict[favitem.item_id] = 'unlike'
 
     # render the gallery.html and pass the selected artist, the login button and the logged in customer (if any - if not pass None) as data
     return render_template("gallery.html", artist=artist_user, login_button=login_button, button_label_dict=button_label_dict)
@@ -243,37 +243,43 @@ def addItem():
 def add_fav_item():
 
     # add a favorite item to the database
-    item_id = request.json.get('itemId')
+    item_id = int(request.json.get('itemId'))
     customer_id = session.get("customer_id", None)
 
     # check if customer is login - if its not, redirect to login
     if customer_id == None:
-        return redirect('/login')
+        customer_logged_in = False
+        added_item = False
 
     else:
+        customer_logged_in = True
+
         # Query a favorite item using both customer id and item id
         favitem = FavoriteItem.query.filter((FavoriteItem.customer_id == customer_id) & (
             FavoriteItem.item_id == item_id)).first()
 
         if favitem:
+            print(customer_id)
+            print(item_id)
             crud.delete_fav_item(customer_id, item_id)
             db.session.commit()
-            switch = False
+            added_item = False
+
         else:
 
             fav_item = crud.create_fav_item(customer_id, item_id)
             db.session.add(fav_item)
             db.session.commit()
-            switch = True
+            added_item = True
 
-        return {
-            'success': True,
-            'status': switch
-        }
+    return {
+        'customer_logged_in': customer_logged_in,
+        'added_item': added_item
+    }
 
 
 # create checkout route / order
-@app.route('/checkout')
+@ app.route('/checkout')
 def checkout():
     return render_template("checkout.html")
 

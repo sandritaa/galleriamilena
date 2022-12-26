@@ -80,8 +80,8 @@ def create_fav_item(customer_id, item_id):
 # delete favorite item
 def delete_fav_item(customer_id, item_id):
 
-    FavoriteItem.query.filter(FavoriteItem.customer_id ==
-                              customer_id & FavoriteItem.item_id == item_id).delete()
+    FavoriteItem.query.filter((FavoriteItem.customer_id ==
+                              customer_id) & (FavoriteItem.item_id == item_id)).delete()
 
 
 # # add favorite item
