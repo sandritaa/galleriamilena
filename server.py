@@ -1,5 +1,5 @@
-from flask import Flask, render_template, request, flash, session, redirect, jsonify, flash
-from model import connect_to_db, db, Customer, Artist, Shipment, Order, Item, FavoriteItem, FavoriteArtist
+from flask import Flask, render_template, request, flash, session, redirect, flash
+from model import connect_to_db, db, FavoriteItem
 from jinja2 import StrictUndefined
 import crud
 import helper
@@ -246,29 +246,30 @@ def add_fav_item():
     item_id = request.json.get('itemId')
     customer_id = session.get("customer_id", None)
 
-    # Query a favourite item using both customer id and item id
-    favitem = FavoriteItem.query.filter((FavoriteItem.customer_id == customer_id) & (
-        FavoriteItem.item_id == item_id)).first()
-
+    # check if customer is login - if its not, redirect to login
     if customer_id == None:
-        flash('please login or create account')
+        return redirect('/login')
 
-    elif favitem:
-
-        crud.delete_fav_item(customer_id, item_id)
-        db.session.commit()
     else:
+        # Query a favorite item using both customer id and item id
+        favitem = FavoriteItem.query.filter((FavoriteItem.customer_id == customer_id) & (
+            FavoriteItem.item_id == item_id)).first()
 
-        fav_item = crud.create_fav_item(customer_id, item_id)
-        db.session.add(fav_item)
-        db.session.commit()
+        if favitem:
+            crud.delete_fav_item(customer_id, item_id)
+            db.session.commit()
+            switch = False
+        else:
 
-    return {
-        "success": True,
-        "status": "yayy"
-    }
+            fav_item = crud.create_fav_item(customer_id, item_id)
+            db.session.add(fav_item)
+            db.session.commit()
+            switch = True
 
-    # "status": f"fav item id: {fav_item.favitem_id}"}
+        return {
+            'success': True,
+            'status': switch
+        }
 
 
 # create checkout route / order
@@ -279,4 +280,4 @@ def checkout():
 
 if __name__ == "__main__":
     connect_to_db(app)
-    app.run(debug=True, host='0.0.0.0', port=5008)
+    app.run(debug=True, host='0.0.0.0', port=5001)

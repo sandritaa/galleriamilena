@@ -22,9 +22,9 @@ for (let button of likeButtons) {
       .then((response) => response.json())
       .then((responseJson) => {
         console.log(responseJson);
-        if (button.innerHTML === "yes") {
+        if (responseJson.status == true) {
           button.innerHTML = "no";
-        } else if (button.innerHTML === "no") {
+        } else if (responseJson.status == false) {
           button.innerHTML = "yes";
         }
       });
