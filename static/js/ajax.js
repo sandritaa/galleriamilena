@@ -1,17 +1,19 @@
-// TODO: add ajax logic for fav buttons
-
 "use strict";
 
 // query all like buttons using the class .itemLikeButton
 let likeButtons = document.querySelectorAll(".itemLikeButton");
 
+// loop through each button and create an event listener for each
 for (let button of likeButtons) {
   button.addEventListener("click", (evt) => {
+    // avoid the default behavior to not reload the page
     evt.preventDefault();
-    // button.classList.remove("new-color");
+
+    // tokenize the button_id string by _ and get last element in the array which is the item_id as a string
     let buttonIdArray = button.id.split("_");
     let itemId = buttonIdArray.at(-1);
 
+    // do a post request to the server sending the item_id
     fetch("/add-favorite-item", {
       method: "POST",
       body: JSON.stringify({ itemId: itemId }),
@@ -19,17 +21,19 @@ for (let button of likeButtons) {
         "Content-Type": "application/json",
       },
     })
+      // use the response (promise) from the server and convert it to a JSON
       .then((response) => response.json())
       .then((responseJson) => {
-        // Check if the server is sending a success = True flag
+        // when the json promise is fulfilled, check if the server is sending a customer_logged_in = True flag
         if (responseJson.customer_logged_in == true) {
+          // if the customer is logged in, toggle between like and unlike for the button depending on whether or not the favitem object has been or removed from the db
           if (responseJson.added_item == true) {
             button.innerHTML = "unlike";
           } else if (responseJson.added_item == false) {
             button.innerHTML = "like";
           }
         } else {
-          // redirect the user to the login page
+          // if the customer is not logged in, redirect the user to the login page
           window.location.href = "/login";
         }
       });

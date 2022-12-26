@@ -58,15 +58,25 @@ def gallery(alias):
     # get login or logout depending if a customer/artist is logged in or not
     login_button = helper.switch_profile_login(session)
 
-    # favorite logic
+    # favorite logic for when the page is first loaded
     button_label_dict = {}
+
+    # go through every item of the artist
     for item in artist_user.item:
+
+        # for each item, add a label with an item_id as the key of a dictionary and set it 'like'
         button_label_dict[item.item_id] = 'like'
+
+        # go through every favitem of a specific item
         for favitem in item.favitem:
+
+            # check if the customer id of the favitem is the same of the customer that is logged in (if any)
             if session.get('customer_id', None) == favitem.customer_id:
+
+                # if its is, set the value in the dictionary of the key item_id to 'unlike'
                 button_label_dict[favitem.item_id] = 'unlike'
 
-    # render the gallery.html and pass the selected artist, the login button and the logged in customer (if any - if not pass None) as data
+    # render the gallery.html and pass the selected artist, the login button and the favitem button label as data
     return render_template("gallery.html", artist=artist_user, login_button=login_button, button_label_dict=button_label_dict)
 
 
@@ -242,35 +252,44 @@ def addItem():
 @app.route('/add-favorite-item', methods=['POST'])
 def add_fav_item():
 
-    # add a favorite item to the database
+    # get the item_id and convert it to an int from the client (ajax)
     item_id = int(request.json.get('itemId'))
+
+    # get the customer_id from the session or None if no customer is logged in
     customer_id = session.get("customer_id", None)
 
-    # check if customer is login - if its not, redirect to login
+    # check if the customer is logged id
     if customer_id == None:
+
+        # if they aren't logged in, set both flags to false
         customer_logged_in = False
         added_item = False
 
     else:
+
+        # if they are logged in, set the customer_logged_in to true
         customer_logged_in = True
 
         # Query a favorite item using both customer id and item id
         favitem = crud.get_fav_item(customer_id, item_id)
 
+        # if there is a favorite item then delete it from the db - otherwise add it
         if favitem:
-            print(customer_id)
-            print(item_id)
+
+            # delete the favitem from the db and set the added_item flag to false
             crud.delete_fav_item(customer_id, item_id)
             db.session.commit()
             added_item = False
 
         else:
 
+            # create the favitem and add it ot the db and set the added_item flag to true
             fav_item = crud.create_fav_item(customer_id, item_id)
             db.session.add(fav_item)
             db.session.commit()
             added_item = True
 
+    # return both flags to the client (ajax) so it can use them in its eventListeners
     return {
         'customer_logged_in': customer_logged_in,
         'added_item': added_item
