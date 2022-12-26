@@ -10,17 +10,13 @@
 <p>{{ artist.about }}</p>
 
 
-<!-- add artist items to gallery (images) -->
+<!-- add artist items to gallery (images and buttons) -->
 {% for item in artist.item %}
 <div>
     <img src="{{ item.picture_path }}" alt="">
-    <!-- TODO: create favorite items button -->
-    <!-- TODO: create favorite items button logic -->
-
     <button type="button" id='{{ "buttonLike" + "_" + (item.item_id) | string }}'
         class='itemLikeButton'>{{ button_label_dict[item.item_id] }}</button>
     <br>
-
 </div>
 {% endfor %}
 
