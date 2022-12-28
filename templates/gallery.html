@@ -13,8 +13,10 @@
 <!-- add artist items to gallery (images and buttons) -->
 {% for item in artist.item %}
 <div>
+    <!-- add images of each item for the specific artist -->
     <img src="{{ item.picture_path }}" alt="">
 
+    <!-- create button which has a dynamic unique id tied to the item and dynamic inner html to change when first rendered -->
     <button type="button" id='{{ "buttonLike" + "_" + (item.item_id) | string }}'
         class='itemLikeButton'>{{ button_label_dict[item.item_id] }}</button>
     <button type="button" id='{{ "buttonCart" + "_" + (item.item_id) | string }}' class="'itemCartButton">add item to
