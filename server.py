@@ -58,14 +58,14 @@ def gallery(alias):
     # get login or logout depending if a customer/artist is logged in or not
     login_button = helper.switch_profile_login(session)
 
-    # favorite logic for when the page is first loaded
-    button_label_dict = {}
+    # favorite logic for when the page is loaded
+    button_like_label = {}
 
     # go through every item of the artist
     for item in artist_user.item:
 
         # for each item, add a label with an item_id as the key of a dictionary and set it 'like'
-        button_label_dict[item.item_id] = 'like'
+        button_like_label[item.item_id] = 'like'
 
         # go through every favitem of a specific item
         for favitem in item.favitem:
@@ -74,10 +74,40 @@ def gallery(alias):
             if session.get('customer_id', None) == favitem.customer_id:
 
                 # if its is, set the value in the dictionary of the key item_id to 'unlike'
-                button_label_dict[favitem.item_id] = 'unlike'
+                button_like_label[favitem.item_id] = 'unlike'
+
+    # cart logic for when the page is loaded
+    button_cart_label = {}
+
+    # go through every item of the artist
+    for item in artist_user.item:
+
+        # for each item, add a label with an item_id as the key of a dictionary and set it 'like'
+        button_cart_label[item.item_id] = 'add to cart'
+
+        # check if customer is logged in
+        # if it isn't use the session to get the correct labels
+        if session.get('customer_id', None) == None:
+
+            # check if item has been added to cart  for someone not logged in
+            if item.item_id in session.get('cartItems', []):
+                # if its is, set the value in the dictionary of the key item_id to 'unlike'
+                button_cart_label[item.item_id] = 'remove from cart'
+
+        # if the customer is logged in use the db to get the right labels
+        else:
+
+            # go through every favitem of a specific item
+            for cartitem in item.cartitem:
+
+                # check if the customer id of the favitem is the same of the customer that is logged in (if any)
+                if session.get('customer_id', None) == cartitem.customer_id:
+
+                    # if its is, set the value in the dictionary of the key item_id to 'unlike'
+                    button_cart_label[cartitem.item_id] = 'remove from cart'
 
     # render the gallery.html and pass the selected artist, the login button and the favitem button label as data
-    return render_template("gallery.html", artist=artist_user, login_button=login_button, button_label_dict=button_label_dict)
+    return render_template("gallery.html", artist=artist_user, login_button=login_button, button_like_label=button_like_label, button_cart_label=button_cart_label)
 
 
 # create login route
@@ -297,8 +327,9 @@ def add_fav_item():
         'added_item': added_item
     }
 
-
 # create cartItem route - POST request
+
+
 @app.route('/add-cart-item', methods=['POST'])
 def add_cart_item():
 
@@ -310,7 +341,6 @@ def add_cart_item():
 
     # check if the customer is logged in or not
     # if the customer is NOT logged in - use session to store cartitems
-    print(f"******** PRE {session.get('cartItems', [])}")
     if customer_id == None:
 
         if item_id in session.get('cartItems', []):
@@ -325,8 +355,6 @@ def add_cart_item():
             session.modified = True
             added_item = True
 
-        print(f"******** AFTER {session.get('cartItems', [])}")
-
     # if instead the customer is logged in - used the db to store cartitems
     else:
 
@@ -335,7 +363,7 @@ def add_cart_item():
 
         if cartitem:
             crud.delete_cart_item(customer_id, item_id)
-            db.session_commit()
+            db.session.commit()
             added_item = False
 
         else:

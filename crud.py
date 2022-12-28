@@ -85,7 +85,7 @@ def delete_fav_item(customer_id, item_id):
 
 
 # get favorite item
-def get_fav_item(item_id, customer_id):
+def get_fav_item(customer_id, item_id):
 
     fav_item = FavoriteItem.query.filter((FavoriteItem.customer_id == customer_id) & (
         FavoriteItem.item_id == item_id)).first()
@@ -107,7 +107,7 @@ def create_cart_item(customer_id, item_id):
 # get cart items
 def get_cart_item(customer_id, item_id):
     cart_item = CartItem.query.filter(
-        (CartItem.customer == customer_id) & (CartItem.item == item_id)).first()
+        (CartItem.customer_id == customer_id) & (CartItem.item_id == item_id)).first()
 
     return cart_item
 

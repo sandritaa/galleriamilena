@@ -18,12 +18,13 @@
 
     <!-- create button which has a dynamic unique id tied to the item and dynamic inner html to change when first rendered -->
     <button type="button" id='{{ "buttonLike" + "_" + (item.item_id) | string }}'
-        class='itemLikeButton'>{{ button_label_dict[item.item_id] }}</button>
-    <button type="button" id='{{ "buttonCart" + "_" + (item.item_id) | string }}' class="itemCartButton">add to
-        cart</button>
+        class='itemLikeButton'>{{ button_like_label[item.item_id] }}</button>
+    <button type="button" id='{{ "buttonCart" + "_" + (item.item_id) | string }}'
+        class="itemCartButton">{{ button_cart_label[item.item_id] }}</button>
     <br>
 </div>
 {% endfor %}
+
 
 <!-- Ajax file -->
 <script src="/static/js/ajax.js"></script>
