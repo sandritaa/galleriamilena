@@ -50,18 +50,27 @@ for (let button of cartButtons) {
   button.addEventListener("click", (evt) => {
     // avoid the default behavior to not reload the page
     evt.preventDefault();
-
     // tokenize the button_id string by _ and get last element in the array which is the item_id as a string
     let buttonIdArray = button.id.split("_");
     let itemId = buttonIdArray.at(-1);
 
     // do a post request to the server sending the item_id
-    //   fetch("/add-favorite-item", {
-    //     method: "POST",
-    //     body: JSON.stringify({ itemId: itemId }),
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //   });
+    fetch("/add-cart-item", {
+      method: "POST",
+      body: JSON.stringify({ itemId: itemId }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      // use the response (promise) from the server and convert it to a JSON
+      .then((response) => response.json())
+      .then((responseJson) => {
+        // if the customer is logged in, toggle between like and unlike for the button depending on whether or not the favitem object has been or removed from the db
+        if (responseJson.added_item == true) {
+          button.innerHTML = "remove from cart";
+        } else if (responseJson.added_item == false) {
+          button.innerHTML = "add to cart";
+        }
+      });
   });
 }

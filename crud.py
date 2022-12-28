@@ -104,6 +104,21 @@ def create_cart_item(customer_id, item_id):
     return cart_item
 
 
+# get cart items
+def get_cart_item(customer_id, item_id):
+    cart_item = CartItem.query.filter(
+        (CartItem.customer == customer_id) & (CartItem.item == item_id)).first()
+
+    return cart_item
+
+# delete cart item
+
+
+def delete_cart_item(customer_id, item_id):
+    CartItem.query.filter((CartItem.customer_id ==
+                           customer_id) & (CartItem.item_id == item_id)).delete()
+
+
 if __name__ == "__main__":
     from server import app
 

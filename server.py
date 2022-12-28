@@ -102,6 +102,7 @@ def login():
 
         # add the logged in customer to the session
         session['customer_id'] = customer.customer_id
+        session.modified = True
 
         # get the customer route since it is a dynamic route depending on the logged in customer
         customer_route = helper.get_customer_route(customer)
@@ -114,6 +115,7 @@ def login():
 
         # add the logged in artist to the session
         session['artist_id'] = artist.artist_id
+        session.modified = True
 
         # get the artist route since it is a dynamic route depending on the logged in artist
         artist_route = helper.get_artist_route(artist)
@@ -306,19 +308,49 @@ def add_cart_item():
     # get the customer_id from the session or None if no customer is logged in
     customer_id = session.get("customer_id", None)
 
+    # check if the customer is logged in or not
+    # if the customer is NOT logged in - use session to store cartitems
+    print(f"******** PRE {session.get('cartItems', [])}")
     if customer_id == None:
-        # item_id goes into my session
-        session.setdefault('cartItems', []).append(item_id)
 
+        if item_id in session.get('cartItems', []):
+
+            session['cartItems'].remove(item_id)
+            session.modified = True
+            added_item = False
+
+        else:
+            # item_id goes into my session
+            session.setdefault('cartItems', []).append(item_id)
+            session.modified = True
+            added_item = True
+
+        print(f"******** AFTER {session.get('cartItems', [])}")
+
+    # if instead the customer is logged in - used the db to store cartitems
     else:
 
-        cart_item = crud.create_cart_item(customer_id, item_id)
-        db.session.add(cart_item)
-        db.session.commit()
-        added_item = True
+        # Query for a cartitems
+        cartitem = crud.get_cart_item(customer_id, item_id)
 
+        if cartitem:
+            crud.delete_cart_item(customer_id, item_id)
+            db.session_commit()
+            added_item = False
+
+        else:
+            cart_item = crud.create_cart_item(customer_id, item_id)
+            db.session.add(cart_item)
+            db.session.commit()
+            added_item = True
+
+    return {
+        'added_item': added_item
+    }
 
 # create checkout route / order
+
+
 @ app.route('/checkout')
 def checkout():
     return render_template("checkout.html")
