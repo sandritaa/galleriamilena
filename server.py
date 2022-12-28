@@ -35,13 +35,12 @@ def logout_delete():
 
     # if the logout was clicked then set the session keys to None
     if logout:
-        print('logged out')
         session['customer_id'] = None
         session['artist_id'] = None
 
     # if delete was clicked then delete the account from the db
     elif delete:
-        crud.deleteProfileById(session['customer_id'])
+        crud.delete_profile(session['customer_id'])
         db.session.commit()
 
     # finally go back to the home route for GET request
@@ -53,61 +52,19 @@ def logout_delete():
 def gallery(alias):
 
     # Given the artist alias, query the artist selected and pass the required info (all of it?) to the template
-    artist_user = crud.get_artist_alias(alias)
+    artist = crud.get_artist_alias(alias)
 
     # get login or logout depending if a customer/artist is logged in or not
     login_button = helper.switch_profile_login(session)
 
-    # favorite logic for when the page is loaded
-    button_like_label = {}
+    # favorite item button label for when the page is loaded
+    button_like_label = helper.get_like_button_label(artist, session)
 
-    # go through every item of the artist
-    for item in artist_user.item:
-
-        # for each item, add a label with an item_id as the key of a dictionary and set it 'like'
-        button_like_label[item.item_id] = 'like'
-
-        # go through every favitem of a specific item
-        for favitem in item.favitem:
-
-            # check if the customer id of the favitem is the same of the customer that is logged in (if any)
-            if session.get('customer_id', None) == favitem.customer_id:
-
-                # if its is, set the value in the dictionary of the key item_id to 'unlike'
-                button_like_label[favitem.item_id] = 'unlike'
-
-    # cart logic for when the page is loaded
-    button_cart_label = {}
-
-    # go through every item of the artist
-    for item in artist_user.item:
-
-        # for each item, add a label with an item_id as the key of a dictionary and set it 'like'
-        button_cart_label[item.item_id] = 'add to cart'
-
-        # check if customer is logged in
-        # if it isn't use the session to get the correct labels
-        if session.get('customer_id', None) == None:
-
-            # check if item has been added to cart  for someone not logged in
-            if item.item_id in session.get('cartItems', []):
-                # if its is, set the value in the dictionary of the key item_id to 'unlike'
-                button_cart_label[item.item_id] = 'remove from cart'
-
-        # if the customer is logged in use the db to get the right labels
-        else:
-
-            # go through every favitem of a specific item
-            for cartitem in item.cartitem:
-
-                # check if the customer id of the favitem is the same of the customer that is logged in (if any)
-                if session.get('customer_id', None) == cartitem.customer_id:
-
-                    # if its is, set the value in the dictionary of the key item_id to 'unlike'
-                    button_cart_label[cartitem.item_id] = 'remove from cart'
+    # cart item button label for when the page is loaded
+    button_cart_label = helper.get_cart_button_label(artist, session)
 
     # render the gallery.html and pass the selected artist, the login button and the favitem button label as data
-    return render_template("gallery.html", artist=artist_user, login_button=login_button, button_like_label=button_like_label, button_cart_label=button_cart_label)
+    return render_template("gallery.html", artist=artist, login_button=login_button, button_like_label=button_like_label, button_cart_label=button_cart_label)
 
 
 # create login route
@@ -229,7 +186,7 @@ def create_profile():
 
     # otherwise create the new profile with the data received from the form
     else:
-        user = crud.createProfile(fname, lname, email, phone, password)
+        user = crud.create_profile(fname, lname, email, phone, password)
         db.session.add(user)
         db.session.commit()
         flash("Account created! Please log in.")
@@ -246,7 +203,7 @@ def cart():
 
 
 # create add item route - GET request
-@app.route('/addItem', methods=['GET'])
+@app.route('/add-item', methods=['GET'])
 def newItemForm():
 
     # when its a get request just render the html without doing anything
@@ -254,7 +211,7 @@ def newItemForm():
 
 
 # create add item route - POST request
-@app.route('/addItem', methods=['POST'])
+@app.route('/add-item', methods=['POST'])
 def addItem():
 
     # get the data posted by the form

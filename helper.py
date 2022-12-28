@@ -28,3 +28,60 @@ def get_customer_route(customer):
 def get_artist_route(artist):
     artist_route = '/admin/' + str(artist.alias)
     return artist_route
+
+
+def get_like_button_label(artist, session):
+
+    # favorite logic for when the page is loaded
+    button_like_label = {}
+
+    # go through every item of the artist
+    for item in artist.item:
+
+        # for each item, add a label with an item_id as the key of a dictionary and set it 'like'
+        button_like_label[item.item_id] = 'like'
+
+        # go through every favitem of a specific item
+        for favitem in item.favitem:
+
+            # check if the customer id of the favitem is the same of the customer that is logged in (if any)
+            if session.get('customer_id', None) == favitem.customer_id:
+
+                # if its is, set the value in the dictionary of the key item_id to 'unlike'
+                button_like_label[favitem.item_id] = 'unlike'
+
+    return button_like_label
+
+
+def get_cart_button_label(artist, session):
+    # cart logic for when the page is loaded
+    button_cart_label = {}
+
+    # go through every item of the artist
+    for item in artist.item:
+
+        # for each item, add a label with an item_id as the key of a dictionary and set it 'like'
+        button_cart_label[item.item_id] = 'add to cart'
+
+        # check if customer is logged in
+        # if it isn't use the session to get the correct labels
+        if session.get('customer_id', None) == None:
+
+            # check if item has been added to cart  for someone not logged in
+            if item.item_id in session.get('cartItems', []):
+                # if its is, set the value in the dictionary of the key item_id to 'unlike'
+                button_cart_label[item.item_id] = 'remove from cart'
+
+        # if the customer is logged in use the db to get the right labels
+        else:
+
+            # go through every favitem of a specific item
+            for cartitem in item.cartitem:
+
+                # check if the customer id of the favitem is the same of the customer that is logged in (if any)
+                if session.get('customer_id', None) == cartitem.customer_id:
+
+                    # if its is, set the value in the dictionary of the key item_id to 'unlike'
+                    button_cart_label[cartitem.item_id] = 'remove from cart'
+
+    return button_cart_label

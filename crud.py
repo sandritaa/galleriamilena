@@ -22,14 +22,14 @@ def get_customer_id(customer_id_int):
 
 
 # create and return a new user
-def createProfile(fname, lname, email, phone, password):
+def create_profile(fname, lname, email, phone, password):
     user = Customer(fname=fname, lname=lname, email=email,
                     phone=phone, password=password)
     return user
 
 
 # delete customer profile
-def deleteProfileById(id):
+def delete_profile(id):
     Customer.query.filter(Customer.customer_id == id).delete()
 
 
