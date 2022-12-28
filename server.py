@@ -296,6 +296,28 @@ def add_fav_item():
     }
 
 
+# create cartItem route - POST request
+@app.route('/add-cart-item', methods=['POST'])
+def add_cart_item():
+
+    # get the item_id and convert it to an int from the client (ajax)
+    item_id = int(request.json.get('itemId'))
+
+    # get the customer_id from the session or None if no customer is logged in
+    customer_id = session.get("customer_id", None)
+
+    if customer_id == None:
+        # item_id goes into my session
+        session.setdefault('cartItems', []).append(item_id)
+
+    else:
+
+        cart_item = crud.create_cart_item(customer_id, item_id)
+        db.session.add(cart_item)
+        db.session.commit()
+        added_item = True
+
+
 # create checkout route / order
 @ app.route('/checkout')
 def checkout():

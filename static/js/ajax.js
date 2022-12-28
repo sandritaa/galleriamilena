@@ -39,3 +39,29 @@ for (let button of likeButtons) {
       });
   });
 }
+
+// ///////////////////////////////////////////
+
+// query all like buttons using the class .itemCartButton
+let cartButtons = document.querySelectorAll(".itemCartButton");
+
+// loop through each button and create an event listener for each
+for (let button of cartButtons) {
+  button.addEventListener("click", (evt) => {
+    // avoid the default behavior to not reload the page
+    evt.preventDefault();
+
+    // tokenize the button_id string by _ and get last element in the array which is the item_id as a string
+    let buttonIdArray = button.id.split("_");
+    let itemId = buttonIdArray.at(-1);
+
+    // do a post request to the server sending the item_id
+    //   fetch("/add-favorite-item", {
+    //     method: "POST",
+    //     body: JSON.stringify({ itemId: itemId }),
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //   });
+  });
+}

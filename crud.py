@@ -1,4 +1,4 @@
-from model import connect_to_db, db, Customer, Artist, Item, FavoriteItem
+from model import connect_to_db, db, Customer, Artist, Item, FavoriteItem, CartItem
 
 # CUSTOMER
 
@@ -91,6 +91,17 @@ def get_fav_item(item_id, customer_id):
         FavoriteItem.item_id == item_id)).first()
 
     return fav_item
+
+
+# CART ITEMS
+
+
+# create and return a new cart item
+def create_cart_item(customer_id, item_id):
+
+    cart_item = CartItem(customer_id=customer_id, item_id=item_id)
+
+    return cart_item
 
 
 if __name__ == "__main__":
