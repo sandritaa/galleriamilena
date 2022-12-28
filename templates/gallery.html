@@ -14,14 +14,14 @@
 {% for item in artist.item %}
 <div>
     <img src="{{ item.picture_path }}" alt="">
+
     <button type="button" id='{{ "buttonLike" + "_" + (item.item_id) | string }}'
         class='itemLikeButton'>{{ button_label_dict[item.item_id] }}</button>
+    <button type="button" id='{{ "buttonCart" + "_" + (item.item_id) | string }}' class="'itemCartButton">add item to
+        cart</button>
     <br>
 </div>
 {% endfor %}
-
-<!-- TODO: cart button + need to add logic -->
-<button type="button" id='addToCart'>add to cart</button>
 
 <!-- Ajax file -->
 <script src="/static/js/ajax.js"></script>
