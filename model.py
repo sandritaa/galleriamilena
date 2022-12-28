@@ -23,6 +23,7 @@ class Customer(db.Model):
     order = db.relationship('Order', back_populates='customer')
     favitem = db.relationship('FavoriteItem', back_populates='customer')
     favartist = db.relationship('FavoriteArtist', back_populates='customer')
+    cart = db.relationship('Cart', back_populates='customer')
 
     # class representation
     def __repr__(self):
@@ -139,6 +140,7 @@ class Item(db.Model):
     order = db.relationship('Order', back_populates='item')
     artist = db.relationship('Artist', back_populates='item')
     favitem = db.relationship('FavoriteItem', back_populates='item')
+    cartitem = db.relationship('CartItem', back_populates='item')
 
     # class representation
 
@@ -192,6 +194,54 @@ class FavoriteArtist(db.Model):
 
     def __repr__(self):
         return f'<FavoriteArtist favartist_id={self.favartists} customer_id={self.customer_id} artist_id={self.artist_id}>'
+
+
+# create cart class
+class Cart(db.Model):
+
+    # create carts table
+    __tablename__ = 'carts'
+
+    # create attributes
+    cart_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+
+    # add foreign keys
+    customer_id = db.Column(db.Integer, db.ForeignKey(
+        'customers.customer_id'), nullable=False)
+
+    # add relationship
+    cartitem = db.relationship('CartItem', back_populates='cart')
+    customer = db.relationship('Customer', back_populates='cart')
+
+    # class representation
+
+    def __repr__(self):
+        return f'<FavoriteArtist favartist_id={self.favartists} customer_id={self.customer_id} artist_id={self.artist_id}>'
+
+
+# create cart item class
+class CartItem(db.Model):
+
+    # create cart items table
+    __tablename__ = 'cartitems'
+
+    # create attributes
+    cartitem_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+
+    # add foreign keys
+    cart_id = db.Column(db.Integer, db.ForeignKey(
+        'carts.cart_id'), nullable=False)
+    item_id = db.Column(db.Integer, db.ForeignKey(
+        'items.item_id'), nullable=False)
+
+    # add relationship
+    cart = db.relationship('Cart', back_populates='cartitem')
+    item = db.relationship('Item', back_populates='cartitem')
+
+    # class representation
+
+    def __repr__(self):
+        return f'<CartItem cartitem_id={self.cartitem_id} cart_id={self.cart_id} item_id={self.item_id}>'
 
 
 def connect_to_db(flask_app, db_uri="postgresql:///galleriadb", echo=True):
