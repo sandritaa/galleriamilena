@@ -8,15 +8,23 @@
 
 <ul>
     {% for item in cart_data %}
-    <li>
+    <li id='{{ "liCart" + "-" + (item.item_id) | string }}'>
         <p>{{ item['item_id'] }}</p>
         <p>{{ item['price'] }}</p>
         <p>{{ item['dimensions'] }}</p>
         <p>{{ item['alias'] }}</p>
         <img src="{{ item['picture_path']}}">
+        <!-- remove item from cart button -->
+        <button type="button" class="removeItemButton"
+            id="{{'buttonRemoveItem' + '_' + (item.item_id) | string}}">remove
+            item</button>
+        {% endfor %}
     </li>
-    {% endfor %}
+
+
+
 </ul>
+
 
 <!-- add login button -->
 <button type='button'>
@@ -27,5 +35,9 @@
 <button type='button'>
     <a href='/ '>home</a>
 </button>
+
+
+<!-- Ajax file -->
+<script src="/static/js/ajax.js"></script>
 
 {% endblock %}

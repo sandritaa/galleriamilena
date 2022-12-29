@@ -94,6 +94,21 @@ def login():
         # get the customer route since it is a dynamic route depending on the logged in customer
         customer_route = helper.get_customer_route(customer)
 
+        for item_id in session.get('cartItems', None):
+
+            cart_item_db = crud.get_cartitem(
+                session.get('customer_id'), item_id)
+
+            if not cart_item_db:
+
+                cart_item = crud.create_cartitem(
+                    session.get('customer_id'), item_id)
+                db.session.add(cart_item)
+                db.session.commit()
+
+        session['cartItems'] = []
+        session.modified = True
+
         # go to the customer route
         return redirect(customer_route)
 
@@ -197,24 +212,6 @@ def create_profile():
         return redirect("/login")
 
 
-# create cart route
-@app.route('/cart')
-def cart():
-    login_button = helper.switch_profile_login(session)
-
-    cart_data = helper.get_cart_data(session)
-
-    return render_template("cart.html", login_button=login_button, cart_data=cart_data)
-
-
-# create add item route - GET request
-@app.route('/add-item', methods=['GET'])
-def newItemForm():
-
-    # when its a get request just render the html without doing anything
-    return render_template('addItem.html')
-
-
 # create add item route - POST request
 @app.route('/add-item', methods=['POST'])
 def addItem():
@@ -289,9 +286,26 @@ def add_fav_item():
         'added_item': added_item
     }
 
+
+# create add item route - GET request
+@app.route('/add-item', methods=['GET'])
+def newItemForm():
+
+    # when its a get request just render the html without doing anything
+    return render_template('addItem.html')
+
+
+# create cart route
+@app.route('/cart')
+def cart():
+    login_button = helper.switch_profile_login(session)
+
+    cart_data = helper.get_cart_data(session)
+
+    return render_template("cart.html", login_button=login_button, cart_data=cart_data)
+
+
 # create cartItem route - POST request
-
-
 @app.route('/add-cart-item', methods=['POST'])
 def add_cart_item():
 
@@ -321,8 +335,7 @@ def add_cart_item():
     else:
 
         # Query for a cartitems
-        cartitem = crud.get_cart_item(customer_id, item_id)
-
+        cartitem = crud.get_cartitem(customer_id, item_id)
         if cartitem:
             crud.delete_cartitem(customer_id, item_id)
             db.session.commit()

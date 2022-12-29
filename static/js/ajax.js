@@ -74,3 +74,32 @@ for (let button of cartButtons) {
       });
   });
 }
+
+let removeItemButtons = document.querySelectorAll(".removeItemButton");
+
+for (let button of removeItemButtons) {
+  button.addEventListener("click", (evt) => {
+    evt.preventDefault();
+
+    let buttonIdArray = button.id.split("_");
+    let itemId = buttonIdArray.at(-1);
+    console.log("hello");
+    fetch("/add-cart-item", {
+      method: "POST",
+      body: JSON.stringify({ itemId: itemId }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      // use the response (promise) from the server and convert it to a JSON
+      .then((response) => response.json())
+      .then((responseJson) => {
+        // if the customer is logged in, toggle between like and unlike for the button depending on whether or not the favitem object has been or removed from the db
+        if (responseJson.added_item == false) {
+          let item_li = document.getElementById("liCart" + "-" + itemId);
+
+          item_li.remove();
+        }
+      });
+  });
+}
