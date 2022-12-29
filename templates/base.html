@@ -4,6 +4,7 @@
 <head>
     <title>Galleria Milena</title>
 
+
     <!-- react dependencies -->
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"></script>
     <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
@@ -11,16 +12,34 @@
 
     <!-- style  -->
     <link href="/static/styles/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
 </head>
 
 <body>
 
     <!-- navbar -->
-    <ul>
+
+    <nav class="navbar navbar-inverse navbar-fixed-left">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">galleria milena</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="/">home</a></li>
+                <li><a href="/login">login</a></li>
+                <li><a href="/cart">cart</a></li>
+                <!-- TODO: add link for contact -->
+                <li><a href="#">contact</a></li>
+
+            </ul>
+        </div>
+    </nav>
+
+    <!-- <ul>
         <li><a href="/">Artists</a></li>
         <li><a href="/cart">Cart</a></li>
-    </ul>
+    </ul> -->
 
     <!-- content block -->
     {% block body %}
