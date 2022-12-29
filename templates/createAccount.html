@@ -23,6 +23,10 @@
 
 </form>
 
+{% for message in get_flashed_messages() %}
+<div class="flash">{{ message }}</div>
+{% endfor %}
+
 <!-- add home button -->
 <button type='button'>
     <a href="/ ">home</a>

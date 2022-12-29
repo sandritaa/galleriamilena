@@ -1,5 +1,3 @@
-<!-- TODO: add cart logic -->
-
 <!-- inherit from base.html -->
 {% extends 'base.html' %}
 
@@ -7,6 +5,18 @@
 {% block body %}
 
 <h2>cart</h2>
+
+<ul>
+    {% for item in cart_data %}
+    <li>
+        <p>{{ item['item_id'] }}</p>
+        <p>{{ item['price'] }}</p>
+        <p>{{ item['dimensions'] }}</p>
+        <p>{{ item['alias'] }}</p>
+        <img src="{{ item['picture_path']}}">
+    </li>
+    {% endfor %}
+</ul>
 
 <!-- add login button -->
 <button type='button'>

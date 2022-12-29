@@ -19,7 +19,7 @@ def homepage():
     login_button = helper.switch_profile_login(session)
 
     # query all artists to display on homepage
-    artist = crud.get_artist()
+    artist = crud.get_all_artists()
 
     # render an html and pass artists and login_button as data
     return render_template("index.html",  artists=artist, login_button=login_button)
@@ -40,7 +40,7 @@ def logout_delete():
 
     # if delete was clicked then delete the account from the db
     elif delete:
-        crud.delete_profile(session['customer_id'])
+        crud.create_customer_profile(session['customer_id'])
         db.session.commit()
 
     # finally go back to the home route for GET request
@@ -52,7 +52,7 @@ def logout_delete():
 def gallery(alias):
 
     # Given the artist alias, query the artist selected and pass the required info (all of it?) to the template
-    artist = crud.get_artist_alias(alias)
+    artist = crud.get_artist_by_alias(alias)
 
     # get login or logout depending if a customer/artist is logged in or not
     login_button = helper.switch_profile_login(session)
@@ -76,8 +76,8 @@ def login():
     user_password = request.args.get('password')
 
     # query from the database if the email and password exist under the same account
-    customer = crud.get_customer_login(user_email, user_password)
-    artist = crud.get_artist_login(user_email, user_password)
+    customer = crud.get_customer_by_login(user_email, user_password)
+    artist = crud.get_artist_by_login(user_email, user_password)
 
     # if no user or email were entered then re-render the login page
     # could also add this as a requirement in the form (e.g. min length on inputs)
@@ -130,7 +130,7 @@ def customer_profile(customer_route):
     if session.get("customer_id", None) == customer_id_int:
 
         # get the customer by the id that we retrieved from the route
-        customer = crud.get_customer_id(customer_id_int)
+        customer = crud.get_customer_by_id(customer_id_int)
 
         # render the customer profile and pass the logged in customer to the client
         return render_template("customerProfile.html", customer=customer)
@@ -145,7 +145,7 @@ def customer_profile(customer_route):
 def artist_profile(alias):
 
     # get the artist from the alias
-    artist = crud.get_artist_alias(alias)
+    artist = crud.get_artist_by_alias(alias)
 
     # if the artist is logged in then go then render the artist profile page
     if session['artist_id'] == artist.artist_id:
@@ -178,15 +178,17 @@ def create_profile():
     password = request.form.get('password')
 
     # get the customer from their email
-    user = crud.get_customer_email()
+    user = crud.get_customer_by_email(email)
 
     # if a customer with that email was found in the db then tell the user that that email has already been used
     if user:
         flash("Cannot create an account with that email. Try again.")
+        return redirect('/profile')
 
     # otherwise create the new profile with the data received from the form
     else:
-        user = crud.create_profile(fname, lname, email, phone, password)
+        user = crud.create_customer_profile(
+            fname, lname, email, phone, password)
         db.session.add(user)
         db.session.commit()
         flash("Account created! Please log in.")
@@ -200,7 +202,9 @@ def create_profile():
 def cart():
     login_button = helper.switch_profile_login(session)
 
-    return render_template("cart.html", login_button=login_button)
+    cart_data = helper.get_cart_data(session)
+
+    return render_template("cart.html", login_button=login_button, cart_data=cart_data)
 
 
 # create add item route - GET request
@@ -225,14 +229,14 @@ def addItem():
     picture_path = request.form.get('picture_path')
 
     # get the artist by using the logged in artist (since they will be the ones adding the item)
-    artist = crud.get_artist_id(session['artist_id'])
+    artist = crud.get_artist_by_id(session['artist_id'])
 
     # create a new item with the data from the form and the logged in artist (since an item belongs to an artist)
     item = crud.create_item(
         description, dimensions, price, date, color, in_stock, picture_path, session['artist_id'])
     db.session.add(item)
     db.session.commit()
-    flash("new item has been created")
+    flash("A new item has been added")
 
     # once the item has been added to the db redirect to the artists profile page
     return redirect('/admin/' + artist.alias)
@@ -248,7 +252,7 @@ def add_fav_item():
     # get the customer_id from the session or None if no customer is logged in
     customer_id = session.get("customer_id", None)
 
-    # check if the customer is logged id
+    # check if the customer is logged in.
     if customer_id == None:
 
         # if they aren't logged in, set both flags to false
@@ -261,20 +265,20 @@ def add_fav_item():
         customer_logged_in = True
 
         # Query a favorite item using both customer id and item id
-        favitem = crud.get_fav_item(customer_id, item_id)
+        favitem = crud.get_favitem_by_id(customer_id, item_id)
 
         # if there is a favorite item then delete it from the db - otherwise add it
         if favitem:
 
             # delete the favitem from the db and set the added_item flag to false
-            crud.delete_fav_item(customer_id, item_id)
+            crud.delete_favitem(customer_id, item_id)
             db.session.commit()
             added_item = False
 
         else:
 
             # create the favitem and add it ot the db and set the added_item flag to true
-            fav_item = crud.create_fav_item(customer_id, item_id)
+            fav_item = crud.create_favitem(customer_id, item_id)
             db.session.add(fav_item)
             db.session.commit()
             added_item = True
@@ -320,12 +324,12 @@ def add_cart_item():
         cartitem = crud.get_cart_item(customer_id, item_id)
 
         if cartitem:
-            crud.delete_cart_item(customer_id, item_id)
+            crud.delete_cartitem(customer_id, item_id)
             db.session.commit()
             added_item = False
 
         else:
-            cart_item = crud.create_cart_item(customer_id, item_id)
+            cart_item = crud.create_cartitem(customer_id, item_id)
             db.session.add(cart_item)
             db.session.commit()
             added_item = True

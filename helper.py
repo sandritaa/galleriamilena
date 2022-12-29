@@ -65,16 +65,8 @@ def get_cart_button_label(artist, session):
         button_cart_label[item.item_id] = 'add to cart'
 
         # check if customer is logged in
-        # if it isn't use the session to get the correct labels
-        if session.get('customer_id', None) == None:
-
-            # check if item has been added to cart  for someone not logged in
-            if item.item_id in session.get('cartItems', []):
-                # if its is, set the value in the dictionary of the key item_id to 'unlike'
-                button_cart_label[item.item_id] = 'remove from cart'
-
-        # if the customer is logged in use the db to get the right labels
-        else:
+        # if it is use the db to get the correct labels
+        if session.get('customer_id', None):
 
             # go through every favitem of a specific item
             for cartitem in item.cartitem:
@@ -85,32 +77,48 @@ def get_cart_button_label(artist, session):
                     # if its is, set the value in the dictionary of the key item_id to 'unlike'
                     button_cart_label[cartitem.item_id] = 'remove from cart'
 
+        # if the customer is not logged in use the session to get the right labels
+        else:
+
+            # check if item has been added to cart  for someone not logged in
+            if item.item_id in session.get('cartItems', []):
+
+                # if its is, set the value in the dictionary of the key item_id to 'unlike'
+                button_cart_label[item.item_id] = 'remove from cart'
+
     return button_cart_label
 
 
-   def get_cart_data(session):
+def get_cart_data(session):
 
     cart_data = []
 
-    # customer logged in 
+    # customer logged in
     if session.get('customer_id', None):
-        customer = crud.get_customer_id(session.get('customer_id'))
+        customer = crud.get_customer_by_id(session.get('customer_id'))
         for cartitem in customer.cartitem:
-            item = cartitem.item[0]
+            item = cartitem.item
             dict = {
                 'item_id': item.item_id,
                 'price': item.price,
-                'dimension': item.dimension,
+                'dimensions': item.dimensions,
                 'picture_path': item.picture_path,
-                'alias':item.artist[0].alias
+                'alias': item.artist.alias
             }
             cart_data.append(dict)
 
-        
     # customer not logged in
+    else:
 
-    # else:
-
-
+        for item_id in session['cartItems']:
+            item = crud.get_item_by_id(item_id)
+            dict = {
+                'item_id': item.item_id,
+                'price': item.price,
+                'dimensions': item.dimensions,
+                'picture_path': item.picture_path,
+                'alias': item.artist.alias
+            }
+            cart_data.append(dict)
 
     return cart_data
