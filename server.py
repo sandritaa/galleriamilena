@@ -127,7 +127,7 @@ def customer_profile(customer_route):
     customer_id_int = int(customer_id)
 
     # if a customer is logged in (so if there is an id stored in the session) then go to the customer profile
-    if session["customer_id"] == customer_id_int:
+    if session.get("customer_id", None) == customer_id_int:
 
         # get the customer by the id that we retrieved from the route
         customer = crud.get_customer_id(customer_id_int)
@@ -195,10 +195,11 @@ def create_profile():
         return redirect("/login")
 
 
-# TODO: create cart route
+# create cart route
 @app.route('/cart')
 def cart():
     login_button = helper.switch_profile_login(session)
+
     return render_template("cart.html", login_button=login_button)
 
 

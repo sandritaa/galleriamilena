@@ -1,4 +1,5 @@
 from model import Customer, Artist
+import crud
 
 
 def switch_profile_login(session):
@@ -85,3 +86,31 @@ def get_cart_button_label(artist, session):
                     button_cart_label[cartitem.item_id] = 'remove from cart'
 
     return button_cart_label
+
+
+   def get_cart_data(session):
+
+    cart_data = []
+
+    # customer logged in 
+    if session.get('customer_id', None):
+        customer = crud.get_customer_id(session.get('customer_id'))
+        for cartitem in customer.cartitem:
+            item = cartitem.item[0]
+            dict = {
+                'item_id': item.item_id,
+                'price': item.price,
+                'dimension': item.dimension,
+                'picture_path': item.picture_path,
+                'alias':item.artist[0].alias
+            }
+            cart_data.append(dict)
+
+        
+    # customer not logged in
+
+    # else:
+
+
+
+    return cart_data
