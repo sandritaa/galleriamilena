@@ -8,6 +8,9 @@
 <h2> Artist gallery: {{ artist.fname + ' ' + artist.lname }}</h2>
 <h3>about the artist: </h3>
 <p>{{ artist.about }}</p>
+<button type="button" id='{{"buttonArtistLike" + "_" + (artist.artist_id) | string}}' class='artistLikeButton'>like
+    artist</button>
+<br><br>
 
 
 <!-- add artist items to gallery (images and buttons) -->
