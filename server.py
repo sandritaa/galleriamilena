@@ -351,10 +351,14 @@ def add_cart_item():
         'added_item': added_item
     }
 
+
+@app.route('/add_fav_artist')
+def add_fav_item():
+    return render_template('gallery.html')
+
+
 # create checkout route / order
-
-
-@ app.route('/checkout')
+@app.route('/checkout')
 def checkout():
     return render_template("checkout.html")
 
