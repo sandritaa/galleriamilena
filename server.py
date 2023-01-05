@@ -262,7 +262,7 @@ def add_fav_item():
         customer_logged_in = True
 
         # Query a favorite item using both customer id and item id
-        favitem = crud.get_favitem_by_id(customer_id, item_id)
+        favitem = crud.get_favitem(customer_id, item_id)
 
         # if there is a favorite item then delete it from the db - otherwise add it
         if favitem:
@@ -348,16 +348,57 @@ def add_cart_item():
             added_item = True
 
     return {
+        # fetch response
         'added_item': added_item
     }
 
 
-@app.route('/add_fav_artist')
-def add_fav_item():
-    return render_template('gallery.html')
+@app.route('/add_fav_artist', methods=['POST'])
+def add_fav_artist():
 
+    artist_id = int(request.json.get('artistId'))
+    customer_id = session.get('customer_id', None)
+
+    # check if the customer is logged in.
+    if customer_id == None:
+
+        # if they aren't logged in, set both flags to false
+        customer_logged_in = False
+        added_item = False
+
+    else:
+
+        # if they are logged in, set the customer_logged_in to true
+        customer_logged_in = True
+
+        # Query a favorite artist using both customer id and artist id
+        favartist = crud.get_favartist(customer_id, artist_id)
+
+        # if there is a favorite artist then delete it from the db - otherwise add it
+        if favartist:
+
+            # delete the favartist from the db and set the added_item flag to false
+            crud.delete_favartist(customer_id, artist_id)
+            db.session.commit()
+            added_item = False
+
+        else:
+
+            # create the favartist and add it ot the db and set the added_item flag to true
+            fav_artist = crud.create_favartist(customer_id, artist_id)
+            db.session.add(fav_artist)
+            db.session.commit()
+            added_item = True
+
+    # return both flags to the client (ajax) so it can use them in its eventListeners
+    return {
+        'customer_logged_in': customer_logged_in,
+        'added_item': added_item
+    }
 
 # create checkout route / order
+
+
 @app.route('/checkout')
 def checkout():
     return render_template("checkout.html")

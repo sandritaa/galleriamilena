@@ -1,4 +1,4 @@
-from model import connect_to_db, db, Customer, Artist, Item, FavoriteItem, CartItem
+from model import connect_to_db, db, Customer, Artist, Item, FavoriteItem, CartItem, FavoriteArtist
 
 # CUSTOMER
 
@@ -53,6 +53,26 @@ def get_artist_by_login(email, password):
 def get_artist_by_alias(alias):
     return Artist.query.filter(Artist.alias == alias).first()
 
+# FAVORITE ARTIST
+
+# get favorite artist
+
+
+def get_favartist(customer_id, artist_id):
+    return FavoriteArtist.query.filter(Artist.artist_id == artist_id) & (Customer.customer_id == customer_id).first()
+
+
+# create favorite artist
+def create_favartist(customer_id, artist_id):
+    return FavoriteArtist(customer_id=customer_id, artist_id=artist_id)
+
+# delete favorite artist
+
+
+def delete_favartist(customer_id, artist_id):
+    return FavoriteArtist.query.filter((FavoriteArtist.customer_id ==
+                                        customer_id) & (FavoriteArtist.artist_id == artist_id)).delete()
+
 
 # ITEM
 
@@ -83,7 +103,7 @@ def delete_favitem(customer_id, item_id):
 
 
 # get favorite item by id
-def get_favitem_by_id(customer_id, item_id):
+def get_favitem(customer_id, item_id):
     return FavoriteItem.query.filter((FavoriteItem.customer_id == customer_id) & (
         FavoriteItem.item_id == item_id)).first()
 
