@@ -64,7 +64,7 @@ def gallery(alias):
     button_cart_label = helper.get_cart_button_label(artist, session)
 
     # render the gallery.html and pass the selected artist, the login button and the favitem button label as data
-    return render_template("gallery.html", artist=artist, login_button=login_button, button_like_label=button_like_label, button_cart_label=button_cart_label)
+    return render_template("gallery.html", artist=artist, login_button=login_button, button_like_label=button_like_label, button_cart_label=button_cart_label, favartistLikeButton='like')
 
 
 # create login route
@@ -94,7 +94,7 @@ def login():
         # get the customer route since it is a dynamic route depending on the logged in customer
         customer_route = helper.get_customer_route(customer)
 
-        for item_id in session.get('cartItems', None):
+        for item_id in session.get('cartItems', []):
 
             cart_item_db = crud.get_cartitem(
                 session.get('customer_id'), item_id)
@@ -393,7 +393,7 @@ def add_fav_artist():
     # return both flags to the client (ajax) so it can use them in its eventListeners
     return {
         'customer_logged_in': customer_logged_in,
-        'added_item': added_artist
+        'added_artist': added_artist
     }
 
 # create checkout route / order

@@ -127,9 +127,9 @@ artistButton.addEventListener("click", (evt) => {
       if (responseJson.customer_logged_in == true) {
         // if the customer is logged in, toggle between like and unlike for the button depending on whether or not the favitem object has been or removed from the db
         if (responseJson.added_artist == true) {
-          button.innerHTML = "unlike";
+          artistButton.innerHTML = "unlike";
         } else if (responseJson.added_artist == false) {
-          button.innerHTML = "like";
+          artistButton.innerHTML = "like";
         }
       } else {
         // if the customer is not logged in, redirect the user to the login page

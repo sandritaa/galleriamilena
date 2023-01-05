@@ -58,7 +58,7 @@ def get_artist_by_alias(alias):
 
 # get favorite artist
 def get_favartist(customer_id, artist_id):
-    return FavoriteArtist.query.filter(Artist.artist_id == artist_id) & (Customer.customer_id == customer_id).first()
+    return FavoriteArtist.query.filter((FavoriteArtist.artist_id == artist_id) & (FavoriteArtist.customer_id == customer_id)).first()
 
 
 # create favorite artist
