@@ -59,63 +59,9 @@ class Artist(db.Model):
     def __repr__(self):
         return f'<Artist artist_id={self.artist_id} fname={self.fname} lname={self.lname} email={self.email} country={self.country} alias={self.alias}>'
 
-
-# create shipment class
-class Shipment(db.Model):
-
-    # create shipments table
-    __tablename__ = 'shipments'
-
-    # create attributes
-    shipment_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    fname = db.Column(db.String)
-    lname = db.Column(db.String)
-    address1 = db.Column(db.String)
-    address2 = db.Column(db.String)
-    city = db.Column(db.String)
-    state = db.Column(db.String)
-    zipcode = db.Column(db.String)
-    country = db.Column(db.String)
-    email = db.Column(db.String)
-    phone = db.Column(db.String)
-
-    # class representation
-    def __repr__(self):
-        return f'<Shipment shipment_id={self.shipment_id} fname={self.fname} lname={self.lname} city={self.city} state={self.state} zipcode={self.zipcode} country={self.country} email={self.email} phone={self.phone}>'
-
-
-# create order class
-class Order(db.Model):
-
-    # create orders table
-    __tablename__ = 'orders'
-
-    # create attributes
-    order_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    date = db.Column(db.DateTime)
-    total = db.Column(db.Float)
-    status = db.Column(db.String)
-    transaction_id = db.Column(db.String)
-
-    # add foreign keys
-    customer_id = db.Column(
-        db.Integer, db.ForeignKey('customers.customer_id'))
-    shipment_id = db.Column(
-        db.Integer, db.ForeignKey('shipments.shipment_id'))
-    artist_id = db.Column(db.Integer, db.ForeignKey('artists.artist_id'))
-
-    # add relationships
-    item = db.relationship('Item', back_populates='order')
-    customer = db.relationship('Customer', back_populates='order')
-    artist = db.relationship('Artist', back_populates='order')
-
-    # class representation
-
-    def __repr__(self):
-        return f'<Order order_id={self.order_id} date={self.date} total={self.total} status={self.status} transaction_id={self.transaction_id}>'
-
-
 # create item class
+
+
 class Item(db.Model):
 
     # create items table
@@ -219,6 +165,61 @@ class CartItem(db.Model):
 
     def __repr__(self):
         return f'<CartItem cartitem_id={self.cartitem_id} customer_id={self.customer_id} item_id={self.item_id}>'
+
+
+# create shipment class
+class Shipment(db.Model):
+
+    # create shipments table
+    __tablename__ = 'shipments'
+
+    # create attributes
+    shipment_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    fname = db.Column(db.String)
+    lname = db.Column(db.String)
+    address1 = db.Column(db.String)
+    address2 = db.Column(db.String)
+    city = db.Column(db.String)
+    state = db.Column(db.String)
+    zipcode = db.Column(db.String)
+    country = db.Column(db.String)
+    email = db.Column(db.String)
+    phone = db.Column(db.String)
+
+    # class representation
+    def __repr__(self):
+        return f'<Shipment shipment_id={self.shipment_id} fname={self.fname} lname={self.lname} city={self.city} state={self.state} zipcode={self.zipcode} country={self.country} email={self.email} phone={self.phone}>'
+
+
+# create order class
+class Order(db.Model):
+
+    # create orders table
+    __tablename__ = 'orders'
+
+    # create attributes
+    order_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    date = db.Column(db.DateTime)
+    total = db.Column(db.Float)
+    status = db.Column(db.String)
+    transaction_id = db.Column(db.String)
+
+    # add foreign keys
+    customer_id = db.Column(
+        db.Integer, db.ForeignKey('customers.customer_id'))
+    shipment_id = db.Column(
+        db.Integer, db.ForeignKey('shipments.shipment_id'))
+    artist_id = db.Column(db.Integer, db.ForeignKey('artists.artist_id'))
+
+    # add relationships
+    item = db.relationship('Item', back_populates='order')
+    customer = db.relationship('Customer', back_populates='order')
+    artist = db.relationship('Artist', back_populates='order')
+
+    # class representation
+
+    def __repr__(self):
+        return f'<Order order_id={self.order_id} date={self.date} total={self.total} status={self.status} transaction_id={self.transaction_id}>'
 
 
 def connect_to_db(flask_app, db_uri="postgresql:///galleriadb", echo=True):

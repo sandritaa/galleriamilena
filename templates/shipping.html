@@ -1,15 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- inherit from base.html -->
+{% extends 'base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+<!-- insert content block -->
+{% block body %}
 
-<body>
+<h2>enter your shipping address</h2>
+<br>
+<div class="'shipping">
+    <form action="/checkout">
+        <label for="fname">First name</label>
+        <input type="text" id="fname" name="fname"> <br> <br>
+        <label for="lname">Last name</label>
+        <input type="text" id="lname" name="lname"> <br> <br>
+        <label for="address1">Address</label>
+        <input type="text" id="address1" name="address1"> <br> <br>
+        <label for="address2">Address</label>
+        <input type="text" id="address2" name="address2"> <br> <br>
+        <label for="city">City</label>
+        <input type="text" id="city" name="city"> <br> <br>
+        <label for="state">State</label>
+        <input type="text" id="state" name="state"> <br> <br>
+        <label for="zipcode">Zipcode</label>
+        <input type="text" id="zipcode" name="zipcode"> <br> <br>
+        <label for="country">Country</label>
+        <input type="text" id="country" name="country"> <br> <br>
+        <label for="email">Email</label>
+        <input type="text" id="email" name="email"> <br> <br>
+        <label for="phone">Phone</label>
+        <input type="text" id="phone" name="phone"> <br> <br>
+        <input type="submit">
 
-</body>
+    </form>
+</div>
 
-</html>
+
+{% endblock %}

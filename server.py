@@ -404,7 +404,7 @@ def add_fav_artist():
 
 @app.route('/checkout')
 def checkout():
-    return render_template("checkout.html")
+    return render_template("shipping.html")
 
 
 if __name__ == "__main__":
