@@ -364,7 +364,7 @@ def add_fav_artist():
 
         # if they aren't logged in, set both flags to false
         customer_logged_in = False
-        added_item = False
+        added_artist = False
 
     else:
 
@@ -380,7 +380,7 @@ def add_fav_artist():
             # delete the favartist from the db and set the added_item flag to false
             crud.delete_favartist(customer_id, artist_id)
             db.session.commit()
-            added_item = False
+            added_artist = False
 
         else:
 
@@ -388,12 +388,12 @@ def add_fav_artist():
             fav_artist = crud.create_favartist(customer_id, artist_id)
             db.session.add(fav_artist)
             db.session.commit()
-            added_item = True
+            added_artist = True
 
     # return both flags to the client (ajax) so it can use them in its eventListeners
     return {
         'customer_logged_in': customer_logged_in,
-        'added_item': added_item
+        'added_item': added_artist
     }
 
 # create checkout route / order

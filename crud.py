@@ -55,9 +55,8 @@ def get_artist_by_alias(alias):
 
 # FAVORITE ARTIST
 
+
 # get favorite artist
-
-
 def get_favartist(customer_id, artist_id):
     return FavoriteArtist.query.filter(Artist.artist_id == artist_id) & (Customer.customer_id == customer_id).first()
 
@@ -66,9 +65,8 @@ def get_favartist(customer_id, artist_id):
 def create_favartist(customer_id, artist_id):
     return FavoriteArtist(customer_id=customer_id, artist_id=artist_id)
 
+
 # delete favorite artist
-
-
 def delete_favartist(customer_id, artist_id):
     return FavoriteArtist.query.filter((FavoriteArtist.customer_id ==
                                         customer_id) & (FavoriteArtist.artist_id == artist_id)).delete()
