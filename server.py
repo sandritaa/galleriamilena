@@ -63,8 +63,11 @@ def gallery(alias):
     # cart item button label for when the page is loaded
     button_cart_label = helper.get_cart_button_label(artist, session)
 
+    # favartist button label for when the page is loaded
+    button_favartist_label = helper.get_favartist_button_label(artist, session)
+
     # render the gallery.html and pass the selected artist, the login button and the favitem button label as data
-    return render_template("gallery.html", artist=artist, login_button=login_button, button_like_label=button_like_label, button_cart_label=button_cart_label, favartistLikeButton='like')
+    return render_template("gallery.html", artist=artist, login_button=login_button, button_like_label=button_like_label, button_cart_label=button_cart_label, button_favartist_label=button_favartist_label)
 
 
 # create login route

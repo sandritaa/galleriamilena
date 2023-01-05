@@ -193,7 +193,7 @@ class FavoriteArtist(db.Model):
     # class representation
 
     def __repr__(self):
-        return f'<FavoriteArtist favartist_id={self.favartists} customer_id={self.customer_id} artist_id={self.artist_id}>'
+        return f'<FavoriteArtist favartist_id={self.favartist_id} customer_id={self.customer_id} artist_id={self.artist_id}>'
 
 
 # create cart item class

@@ -9,7 +9,7 @@
 <h3>about the artist: </h3>
 <p>{{ artist.about }}</p>
 <button type="button" id='{{"buttonArtistLike" + "_" + (artist.artist_id) | string}}'
-    class='artistLikeButton'>{{ favartistLikeButton }}</button>
+    class='artistLikeButton'>{{ button_favartist_label[artist.artist_id] }}</button>
 <br><br>
 
 

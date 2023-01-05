@@ -54,6 +54,25 @@ def get_like_button_label(artist, session):
     return button_like_label
 
 
+def get_favartist_button_label(artist, session):
+    # favorite logic for when the page is loaded
+    button_favartist_label = {}
+
+    # go through every item of the artist
+    for favartist in artist.favartist:
+
+        # for each item, add a label with an item_id as the key of a dictionary and set it 'like'
+        button_favartist_label[favartist.artist_id] = 'like'
+
+        # check if the customer id of the favitem is the same of the customer that is logged in (if any)
+        if session.get('customer_id', None) == favartist.customer_id:
+
+            # if its is, set the value in the dictionary of the key item_id to 'unlike'
+            button_favartist_label[favartist.artist_id] = 'unlike'
+
+    return button_favartist_label
+
+
 def get_cart_button_label(artist, session):
     # cart logic for when the page is loaded
     button_cart_label = {}
