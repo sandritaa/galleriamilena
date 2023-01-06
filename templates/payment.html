@@ -1,0 +1,88 @@
+<!-- inherit from base.html -->
+{% extends 'base.html' %}
+
+<!-- insert content block -->
+{% block body %}
+
+<h2>enter billing information</h2>
+<div class="payment">
+    <form action="/checkout">
+        <label for="fname">First name</label>
+        <input type="text" id="fname" name="fname"> <br> <br>
+        <label for="lname">Last name</label>
+        <input type="text" id="lname" name="lname"> <br> <br>
+        <label for="address1">Address</label>
+        <input type="text" id="address1" name="address1"> <br> <br>
+        <label for="address2">Address</label>
+        <input type="text" id="address2" name="address2"> <br> <br>
+        <label for="city">City</label>
+        <input type="text" id="city" name="city"> <br> <br>
+        <label for="state">State</label>
+        <input type="text" id="state" name="state"> <br> <br>
+        <label for="zipcode">Zipcode</label>
+        <input type="text" id="zipcode" name="zipcode"> <br> <br>
+        <label for="country">Country</label>
+        <input type="text" id="country" name="country"> <br> <br>
+        <label for="email">Email</label>
+        <input type="text" id="email" name="email"> <br> <br>
+        <label for="email">Confirm email</label>
+        <input type="text" id="email" name="email"> <br> <br>
+        <label for="phone">Phone</label>
+        <input type="text" id="phone" name="phone"> <br> <br>
+        <input type="submit">
+    </form>
+</div>
+
+<br><br>
+
+<h2>enter credit card information</h2>
+<div class="payment">
+    <form action="">
+        <label for="cardName">name on card</label><br>
+        <input type="text" id="cardName" name="cardName"><br><br>
+
+        <label for="cardNum">card number</label><br>
+        <input type="text" id="cardNum" name="cardNum"><br><br>
+
+        <label for="cardExp">expiration date</label><br>
+        <input type="date" id="cardExp" name="cardExp"><br><br>
+
+        <label for="cardCode">security code</label><br>
+        <input type="text" id="cardCode" name="cardCode"><br><br>
+
+        <select placeholder="MM">
+            <option name="" value="" style="display:none;">Month</option>
+            <option name="January" value="Jan">January</option>
+            <option name="February" value="Feb">February</option>
+            <option name="March" value="Mar">March</option>
+            <option name="April" value="Apr">April</option>
+            <option name="May" value="May">May</option>
+            <option name="June" value="Jun">June</option>
+            <option name="July" value="Jul">July</option>
+            <option name="August" value="Aug">August</option>
+            <option name="September" value="Sep">September</option>
+            <option name="October" value="Oct">October</option>
+            <option name="November" value="Nov">November</option>
+            <option name="December" value="Dec">December</option>
+        </select>
+
+        <select placeholder="YY">
+            <option name="" value="" style="display:none;">Year</option>
+            <option name="2020" value="2020">2020</option>
+            <option name="2021" value="2021">2021</option>
+            <option name="2022" value="2022">2022</option>
+            <option name="2023" value="2023">2023</option>
+            <option name="2024" value="2024">2024</option>
+            <option name="2025" value="2025">2025</option>
+            <option name="2026" value="2026">2026</option>
+            <option name="2027" value="2027">2027</option>
+            <option name="2028" value="2028">2028</option>
+            <option name="2029" value="2029">2029</option>
+            <option name="2030" value="2030">2030</option>
+        </select>
+        <br><br>
+
+        <input type="submit">
+    </form>
+</div>
+{% endblock %}
