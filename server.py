@@ -402,7 +402,7 @@ def add_fav_artist():
 # create checkout route / order
 
 
-@app.route('/checkout')
+@app.route('/shipping')
 def checkout():
     return render_template("shipping.html")
 
@@ -410,6 +410,11 @@ def checkout():
 @app.route('/payment')
 def payment():
     return render_template("payment.html")
+
+
+@app.route('/review')
+def order_review():
+    return render_template("orderReview.html")
 
 
 if __name__ == "__main__":
