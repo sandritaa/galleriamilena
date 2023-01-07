@@ -207,7 +207,7 @@ class Order(db.Model):
     # class representation
 
     def __repr__(self):
-        return f'<Order order_id={self.order_id} date={self.date} total={self.total} status={self.status} transaction_id={self.transaction_id} shipment_id={self.shipment_id} fname={self.fname} lname={self.lname} city={self.city} state={self.state} zipcode={self.zipcode} country={self.country} email={self.email} phone={self.phone}>'
+        return f'<Order order_id={self.order_id} date={self.date} total={self.total} status={self.status} transaction_id={self.transaction_id} fname={self.fname} lname={self.lname} city={self.city} state={self.state} zipcode={self.zipcode} country={self.country} email={self.email} phone={self.phone}>'
 
 
 def connect_to_db(flask_app, db_uri="postgresql:///galleriadb", echo=True):

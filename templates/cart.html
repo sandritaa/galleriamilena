@@ -6,7 +6,21 @@
 
 <h2>cart</h2>
 
-<p>{{ cart_data }}</p>
+<div class="cartData">
+    {% for artist_id in cart_data %}
+    <h2>artist {{ artist_id }}</h2>
+    <ul>
+        {% for item in cart_data[artist_id] %}
+        <li> {{ item }}</li>
+
+        <button type="button" class="removeItemButton"
+            id="{{'buttonRemoveItem' + '_' + (item.item_id) | string}}">remove
+            item</button>
+        {% endfor %}
+    </ul>
+    {% endfor %}
+
+</div>
 
 <!-- proceed to checkout -->
 <button type='button'> <a href='/shipping'>proceed to checkout</a> </button>

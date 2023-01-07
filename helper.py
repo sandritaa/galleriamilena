@@ -124,8 +124,6 @@ def get_cart_data(session):
 
     # customer logged in
     if session.get('customer_id', None):
-        # database crud fucntion - get
-        # customer_id , item_id, artist_id
 
         cart_items = crud.get_cartitem_by_customer(session['customer_id'])
 
@@ -135,7 +133,10 @@ def get_cart_data(session):
                                  []).append(cart_item.item)
 
     # customer not logged in
-    # else:
+    else:
+        for item_id in session['cartItems']:
+            item = crud.get_item_by_id(item_id)
+            cart_data.setdefault(item.artist_id, []).append(item)
 
     return cart_data
 

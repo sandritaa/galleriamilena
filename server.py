@@ -402,11 +402,6 @@ def add_fav_artist():
 # create checkout route / order
 
 
-@app.route('/shipping')
-def checkout():
-    return render_template("shipping.html")
-
-
 @app.route('/payment')
 def payment():
     return render_template("payment.html")
