@@ -8,14 +8,14 @@
 
 <div class="cartData">
     {% for artist_id in cart_data %}
-    <h2>artist {{ artist_id }}</h2>
     <ul>
+        <h2>artist {{ artist_id }}</h2>
         {% for item in cart_data[artist_id] %}
-        <li> {{ item }}</li>
-
-        <button type="button" class="removeItemButton"
-            id="{{'buttonRemoveItem' + '_' + (item.item_id) | string}}">remove
-            item</button>
+        <li> {{ item }}
+            <button type="button" class="editCartButton"
+                id="{{'buttonRemoveItem' + '_' + (item.item_id) | string}}">remove
+                item</button>
+        </li>
         {% endfor %}
     </ul>
     {% endfor %}
