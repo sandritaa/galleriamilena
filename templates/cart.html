@@ -6,24 +6,9 @@
 
 <h2>cart</h2>
 
-<ul>
-    {% for item in cart_data %}
-    <li id='{{ "liCart" + "-" + (item.item_id) | string }}'>
-        <p>{{ item['item_id'] }}</p>
-        <p>{{ item['price'] }}</p>
-        <p>{{ item['dimensions'] }}</p>
-        <p>{{ item['alias'] }}</p>
-        <img src="{{ item['picture_path']}}">
-        <!-- remove item from cart button -->
-        <button type="button" class="removeItemButton"
-            id="{{'buttonRemoveItem' + '_' + (item.item_id) | string}}">remove
-            item</button>
-        {% endfor %}
-    </li>
+<p>{{ cart_data }}</p>
 
-</ul>
-
-<!-- procees to checkout -->
+<!-- proceed to checkout -->
 <button type='button'> <a href='/shipping'>proceed to checkout</a> </button>
 <br><br>
 

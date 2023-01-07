@@ -181,7 +181,6 @@ class Order(db.Model):
     transaction_id = db.Column(db.String)
 
     # create shipment attributes
-    shipment_id = db.Column(db.Integer, autoincrement=True)
     fname = db.Column(db.String)
     lname = db.Column(db.String)
     address1 = db.Column(db.String)

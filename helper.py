@@ -110,7 +110,39 @@ def get_cart_button_label(artist, session):
 
 def get_cart_data(session):
 
-    cart_data = []
+    # Output is a dictionary where:
+    #   - keys -> artist_id
+    #   - values -> list of objects of type Item
+
+    # cart_data = {
+    #   2: [<Item item_id=1 ...>, <Item item_id=5 ...>],
+    #   4: [<Item item_id=3 ...>, <Item item_id=6 ...>, <Item item_id=10 ...>]
+    #   3: [<Item item_id=10 ...>, <Item item_id=7 ...>, <Item item_id=15 ...>]
+    # }
+
+    cart_data = {}
+
+    # customer logged in
+    if session.get('customer_id', None):
+        # database crud fucntion - get
+        # customer_id , item_id, artist_id
+
+        cart_items = crud.get_cartitem_by_customer(session['customer_id'])
+
+        for cart_item in cart_items:
+
+            cart_data.setdefault(cart_item.item.artist_id,
+                                 []).append(cart_item.item)
+
+    # customer not logged in
+    # else:
+
+    return cart_data
+
+
+def order_data(session):
+
+    orders_dict = []
 
     # customer logged in
     if session.get('customer_id', None):
@@ -124,7 +156,7 @@ def get_cart_data(session):
                 'picture_path': item.picture_path,
                 'alias': item.artist.alias
             }
-            cart_data.append(dict)
+            orders_dict.append(dict)
 
     # customer not logged in
     else:

@@ -120,6 +120,11 @@ def get_cartitem(customer_id, item_id):
         (CartItem.customer_id == customer_id) & (CartItem.item_id == item_id)).first()
 
 
+# get cart item by customer_id
+def get_cartitem_by_customer(customer_id):
+    return CartItem.query.filter(CartItem.customer_id == customer_id).all()
+
+
 # delete cart item
 def delete_cartitem(customer_id, item_id):
     CartItem.query.filter((CartItem.customer_id ==
