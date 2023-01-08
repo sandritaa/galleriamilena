@@ -402,6 +402,11 @@ def add_fav_artist():
 # create checkout route / order
 
 
+@app.route('/shipping')
+def shipping():
+    return render_template("shipping.html")
+
+
 @app.route('/payment')
 def payment():
     return render_template("payment.html")
@@ -409,7 +414,19 @@ def payment():
 
 @app.route('/review')
 def order_review():
-    return render_template("orderReview.html")
+
+    login_button = helper.switch_profile_login(session)
+
+    cart_data = helper.get_cart_data(session)
+
+    return render_template("orderReview.html", order_data=cart_data)
+
+
+@app.route('/orderComplete')
+def orderComplete():
+
+    orderComplete = crud.create_new_order()
+    return render_template("orderComplete.html")
 
 
 if __name__ == "__main__":

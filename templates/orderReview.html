@@ -4,5 +4,21 @@
 <!-- insert content block -->
 {% block body %}
 <h2>review your order</h2>
-<button type="button"><a href="">place order</a> </button>
+
+<div class="orderReview">
+    {% for artist_id in order_data %}
+    <ul>
+        <h2>artist {{ artist_id }}</h2>
+        {% for item in order_data[artist_id] %}
+        <li> {{ item }}
+        </li>
+        {% endfor %}
+    </ul>
+    {% endfor %}
+
+</div>
+
+<button type="button"><a href="/orderComplete">place order</a> </button>
+
+
 {% endblock %}
