@@ -1,4 +1,5 @@
-from model import connect_to_db, db, Customer, Artist, Item, FavoriteItem, CartItem, FavoriteArtist
+from model import connect_to_db, db, Customer, Artist, Item, FavoriteItem, CartItem, FavoriteArtist, Order
+from sqlalchemy import func
 
 # CUSTOMER
 
@@ -129,6 +130,33 @@ def get_cartitem_by_customer(customer_id):
 def delete_cartitem(customer_id, item_id):
     CartItem.query.filter((CartItem.customer_id ==
                            customer_id) & (CartItem.item_id == item_id)).delete()
+
+# ORDER
+
+
+def create_order_by_session(session, artist_id):
+    return Order(
+        status='review',
+        date=func.now(),
+        total=0,
+        fname=session['shipment']['fname'],
+        lname=session['shipment']['lname'],
+        address1=session['shipment']['address1'],
+        address2=session['shipment']['address2'],
+        city=session['shipment']['city'],
+        state=session['shipment']['state'],
+        zipcode=session['shipment']['zipcode'],
+        country=session['shipment']['country'],
+        email=session['shipment']['email'],
+        phone=session['shipment']['phone'],
+        customer_id=session['customer_id'],
+        artist_id=artist_id
+    )
+
+
+def update_item_with_order(item, order_id):
+    Item.query.filter(Item.item_id == item.item_id).update(
+        {'order_id': order_id})
 
 
 if __name__ == "__main__":

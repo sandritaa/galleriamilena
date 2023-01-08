@@ -404,11 +404,26 @@ def add_fav_artist():
 
 @app.route('/shipping')
 def shipping():
+
     return render_template("shipping.html")
 
 
 @app.route('/payment')
 def payment():
+    # add to session shipment information
+    session['shipment'] = {
+        'fname': request.args.get('fname'),
+        'lname': request.args.get('lname'),
+        'address1': request.args.get('address1'),
+        'address2': request.args.get('address2'),
+        'city': request.args.get('city'),
+        'state': request.args.get('state'),
+        'zipcode': request.args.get('zipcode'),
+        'country': request.args.get('country'),
+        'email': request.args.get('email'),
+        'phone': request.args.get('phone'),
+    }
+
     return render_template("payment.html")
 
 
@@ -425,7 +440,20 @@ def order_review():
 @app.route('/orderComplete')
 def orderComplete():
 
-    orderComplete = crud.create_new_order()
+    cart_data = helper.get_cart_data(session)
+    for artist_id in cart_data:
+        orderItems = cart_data[artist_id]
+
+        order = crud.create_order_by_session(session, artist_id)
+
+        db.session.add(order)
+        db.session.commit()
+
+        for orderItem in orderItems:
+
+            crud.update_item_with_order(orderItem, order.order_id)
+            db.session.commit()
+
     return render_template("orderComplete.html")
 
 

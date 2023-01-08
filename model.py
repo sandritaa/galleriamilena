@@ -173,11 +173,13 @@ class Order(db.Model):
     # create orders table
     __tablename__ = 'orders'
 
-    # create attributes
+    # create order attributes
     order_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     date = db.Column(db.DateTime)
     total = db.Column(db.Float)
     status = db.Column(db.String)
+
+    # hook in place for stripe api
     transaction_id = db.Column(db.String)
 
     # create shipment attributes
