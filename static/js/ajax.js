@@ -142,3 +142,28 @@ if (artistButton != null) {
       });
   });
 }
+
+let statusButton = document.querySelectorAll(".statusButton");
+for (let button of statusButton) {
+  button.addEventListener("click", (evt) => {
+    evt.preventDefault();
+
+    let buttonIdArray = button.id.split("_");
+    let orderId = buttonIdArray.at(-1);
+
+    let statusElement = document.getElementById("status" + "_" + orderId);
+    let statusOption = statusElement.value;
+
+    fetch("/artistUpdateOrder", {
+      method: "POST",
+      body: JSON.stringify({ orderId: orderId, statusOption: statusOption }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((responseJson) => {
+        statusElement.value = responseJson.status_option;
+      });
+  });
+}

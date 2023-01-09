@@ -15,17 +15,31 @@
 <ul>
     {% for order in artist.order %}
     <li>
-        <p>artist orders: {{ order }}</p>
         <h3>order status:</h3>
-        <!-- TODO: Add menu options for order update -->
-        <input type='radio' name='order received' value='order received'>order received</input>
-        <input type='radio' name='preparing' value='preparing'>preparing</input>
-        <input type='radio' name='on the way' value='on the way'>on the way</input>
-        <input type='radio' name='sent' value='sent'>sent</input>
-        <input type='radio' name='delayed' value='delayed'>delayed</input>
-        <input type='radio' name='delivered' value='delivered'>delivered</input>
-        <br><br>
+        <p>artist orders: {{ order }}</p>
+
+        <br>
+
+        <select class="statusOptions" id="{{ 'status' + '_' + (order.order_id) | string }}" placeholder="status">
+            <option name='order received' value='order received'
+                {% if order.status == 'order received' %}selected{% endif %}>order received</option>
+            <option name='preparing' value='preparing' {% if order.status == 'preparing' %}selected{% endif %}>preparing
+            </option>
+            <option name='on the way' value='on the way' {% if order.status == 'on the way' %}selected{% endif %}>on the
+                way</option>
+            <option name='sent' value='sent' {% if order.status == 'sent' %}selected{% endif %}>sent</option>
+            <option name='delayed' value='delayed' {% if order.status == 'delayed' %}selected{% endif %}>delayed
+            </option>
+            <option name='delivered' value='delivered' {% if order.status == 'delivered' %}selected{% endif %}>delivered
+            </option>
+        </select>
+
+
+        <button class="statusButton" id="{{'statusButton' + '_' + (order.order_id) | string}}" type="button">update
+            status</button>
+
     </li>
+
     {% endfor %}
 </ul>
 
@@ -52,6 +66,9 @@
 <button type='button'>
     <a href="/ ">home</a>
 </button> <br> <br>
+
+<!-- Ajax file -->
+<script src="/static/js/ajax.js"></script>
 
 <!-- logout button -->
 <form action="/" method="POST">

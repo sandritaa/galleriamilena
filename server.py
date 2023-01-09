@@ -457,6 +457,21 @@ def orderComplete():
     return render_template("orderComplete.html")
 
 
+@app.route('/artistUpdateOrder', methods=["POST"])
+def artist_order_update():
+
+    # get the order_id and convert it to an int from the client (ajax)
+    order_id = int(request.json.get('orderId'))
+    status_option = request.json.get('statusOption')
+
+    crud.update_order_status(order_id, status_option)
+    db.session.commit()
+
+    return {
+        'status_option': status_option
+    }
+
+
 if __name__ == "__main__":
     connect_to_db(app)
-    app.run(debug=True, host='0.0.0.0', port=5001)
+    app.run(debug=True, host='0.0.0.0', port=5002)

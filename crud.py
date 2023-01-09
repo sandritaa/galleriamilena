@@ -136,7 +136,7 @@ def delete_cartitem(customer_id, item_id):
 
 def create_order_by_session(session, artist_id):
     return Order(
-        status='review',
+        status='order received',
         date=func.now(),
         total=0,
         fname=session['shipment']['fname'],
@@ -157,6 +157,11 @@ def create_order_by_session(session, artist_id):
 def update_item_with_order(item, order_id):
     Item.query.filter(Item.item_id == item.item_id).update(
         {'order_id': order_id})
+
+
+def update_order_status(order_id, status_option):
+    Order.query.filter(Order.order_id == order_id).update(
+        {'status': status_option})
 
 
 if __name__ == "__main__":
