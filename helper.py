@@ -124,7 +124,7 @@ def get_cart_data(session):
 
     # customer not logged in
     else:
-        for item_id in session['cartItems']:
+        for item_id in session.get('cartItems', []):
             item = crud.get_item_by_id(item_id)
             cart_data.setdefault(item.artist_id, []).append(item)
 
@@ -147,7 +147,7 @@ def get_cost_data(session):
 
     # customer not logged in
     else:
-        for item_id in session['cartItems']:
+        for item_id in session.get('cartItems', []):
             item = crud.get_item_by_id(item_id)
             cost_data[item.artist_id] = cost_data.get(
                 item.artist_id, 0) + item.price
@@ -186,7 +186,7 @@ def order_data(session):
     # customer not logged in
     else:
 
-        for item_id in session['cartItems']:
+        for item_id in session.get('cartItems', []):
             item = crud.get_item_by_id(item_id)
             dict = {
                 'item_id': item.item_id,
@@ -195,6 +195,6 @@ def order_data(session):
                 'picture_path': item.picture_path,
                 'alias': item.artist.alias
             }
-            cart_data.append(dict)
+            orders_dict.append(dict)
 
-    return cart_data
+    return orders_dict
