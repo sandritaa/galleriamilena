@@ -225,7 +225,7 @@ def addItem():
     price = request.form.get('price')
     date = request.form.get('date')
     color = request.form.get('color')
-    in_stock = True  # request.form.get('in_stock')
+    in_stock = True
     picture_path = request.form.get('picture_path')
 
     # get the artist by using the logged in artist (since they will be the ones adding the item)
@@ -450,8 +450,8 @@ def orderComplete():
         db.session.commit()
 
         for orderItem in orderItems:
-
-            crud.update_item_with_order(orderItem, order.order_id)
+            in_stock = False
+            crud.update_item_with_order(orderItem, order.order_id, in_stock)
             db.session.commit()
 
     return render_template("orderComplete.html")
@@ -469,6 +469,45 @@ def artist_order_update():
 
     return {
         'status_option': status_option
+    }
+
+
+@app.route('/artistRemoveItem', methods=["POST"])
+def artistRemoveItem():
+
+    # get the order_id and convert it to an int from the client (ajax)
+    item_id = int(request.json.get('itemId'))
+
+    favitems = crud.getFavItemByItemId(item_id)
+    cartitems = crud.getCartItemByItemId(item_id)
+    for favitem in favitems:
+        crud.deleteFavItemById(favitem.favitem_id)
+        db.session.commit()
+
+    for cartitem in cartitems:
+        crud.deleteCartItemById(cartitem.cartitem_id)
+        db.session.commit()
+
+    crud.artistRemoveItem(item_id)
+    db.session.commit()
+
+    return {
+        'success': True
+    }
+
+
+@app.route('/artistStockItem', methods=["POST"])
+def artistStockItem():
+
+    # get the order_id and convert it to an int from the client (ajax)
+    item_id = int(request.json.get('itemId'))
+    stock_option = bool(request.json.get('stockOption'))
+
+    crud.update_item_stock(item_id, stock_option)
+    db.session.commit()
+
+    return {
+        'success': True
     }
 
 

@@ -33,8 +33,6 @@
             <option name='delivered' value='delivered' {% if order.status == 'delivered' %}selected{% endif %}>delivered
             </option>
         </select>
-
-
         <button class="statusButton" id="{{'statusButton' + '_' + (order.order_id) | string}}" type="button">update
             status</button>
 
@@ -53,7 +51,15 @@
         <h4>item description: {{item.description}}</h4>
         <h4>price: {{item.price}}</h4>
         <img src="{{ item.picture_path }}" alt="">
+
+        {% if not item.order_id %}
+        <button class="removeItemButton" id="{{'removeItemButton' + '_' + (item.item_id) | string}}"
+            type="button">remove
+            item</button>
+        {% endif %}
     </li>
+
+
     {% endfor %}
 </ul>
 

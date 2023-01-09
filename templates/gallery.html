@@ -15,6 +15,7 @@
 
 <!-- add artist items to gallery (images and buttons) -->
 {% for item in artist.item %}
+{% if item.in_stock %}
 <div>
     <!-- add images of each item for the specific artist -->
     <img src="{{ item.picture_path }}" alt="">
@@ -26,6 +27,7 @@
         class="itemCartButton">{{ button_cart_label[item.item_id] }}</button>
     <br>
 </div>
+{% endif %}
 {% endfor %}
 
 

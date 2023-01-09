@@ -107,6 +107,13 @@ def get_favitem(customer_id, item_id):
         FavoriteItem.item_id == item_id)).first()
 
 
+def deleteFavItemById(favitem_id):
+    FavoriteItem.query.filter((FavoriteItem.favitem_id == favitem_id)).delete()
+
+
+def getFavItemByItemId(item_id):
+    return FavoriteItem.query.filter((FavoriteItem.item_id == item_id)).all()
+
 # CART ITEMS
 
 
@@ -131,6 +138,15 @@ def delete_cartitem(customer_id, item_id):
     CartItem.query.filter((CartItem.customer_id ==
                            customer_id) & (CartItem.item_id == item_id)).delete()
 
+
+def deleteCartItemById(cartitem_id):
+    CartItem.query.filter((CartItem.cartitem_id == cartitem_id)).delete()
+
+
+def getCartItemByItemId(item_id):
+    return CartItem.query.filter((CartItem.item_id == item_id)).all()
+
+
 # ORDER
 
 
@@ -154,14 +170,19 @@ def create_order_by_session(session, artist_id):
     )
 
 
-def update_item_with_order(item, order_id):
+def update_item_with_order(item, order_id, in_stock):
     Item.query.filter(Item.item_id == item.item_id).update(
-        {'order_id': order_id})
+        {'order_id': order_id, 'in_stock': in_stock})
 
 
 def update_order_status(order_id, status_option):
     Order.query.filter(Order.order_id == order_id).update(
         {'status': status_option})
+
+
+def artistRemoveItem(item_id):
+    Item.query.filter((Item.item_id ==
+                       item_id)).delete()
 
 
 if __name__ == "__main__":

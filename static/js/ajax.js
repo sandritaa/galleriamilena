@@ -167,3 +167,31 @@ for (let button of statusButton) {
       });
   });
 }
+
+let removeItemButton = document.querySelectorAll(".removeItemButton");
+
+for (let button of removeItemButton) {
+  button.addEventListener("click", (evt) => {
+    evt.preventDefault();
+
+    let buttonIdArray = button.id.split("_");
+    let itemId = buttonIdArray.at(-1);
+
+    fetch("/artistRemoveItem", {
+      method: "POST",
+      body: JSON.stringify({ itemId: itemId }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      // use the response (promise) from the server and convert it to a JSON
+      .then((response) => response.json())
+      .then((responseJson) => {
+        let liItem = button.parentElement;
+
+        // if the ul only has one li and one h2 (so 2 elements in total) then delete it
+
+        liItem.remove();
+      });
+  });
+}
