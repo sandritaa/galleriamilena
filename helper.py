@@ -131,6 +131,40 @@ def get_cart_data(session):
     return cart_data
 
 
+def get_cost_data(session):
+
+    cost_data = {}
+
+    # customer logged in
+    if session.get('customer_id', None):
+
+        cart_items = crud.get_cartitem_by_customer(session['customer_id'])
+
+        for cart_item in cart_items:
+
+            cost_data[cart_item.item.artist_id] = cost_data.get(
+                cart_item.item.artist_id, 0) + cart_item.item.price
+
+    # customer not logged in
+    else:
+        for item_id in session['cartItems']:
+            item = crud.get_item_by_id(item_id)
+            cost_data[item.artist_id] = cost_data.get(
+                item.artist_id, 0) + item.price
+
+    return cost_data
+
+
+def get_tax_data(cost_data):
+
+    tax_data = {}
+
+    for artist_id in cost_data:
+        tax_data[artist_id] = round(cost_data[artist_id] * 9/100, 2)
+
+    return tax_data
+
+
 def order_data(session):
 
     orders_dict = []

@@ -304,8 +304,10 @@ def cart():
     login_button = helper.switch_profile_login(session)
 
     cart_data = helper.get_cart_data(session)
+    cost_data = helper.get_cost_data(session)
+    total_cost = sum(cost_data.values())
 
-    return render_template("cart.html", login_button=login_button, cart_data=cart_data)
+    return render_template("cart.html", login_button=login_button, cart_data=cart_data, cost_data=cost_data, total_cost=total_cost)
 
 
 # create cartItem route - POST request
@@ -437,18 +439,25 @@ def order_review():
     login_button = helper.switch_profile_login(session)
 
     cart_data = helper.get_cart_data(session)
+    cost_data = helper.get_cost_data(session)
+    tax_data = helper.get_tax_data(cost_data)
 
-    return render_template("orderReview.html", order_data=cart_data)
+    total_cost = sum(cost_data.values()) + sum(tax_data.values())
+
+    return render_template("orderReview.html", order_data=cart_data, cost_data=cost_data, tax_data=tax_data, total_cost=total_cost)
 
 
 @app.route('/orderComplete')
 def orderComplete():
 
     cart_data = helper.get_cart_data(session)
+    cost_data = helper.get_cost_data(session)
+    tax_data = helper.get_tax_data(cost_data)
+
     for artist_id in cart_data:
         orderItems = cart_data[artist_id]
-
-        order = crud.create_order_by_session(session, artist_id)
+        totalOrder = cost_data[artist_id] + tax_data[artist_id]
+        order = crud.create_order_by_session(session, artist_id, totalOrder)
 
         db.session.add(order)
         db.session.commit()

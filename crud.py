@@ -150,11 +150,11 @@ def getCartItemByItemId(item_id):
 # ORDER
 
 
-def create_order_by_session(session, artist_id):
+def create_order_by_session(session, artist_id, totalOrder):
     return Order(
         status='order received',
         date=func.now(),
-        total=0,
+        total=totalOrder,
         fname=session['shipment']['fname'],
         lname=session['shipment']['lname'],
         address1=session['shipment']['address1'],

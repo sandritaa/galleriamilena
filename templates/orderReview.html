@@ -14,7 +14,10 @@
         </li>
         {% endfor %}
     </ul>
+    <p>Order subtotal is: {{ cost_data[artist_id] }}</p>
+    <p>Tax: {{ tax_data[artist_id] }}</p>
     {% endfor %}
+    <p>Total of order is: {{ total_cost }}</p>
 
 </div>
 
