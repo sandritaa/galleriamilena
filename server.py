@@ -317,38 +317,42 @@ def add_cart_item():
 
     # get the customer_id from the session or None if no customer is logged in
     customer_id = session.get("customer_id", None)
+    artist_id = session.get("artist_id", None)
 
     # check if the customer is logged in or not
     # if the customer is NOT logged in - use session to store cartitems
-    if customer_id == None:
+    if artist_id == None:
+        if customer_id == None:
 
-        if item_id in session.get('cartItems', []):
+            if item_id in session.get('cartItems', []):
 
-            session['cartItems'].remove(item_id)
-            session.modified = True
-            added_item = False
+                session['cartItems'].remove(item_id)
+                session.modified = True
+                added_item = False
 
+            else:
+                # item_id goes into my session
+                session.setdefault('cartItems', []).append(item_id)
+                session.modified = True
+                added_item = True
+
+        # if instead the customer is logged in - used the db to store cartitems
         else:
-            # item_id goes into my session
-            session.setdefault('cartItems', []).append(item_id)
-            session.modified = True
-            added_item = True
 
-    # if instead the customer is logged in - used the db to store cartitems
+            # Query for a cartitems
+            cartitem = crud.get_cartitem(customer_id, item_id)
+            if cartitem:
+                crud.delete_cartitem(customer_id, item_id)
+                db.session.commit()
+                added_item = False
+
+            else:
+                cart_item = crud.create_cartitem(customer_id, item_id)
+                db.session.add(cart_item)
+                db.session.commit()
+                added_item = True
     else:
-
-        # Query for a cartitems
-        cartitem = crud.get_cartitem(customer_id, item_id)
-        if cartitem:
-            crud.delete_cartitem(customer_id, item_id)
-            db.session.commit()
-            added_item = False
-
-        else:
-            cart_item = crud.create_cartitem(customer_id, item_id)
-            db.session.add(cart_item)
-            db.session.commit()
-            added_item = True
+        added_item = False
 
     return {
         # fetch response
