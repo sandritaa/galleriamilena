@@ -1,3 +1,6 @@
+
+#  TODO: create dynamic follow button
+
 from flask import Flask, render_template, request, flash, session, redirect, flash
 from model import connect_to_db, db
 from jinja2 import StrictUndefined
