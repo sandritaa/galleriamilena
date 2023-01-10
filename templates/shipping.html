@@ -9,27 +9,28 @@
 <div class="'shipping">
     <form action="/payment">
         <label for="fname">First name</label>
-        <input type="text" id="fname" name="fname"> <br> <br>
+        <input type="text" id="fname" name="fname" required minlength='1' maxlength='50'> <br> <br>
         <label for="lname">Last name</label>
-        <input type="text" id="lname" name="lname"> <br> <br>
+        <input type="text" id="lname" name="lname" required minlength='1' maxlength='50'> <br> <br>
         <label for="address1">Address</label>
-        <input type="text" id="address1" name="address1"> <br> <br>
+        <input type="text" id="address1" name="address1" required minlength='1'> <br> <br>
         <label for="address2">Address</label>
-        <input type="text" id="address2" name="address2"> <br> <br>
+        <input type="text" id="address2" name="address2" required minlength='1'> <br> <br>
         <label for="city">City</label>
-        <input type="text" id="city" name="city"> <br> <br>
+        <input type="text" id="city" name="city" required minlength='1'> <br> <br>
         <label for="state">State</label>
-        <input type="text" id="state" name="state"> <br> <br>
+        <input type="text" id="state" name="state " required minlength='1' maxlength='50'> <br> <br>
         <label for="zipcode">Zipcode</label>
-        <input type="text" id="zipcode" name="zipcode"> <br> <br>
+        <input type="text" id="zipcode" name="zipcode" required minlength='1' maxlength='10'> <br> <br>
         <label for="country">Country</label>
-        <input type="text" id="country" name="country"> <br> <br>
+        <input type="text" id="country" name="country" required minlength='1'> <br> <br>
         <label for="email">Email</label>
-        <input type="text" id="email" name="email"> <br> <br>
+        <input type="text" id="email" name="email" required minlength='4' maxlength='50'> <br> <br>
         <label for="email">Confirm email</label>
-        <input type="text" id="email" name="email"> <br> <br>
+        <input type="text" id="email" name="email" required minlength='4' maxlength='50'> <br> <br>
         <label for="phone">Phone</label>
-        <input type="text" id="phone" name="phone"> <br> <br>
+        <input type="text" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required minlength='1'
+            maxlength='20'> <br> <br>
         <input type="submit" href='/payment' value="proceed to checkout">
     </form>
 </div>
