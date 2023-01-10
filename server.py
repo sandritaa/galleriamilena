@@ -74,6 +74,9 @@ def gallery(alias):
 @app.route('/login')
 def login():
 
+    # get login or logout depending if a customer/artist is logged in or not
+    login_button = helper.switch_profile_login(session)
+
     # get request from client to retrieve user input in the server
     user_email = request.args.get('email')
     user_password = request.args.get('password')
@@ -85,7 +88,7 @@ def login():
     # if no user or email were entered then re-render the login page
     # could also add this as a requirement in the form (e.g. min length on inputs)
     if not user_email or not user_password:
-        return render_template('login.html')
+        return render_template('login.html', login_button=login_button)
 
     # check if customer query above checks out - if it does, redirect to be below customer route
     elif customer:
@@ -137,6 +140,9 @@ def login():
 @app.route('/profile/<customer_route>')
 def customer_profile(customer_route):
 
+    # get login or logout depending if a customer/artist is logged in or not
+    login_button = helper.switch_profile_login(session)
+
     # tokenize the customer route so we can get the id
     customer_route_list = customer_route.split('_')
 
@@ -151,7 +157,7 @@ def customer_profile(customer_route):
         customer = crud.get_customer_by_id(customer_id_int)
 
         # render the customer profile and pass the logged in customer to the client
-        return render_template("customerProfile.html", customer=customer)
+        return render_template("customerProfile.html", customer=customer, login_button=login_button)
 
     # if no customer is logged in the go to the login page
     else:
@@ -161,6 +167,8 @@ def customer_profile(customer_route):
 # create the dynamic artist profile route - the dynamic part is given by the <alias> which is made of the artist alias
 @app.route('/admin/<alias>')
 def artist_profile(alias):
+    # get login or logout depending if a customer/artist is logged in or not
+    login_button = helper.switch_profile_login(session)
 
     # get the artist from the alias
     artist = crud.get_artist_by_alias(alias)
@@ -169,7 +177,7 @@ def artist_profile(alias):
     if session['artist_id'] == artist.artist_id:
 
         # render the page and pass the logged in artist as data
-        return render_template("artistProfile.html", artist=artist)
+        return render_template("artistProfile.html", artist=artist, login_button=login_button)
 
     # if no artist is logged in the redirect to the login page
     else:
@@ -180,8 +188,11 @@ def artist_profile(alias):
 @app.route('/profile')
 def profile():
 
+    # get login or logout depending if a customer/artist is logged in or not
+    login_button = helper.switch_profile_login(session)
+
     # simply render the create account page
-    return render_template('createAccount.html')
+    return render_template('createAccount.html', login_button=login_button)
 
 
 # create new customer profile route as POST request
@@ -294,8 +305,11 @@ def add_fav_item():
 @app.route('/add-item', methods=['GET'])
 def newItemForm():
 
+    # get login or logout depending if a customer/artist is logged in or not
+    login_button = helper.switch_profile_login(session)
+
     # when its a get request just render the html without doing anything
-    return render_template('addItem.html')
+    return render_template('addItem.html', login_button=login_button)
 
 
 # create cart route
@@ -410,12 +424,17 @@ def add_fav_artist():
 
 @app.route('/shipping')
 def shipping():
+    # get login or logout depending if a customer/artist is logged in or not
+    login_button = helper.switch_profile_login(session)
 
-    return render_template("shipping.html")
+    return render_template("shipping.html", login_button=login_button)
 
 
 @app.route('/payment')
 def payment():
+    # get login or logout depending if a customer/artist is logged in or not
+    login_button = helper.switch_profile_login(session)
+
     # add to session shipment information
     session['shipment'] = {
         'fname': request.args.get('fname'),
@@ -430,11 +449,14 @@ def payment():
         'phone': request.args.get('phone'),
     }
 
-    return render_template("payment.html")
+    return render_template("payment.html", login_button=login_button)
 
 
 @app.route('/review')
 def order_review():
+
+    # get login or logout depending if a customer/artist is logged in or not
+    login_button = helper.switch_profile_login(session)
 
     login_button = helper.switch_profile_login(session)
 
@@ -444,11 +466,14 @@ def order_review():
 
     total_cost = sum(cost_data.values()) + sum(tax_data.values())
 
-    return render_template("orderReview.html", order_data=cart_data, cost_data=cost_data, tax_data=tax_data, total_cost=total_cost)
+    return render_template("orderReview.html", order_data=cart_data, cost_data=cost_data, tax_data=tax_data, total_cost=total_cost, login_button=login_button)
 
 
 @app.route('/orderComplete')
 def orderComplete():
+
+    # get login or logout depending if a customer/artist is logged in or not
+    login_button = helper.switch_profile_login(session)
 
     cart_data = helper.get_cart_data(session)
     cost_data = helper.get_cost_data(session)
@@ -467,7 +492,7 @@ def orderComplete():
             crud.update_item_with_order(orderItem, order.order_id, in_stock)
             db.session.commit()
 
-    return render_template("orderComplete.html")
+    return render_template("orderComplete.html", login_button=login_button)
 
 
 @app.route('/artistUpdateOrder', methods=["POST"])
