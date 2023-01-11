@@ -38,3 +38,17 @@ body {
   background-color: aliceblue;
   margin-right: 0px;
 }
+
+#email,
+#password {
+  width: 30%
+}
+
+.navbar a:active,
+.navbar a:hover {
+  text-decoration: underline;
+}
+
+ul {
+  list-style-type: none;
+}

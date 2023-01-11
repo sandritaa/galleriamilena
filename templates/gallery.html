@@ -4,38 +4,97 @@
 <!-- insert content block -->
 {% block body %}
 
+<section class="bg-light text-dark p-5 p-lg-0 pt-lg-5 text-center text-sm-start">
+    <div class="container">
+        <div class="d-sm-flex align-items-center justify-content-between">
+            <div>
+                <h1> {{ artist.fname + ' ' + artist.lname }}</h1>
+
+                <p class="lead my-4">{{ artist.about }}</p>
+
+
+                <button type="button" id='{{"buttonArtistLike" + "_" + (artist.artist_id) | string}}'
+                    class='artistLikeButton'>{{ button_favartist_label[artist.artist_id] }}</button>
+                <br><br>
+            </div>
+            <img class="img-fluid w-50 d-none d-sm-block" src="img/showcase.svg" alt="" />
+        </div>
+    </div>
+</section>
+
+
+
+{% for item in artist.item %}
+
+{% if item.in_stock %}
+<div class="container">
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+
+        <div class="boxesWrapper">
+            <section class="p-5">
+
+                <div class="col-md">
+                    <div class="card">
+                        <img src="{{ item.picture_path }}" alt="">
+                        <!-- <img src="/static/data/img/FullSizeRender.jpg" class="card-img-top" alt="..."> -->
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">This is a longer card with supporting text below as a natural
+                                lead-in
+                                to
+                                additional content. This content is a little bit longer.</p>
+                        </div>
+                        <!-- <div> -->
+                        <!-- add images of each item for the specific artist -->
+
+                        <button type="button" id='{{ "buttonLike" + "_" + (item.item_id) | string }}'
+                            class='itemLikeButton'>{{ button_like_label[item.item_id] }}</button>
+                        <button type="button" id='{{ "buttonCart" + "_" + (item.item_id) | string }}'
+                            class="itemCartButton">{{ button_cart_label[item.item_id] }}</button>
+
+                    </div>
+                </div>
+
+            </section>
+        </div>
+
+
+    </div>
+</div>
+
+{% endif %}
+{% endfor %}
+
+<script src="/static/js/ajax.js"></script>
+
+{% endblock %}
+
 <!-- add artists full name and about   -->
-<h2> Artist gallery: {{ artist.fname + ' ' + artist.lname }}</h2>
+<!-- <h2> Artist gallery: {{ artist.fname + ' ' + artist.lname }}</h2>
 <h3>about the artist: </h3>
 <p>{{ artist.about }}</p>
 <button type="button" id='{{"buttonArtistLike" + "_" + (artist.artist_id) | string}}'
     class='artistLikeButton'>{{ button_favartist_label[artist.artist_id] }}</button>
-<br><br>
+<br><br> -->
 
 
 <!-- add artist items to gallery (images and buttons) -->
-{% for item in artist.item %}
-{% if item.in_stock %}
-<div>
-    <!-- add images of each item for the specific artist -->
-    <img src="{{ item.picture_path }}" alt="">
+<!-- {% for item in artist.item %}
+{% if item.in_stock %} -->
+<!-- <div> -->
+<!-- add images of each item for the specific artist -->
+<!-- <img src="{{ item.picture_path }}" alt=""> -->
 
-    <!-- create button which has a dynamic unique id tied to the item and dynamic inner html to change when first rendered -->
-    <button type="button" id='{{ "buttonLike" + "_" + (item.item_id) | string }}'
+<!-- create button which has a dynamic unique id tied to the item and dynamic inner html to change when first rendered -->
+<!-- <button type="button" id='{{ "buttonLike" + "_" + (item.item_id) | string }}'
         class='itemLikeButton'>{{ button_like_label[item.item_id] }}</button>
     <button type="button" id='{{ "buttonCart" + "_" + (item.item_id) | string }}'
         class="itemCartButton">{{ button_cart_label[item.item_id] }}</button>
     <br>
-</div>
-{% endif %}
-{% endfor %}
+</div> -->
+<!-- {% endif %}
+{% endfor %} -->
 
 
 <!-- Ajax file -->
-<script src="/static/js/ajax.js"></script>
-
-
-
-
-
-{% endblock %}
+<!-- <script src="/static/js/ajax.js"></script> -->
