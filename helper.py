@@ -126,7 +126,8 @@ def get_cart_data(session):
     else:
         for item_id in session.get('cartItems', []):
             item = crud.get_item_by_id(item_id)
-            cart_data.setdefault(item.artist_id, []).append(item)
+            if item:
+                cart_data.setdefault(item.artist_id, []).append(item)
 
     return cart_data
 
@@ -149,8 +150,9 @@ def get_cost_data(session):
     else:
         for item_id in session.get('cartItems', []):
             item = crud.get_item_by_id(item_id)
-            cost_data[item.artist_id] = cost_data.get(
-                item.artist_id, 0) + item.price
+            if item:
+                cost_data[item.artist_id] = cost_data.get(
+                    item.artist_id, 0) + item.price
 
     return cost_data
 
