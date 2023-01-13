@@ -15,89 +15,69 @@
     </div>
 </section>
 
-
-
-
-<br>
+<br><br>
 <div class="container">
-    <div class="row row-cols-1 row-cols-md-2 g-4">
+    <div class="card mb-3" style="max-width: 540px;">
         <div class="cartData">
             {% for artist_id in cart_data %}
             <ul>
                 <h2>artist {{ artist_id }}</h2>
+                <br>
                 {% for item in cart_data[artist_id] %}
-                <div class="boxesWrapper">
-                    <section class="p-5">
-                        <div class="col-md">
-                            <div class="card">
-                                <img src="{{ item.picture_path }}" alt="">
-                                <div class="card-body">
-                                    <h5 class="card-title">
-                                    </h5>
-                                    <!-- <p class="card-text">This is a longer card with supporting text below as a natural
-                                        lead-in
-                                        to
-                                        additional content. This content is a little bit longer.</p> -->
-                                    <li>Artist: {{ item.artist.fname + ' ' + item.artist.lname }}</li>
-                                    <li> Price: $ {{ item.price }}</li>
-                                    <li> Color: {{ item.color }}</li>
-                                    <li> Style Number: {{ item.item_id}}</li>
-                                    <br>
-                                    <li>
-                                        <button type="button" class="editCartButton"
-                                            id="{{'buttonRemoveItem' + '_' + (item.item_id) | string}}">remove
-                                            item</button>
-                                    </li>
-                                </div>
+                <section>
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="{{ item.picture_path }}" class="img-fluid rounded-start" alt="">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+
+                                <li>Artist: {{ item.artist.fname + ' ' + item.artist.lname }}</li>
+                                <li> Price: $ {{ item.price }}</li>
+                                <li> Color: {{ item.color }}</li>
+                                <li> Style Number: {{ item.item_id}}</li>
+                                <br>
+
+                                <li>
+                                    <button type="button" class="editCartButton"
+                                        id="{{'buttonRemoveItem' + '_' + (item.item_id) | string}}">remove
+                                        item</button>
+                                </li>
 
                             </div>
                         </div>
+                    </div>
+                </section>
+        </div>
+        {% endfor %}
+        </ul>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            Order Details
+        </div>
+        <div class="card-body">
 
-                    </section>
-                </div>
-                {% endfor %}
-            </ul>
-            <p>Order subtotal is: {{ cost_data[artist_id] }}</p>
+            <p>Subtotal: {{ cost_data[artist_id] }}</p>
             {% endfor %}
-            <p>Total is: {{ total_cost }}</p>
+
+            <p>Total: {{ total_cost }}</p>
+
+            <!-- proceed to checkout -->
+            <button type='button' class="btn btn-light"> <a href='/shipping'>proceed to checkout</a> </button>
+            <br><br>
+
         </div>
     </div>
 </div>
 
-
-
-
-
-
-
-<!-- <div class="cartData">
-    {% for artist_id in cart_data %}
-    <ul>
-        <h2>artist {{ artist_id }}</h2>
-        {% for item in cart_data[artist_id] %}
-        <li> {{ item }}
-            <button type="button" class="editCartButton"
-                id="{{'buttonRemoveItem' + '_' + (item.item_id) | string}}">remove
-                item</button>
-        </li>
-        {% endfor %}
-    </ul>
-    <p>Order subtotal is: {{ cost_data[artist_id] }}</p>
-    {% endfor %}
-    <p>Total is: {{ total_cost }}</p>
-</div> -->
-
-<!-- proceed to checkout -->
-<button type='button'> <a href='/shipping'>proceed to checkout</a> </button>
-<br><br>
-
 <!-- add login button -->
-<button type='button'>
+<button type='button' class="btn btn-light">
     <a href="{{ login_button['route'] }}">{{ login_button['label'] }}</a>
 </button>
 
 <!-- add home button-->
-<button type='button'> <a href="/">home</a>
+<button type='button' class="btn btn-light"> <a href="/">home</a>
 
 </button>
 
