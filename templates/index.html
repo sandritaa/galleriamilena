@@ -26,22 +26,27 @@
 
                 <div class="col-md">
                     <div class="card">
-                        <img src="/static/data/img/FullSizeRender.jpg" class="card-img-top" alt="...">
+                        <h5 class="card-title"> {{ artist.alias }}</h5>
+                        <h6> {{ artist.fname + ' ' + artist.lname }} -artist</h6>
+
+                        <a href="{{ url_for('gallery', alias = artist.alias) }}"><img
+                                src="/static/data/img/FullSizeRender.jpg" class="card-img-top"></a>
+                        <!-- <img src="/static/data/img/FullSizeRender.jpg" class="card-img-top" alt="..."> -->
                         <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This is a longer card with supporting text below as a natural
-                                lead-in
+
+                            <!-- <p class="card-text">This is a longer card with supporting text below as a natural
+                                lead-in1
                                 to
-                                additional content. This content is a little bit longer.</p>
+                                additional content. This content is a little bit longer.</p> -->
                         </div>
                         <!-- <a href="#" class="btn btn-primary">Read More</a> -->
                         <div class="artist">
                             <!-- add button for each artist -->
-                            <button type='button'>
-                                <!-- add customize url for each artist using alias and pass information to inner html -->
-                                <a
+                            <!-- <button type='button' class="btn btn-light"> -->
+                            <!-- add customize url for each artist using alias and pass information to inner html -->
+                            <!-- <a
                                     href="{{ url_for('gallery', alias = artist.alias) }}">{{ artist.fname + ' ' + artist.lname }}</a>
-                            </button>
+                            </button> -->
 
                         </div>
                         <!-- TODO: create dynamic follow button -->
