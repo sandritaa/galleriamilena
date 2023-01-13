@@ -52,3 +52,12 @@ body {
 ul {
   list-style-type: none;
 }
+
+.img-align {
+  display: block;
+  margin: 0 auto;
+}
+
+.col-md-6 {
+  text-align: center;
+}
