@@ -1,5 +1,8 @@
 from model import Customer, Artist
 import crud
+import os
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import *
 
 
 def switch_profile_login(session):
@@ -200,3 +203,35 @@ def order_data(session):
             orders_dict.append(dict)
 
     return orders_dict
+
+
+def twilio_api():
+
+    from_email = Email("milenasatelier@gmail.com")
+    to_email = "aprender.link@gmail.com"
+    # to_email = To("aprender.link@gmail.com")
+    subject = "Sending with SendGrid is Fun"
+    content = Content(
+        "text/plain", "and easy to do anywhere, even with Python")
+    mail = Mail(from_email, to_email, subject, content)
+    # print(os.environ.get('SENDGRID_KEY'))
+    # try:
+
+    sg = SendGridAPIClient(os.environ.get('SENDGRID_KEY'))
+    print(mail.headers)
+    print(sg.api_key)
+    print(sg.host)
+    # print(sg.send())
+
+    response = sg.send(mail)
+
+    # response = sg.client.mail.send.post(request_body=mail.get())
+    # print('fjaskj')
+
+    print(response)
+    print(response.status_code)
+    print(response.body)
+    print(response.headers)
+
+    # except Exception as e:
+    # print(e)

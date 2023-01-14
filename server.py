@@ -6,6 +6,7 @@ from model import connect_to_db, db
 from jinja2 import StrictUndefined
 import crud
 import helper
+import keys
 
 
 # create the flask app
@@ -507,6 +508,11 @@ def artist_order_update():
 
     crud.update_order_status(order_id, status_option)
     db.session.commit()
+
+    # print('!!!!')
+    # print(status_option)
+
+    helper.twilio_api()
 
     return {
         'status_option': status_option
