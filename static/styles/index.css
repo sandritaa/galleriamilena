@@ -39,6 +39,11 @@ body {
   margin-right: 0px;
 }
 
+.nav-link.active {
+  font-weight: bold;
+}
+
+
 #email,
 #password {
   width: 30%

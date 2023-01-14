@@ -40,9 +40,6 @@
                     <li class="nav-item">
                         <a href="/cart" class="nav-link">cart</a>
                     </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">contact</a>
-                    </li>
                 </ul>
             </div>
         </div>
@@ -142,11 +139,16 @@
         </div>
 
 
-        <!-- <script>
-        $(document).ready(function () {
-            $('.navbar-collapse').collapse();
-        });
-    </script> -->
+        <script>
+            let currentPage = window.location.pathname;
+            let links = document.querySelectorAll('.nav-link');
+
+            links.forEach(link => {
+                if (link.getAttribute('href') === currentPage) {
+                    link.classList.add('active');
+                }
+            });
+        </script>
 </body>
 
 </html>
