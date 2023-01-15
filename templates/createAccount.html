@@ -10,7 +10,7 @@
         <div class="d-sm-flex align-items-center justify-content-between">
             <h2>Create an Account</h2>
 
-            <img class="img-fluid w-50 d-none d-sm-block" src="img/showcase.svg" alt="" />
+            <!-- <img class="img-fluid w-50 d-none d-sm-block" src="img/showcase.svg" alt="" /> -->
         </div>
     </div>
 </section>
@@ -18,29 +18,74 @@
 
 
 <!-- send post request to server to create new user account and update database -->
-<form action="/profile" method="POST">
 
-    <!-- customer attributes -->
-    <label>First name </label> <br> <input type="text" name="fname" required minlength='1' maxlength='50'> <br>
-    <label>Last name </label> <br> <input type="text" name="lname" required minlength='1' maxlength='50'> <br>
-    <label>Email</label> <br> <input type="email" name="email" required minlength='4' maxlength='50'> <br>
-    <label>Phone</label> <br><input type="tel" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required minlength='1'
-        maxlength='20'>
-    <small>Format: 123-456-7890</small> <br>
-    <label>Password</label> <br><input type="password" name="password" required minlength='8' maxlength='12'><small>
-        Format: 8 to 12
-        characters</small> <br>
-    <input type="submit">
 
-</form>
 
-{% for message in get_flashed_messages() %}
-<div class="flash">{{ message }}</div>
-{% endfor %}
+<div class="container">
+    <div class="card mb-3" style="max-width: 540px;">
+        <div class="cartData">
+            <h3>Please fill out the below form: </h3>
+            <ul>
+                <br>
+                <section>
+                    <div class="row g-0">
+                        <!-- <div class="col-md-4">
+                            <img src="" class="img-fluid rounded-start" alt="">
+                        </div> -->
+                        <div class="col-md-8">
+                            <div class="card-body">
 
-<!-- add home button -->
-<button type='button'>
-    <a href="/ ">home</a>
-</button>
 
-{% endblock %}
+                                <!-- send post request to server to create new item and update database when added -->
+                                <form action='/profile' method="POST">
+
+                                    <!-- item attributes -->
+                                    <label>First name </label> <br> <input type="text" name="fname" required
+                                        minlength='1' maxlength='50'><br>
+                                    <label>Last name </label> <br> <input type="text" name="lname" required
+                                        minlength='1' maxlength='50'><br>
+                                    <label>Email</label> <br> <input type="email" name="email" required minlength='4'
+                                        maxlength='50'> <br>
+                                    <label>Phone number/label> <br> <input type="tel" name="phone"
+                                            pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required minlength='1' maxlength='20'>
+                                        <small>Format: 123-456-7890</small>
+                                        <br>
+                                        <label>Password</label> <br> <input type="password" name="password" required
+                                            minlength='8' maxlength='12'><small>
+                                            Format: 8 to 12
+                                            characters</small> <br>
+
+
+
+
+                                        <!-- add hidden field since it will be populated when an image is added so that I can send the url as part of the form  -->
+                                        <input type="hidden" name="picture_path" id="picture_path_id" value=""> <br>
+
+                                        <input type="submit">
+
+                                </form>
+
+                                {% for message in get_flashed_messages() %}
+                                <div class="flash">{{ message }}</div>
+                                {% endfor %}
+
+
+                            </div>
+                        </div>
+                    </div>
+                </section>
+        </div>
+
+        </ul>
+    </div>
+
+    {% for message in get_flashed_messages() %}
+    <div class="flash">{{ message }}</div>
+    {% endfor %}
+
+    <!-- add home button -->
+    <button type='button'>
+        <a href="/ ">home</a>
+    </button>
+
+    {% endblock %}

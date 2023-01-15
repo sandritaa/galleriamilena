@@ -13,7 +13,7 @@
 
             <h2>enter credit card information</h2>
 
-            <img class="img-fluid w-50 d-none d-sm-block" src="img/showcase.svg" alt="" />
+            <!-- <img class="img-fluid w-50 d-none d-sm-block" src="img/showcase.svg" alt="" /> -->
         </div>
     </div>
 </section>
@@ -22,19 +22,19 @@
 <div class="payment">
     <form action="">
         <label for="cardName">name on card</label><br>
-        <input type="text" id="cardName" name="cardName"><br><br>
+        <input type="text" id="cardName" name="cardName" required minlength='1'><br><br>
 
         <label for="cardNum">card number</label><br>
-        <input type="text" id="cardNum" name="cardNum"><br><br>
+        <input type="text" id="cardNum" name="cardNum" required minlength='1'><br><br>
 
         <label for="cardExp">expiration date</label><br>
-        <input type="date" id="cardExp" name="cardExp"><br><br>
+        <input type="date" id="cardExp" name="cardExp" required><br><br>
 
         <label for="cardCode">security code</label><br>
-        <input type="text" id="cardCode" name="cardCode"><br><br>
+        <input type="text" id="cardCode" name="cardCode" required minlength='1'><br><br>
 
         <select placeholder="MM">
-            <option name="" value="" style="display:none;">Month</option>
+            <option name="" value="" style="display:none;" required>Month</option>
             <option name="January" value="Jan">January</option>
             <option name="February" value="Feb">February</option>
             <option name="March" value="Mar">March</option>
@@ -50,7 +50,7 @@
         </select>
 
         <select placeholder="YY">
-            <option name="" value="" style="display:none;">Year</option>
+            <option name="" value="" style="display:none;" required>Year</option>
             <option name="2020" value="2020">2020</option>
             <option name="2021" value="2021">2021</option>
             <option name="2022" value="2022">2022</option>

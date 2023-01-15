@@ -9,30 +9,50 @@
         <div class="d-sm-flex align-items-center justify-content-between">
             <h2>review your order</h2>
 
-            <img class="img-fluid w-50 d-none d-sm-block" src="img/showcase.svg" alt="" />
+            <!-- <img class="img-fluid w-50 d-none d-sm-block" src="img/showcase.svg" alt="" /> -->
         </div>
     </div>
 </section>
 
 
+<div class="card">
+    <div class="card-header">
+        <h1>order summary</h1>
+    </div>
+    <div class="orderReview">
+        {% for artist_id in order_data %}
+        <ul>
+            <div class="card-body">
+                <!-- <h2>artist {{ artist_id }}</h2> -->
+                {% for item in order_data[artist_id] %}
 
-<div class="orderReview">
-    {% for artist_id in order_data %}
-    <ul>
-        <h2>artist {{ artist_id }}</h2>
-        {% for item in order_data[artist_id] %}
-        <li> {{ item }}
-        </li>
+                <li> item id: {{ item.item_id }}
+                </li>
+                <li> item price: {{ item.price}}
+                </li>
+                <li> item date: {{ item.date }}
+                </li>
+                <li> item color: {{ item.color }}
+                </li>
+
+                {% endfor %}
+        </ul>
+        <p>Order subtotal is: $ {{ cost_data[artist_id] }}</p>
+        <p>Tax: $ {{ tax_data[artist_id] }}</p>
         {% endfor %}
-    </ul>
-    <p>Order subtotal is: {{ cost_data[artist_id] }}</p>
-    <p>Tax: {{ tax_data[artist_id] }}</p>
-    {% endfor %}
-    <p>Total of order is: {{ total_cost }}</p>
+        <p>Total of order is: $ {{ total_cost }}</p>
+    </div>
+
+</div>
+<button type="button"><a href="/orderComplete">place order</a> </button>
+</div>
+
+
+
 
 </div>
 
-<button type="button"><a href="/orderComplete">place order</a> </button>
+<!-- <button type="button"><a href="/orderComplete">place order</a> </button> -->
 
 
 {% endblock %}
