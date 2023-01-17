@@ -9,67 +9,57 @@
     <div class="container">
         <div class="d-sm-flex align-items-center justify-content-between">
             <h2>cart</h2>
-
             <!-- <img class="img-fluid w-50 d-none d-sm-block" src="img/showcase.svg" alt="" /> -->
         </div>
     </div>
 </section>
 
 <br><br>
-<div class="container">
-    <div class="card mb-3" style="max-width: 540px;">
-        <div class="cartData">
-            {% for artist_id in cart_data %}
-            <ul>
-                <h2>artist {{ artist_id }}</h2>
-                <!-- <h2>artist {{ artist_id }}</h2> -->
-                <br>
-                {% for item in cart_data[artist_id] %}
-                <section>
-                    <div class="row g-0">
-                        <div class="col-md-4">
-                            <img src="{{ item.picture_path }}" class="img-fluid rounded-start" alt="">
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
 
-                                <li>Artist: {{ item.artist.fname + ' ' + item.artist.lname }}</li>
+<div class="container">
+    <div class="card mb-3 cartData" style="max-width: 540px;">
+        {% for artist_id in cart_data %}
+        <div class="card-body">
+            <h2>artist {{ artist_id }}</h2>
+            <br>
+            {% for item in cart_data[artist_id] %}
+            <section>
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="{{ item.picture_path }}" class="img-fluid rounded-start" alt="">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <ul>
+                                <li> Artist: {{ item.artist.fname + ' ' + item.artist.lname }}</li>
                                 <li> Price: $ {{ item.price }}</li>
                                 <li> Color: {{ item.color }}</li>
                                 <li> Style Number: {{ item.item_id}}</li>
                                 <br><br>
                                 <br><br>
-
-
-
                                 <li>
                                     <button type="button" class="editCartButton"
                                         id="{{'buttonRemoveItem' + '_' + (item.item_id) | string}}">remove
-                                        item</button>
+                                        item
+                                    </button>
                                 </li>
-
-                            </div>
+                            </ul>
                         </div>
                     </div>
-                </section>
-                <!-- </div> -->
-                {% endfor %}
-            </ul>
+                </div>
+            </section>
+            {% endfor %}
+            <p>Subtotal: ${{ cost_data[artist_id] }}</p>
         </div>
+        {% endfor %}
 
-
-        <div class="card">
+        <div class="cartSummary" style="max-width: 540px;">
             <div class="card-header">
-                Order Details
+                Order Summary
             </div>
 
             <div class="card-body">
-
-
-                <p>Subtotal: {{ cost_data[artist_id] }}</p>
-                {% endfor %}
-                <h4>$$</h4>
-                <p>Total: {{ total_cost }}</p>
+                <p>Total: ${{ total_cost }}</p>
 
                 <!-- proceed to checkout -->
                 <button type='button' class="btn btn-light"> <a href='/shipping'>proceed to checkout</a> </button>
@@ -79,18 +69,21 @@
         </div>
     </div>
 
-    <!-- add login button -->
-    <button type='button' class="btn btn-light">
-        <a href="{{ login_button['route'] }}">{{ login_button['label'] }}</a>
-    </button>
-
-    <!-- add home button-->
-    <button type='button' class="btn btn-light"> <a href="/">home</a>
-
-    </button>
+</div>
 
 
-    <!-- Ajax file -->
-    <script src="/static/js/ajax.js"></script>
+<!-- add login button -->
+<button type='button' class="btn btn-light">
+    <a href="{{ login_button['route'] }}">{{ login_button['label'] }}</a>
+</button>
 
-    {% endblock %}
+<!-- add home button-->
+<button type='button' class="btn btn-light"> <a href="/">home</a>
+
+</button>
+
+
+<!-- Ajax file -->
+<script src="/static/js/ajax.js"></script>
+
+{% endblock %}

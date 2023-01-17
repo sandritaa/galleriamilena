@@ -27,8 +27,8 @@
                         <h5 class="card-title"> {{ artist.alias }}</h5>
                         <h6> {{ artist.fname + ' ' + artist.lname }} artist</h6>
 
-                        <a href="{{ url_for('gallery', alias = artist.alias) }}"><img
-                                src="/static/data/img/FullSizeRender.jpg" class="card-img-top"></a>
+                        <a href="{{ url_for('gallery', alias = artist.alias) }}"><img src="{{ artist.profile_pic }}"
+                                class="card-img-top"></a>
                         <!-- <img src="/static/data/img/FullSizeRender.jpg" class="card-img-top" alt="..."> -->
                         <div class="card-body">
 
@@ -48,7 +48,9 @@
 
                         </div>
                         <!-- TODO: create dynamic follow button -->
-                        <a href="#" class="btn btn-primary">follow</a>
+                        <!-- <a href="#" class="btn btn-primary">follow</a> -->
+                        <button type="button" id='{{"buttonArtistLike" + "_" + (artist.artist_id) | string}}'
+                            class='artistLikeButton btn btn-primary'>{{ button_favartist_label[artist.artist_id] }}</button>
                     </div>
                 </div>
 
@@ -58,4 +60,5 @@
         {% endfor %}
     </div>
 </div>
+<script src="/static/js/ajax.js"></script>
 {% endblock %}

@@ -34,16 +34,16 @@ def get_artist_route(artist):
     return artist_route
 
 
-def get_like_button_label(artist, session):
+def get_favitem_button_label(artist, session):
 
     # favorite logic for when the page is loaded
-    button_like_label = {}
+    button_favitem_label = {}
 
     # go through every item of the artist
     for item in artist.item:
 
         # for each item, add a label with an item_id as the key of a dictionary and set it 'like'
-        button_like_label[item.item_id] = 'like'
+        button_favitem_label[item.item_id] = 'like'
 
         # go through every favitem of a specific item
         for favitem in item.favitem:
@@ -52,17 +52,17 @@ def get_like_button_label(artist, session):
             if session.get('customer_id', None) == favitem.customer_id:
 
                 # if its is, set the value in the dictionary of the key item_id to 'unlike'
-                button_like_label[favitem.item_id] = 'unlike'
+                button_favitem_label[favitem.item_id] = 'unlike'
 
-    return button_like_label
+    return button_favitem_label
 
 
-def get_favartist_button_label(artist, session):
+def get_favartist_button_label_gallery(artist, session):
     # favorite logic for when the page is loaded
     button_favartist_label = {}
 
     # for each item, add a label with an item_id as the key of a dictionary and set it 'like'
-    button_favartist_label[artist.artist_id] = 'like'
+    button_favartist_label[artist.artist_id] = 'follow'
 
     # go through every item of the artist
     for favartist in artist.favartist:
@@ -71,7 +71,29 @@ def get_favartist_button_label(artist, session):
         if session.get('customer_id', None) == favartist.customer_id:
 
             # if its is, set the value in the dictionary of the key item_id to 'unlike'
-            button_favartist_label[favartist.artist_id] = 'unlike'
+            button_favartist_label[favartist.artist_id] = 'unfollow'
+
+    return button_favartist_label
+
+
+def get_favartist_button_label_home(artists, session):
+    # favorite logic for when the page is loaded
+    button_favartist_label = {}
+
+    # go through every item of the artist
+    for artist in artists:
+
+        # for each item, add a label with an item_id as the key of a dictionary and set it 'like'
+        button_favartist_label[artist.artist_id] = 'follow'
+
+        # go through every favartist of a specific item
+        for favartist in artist.favartist:
+
+            # check if the customer id of the favitem is the same of the customer that is logged in (if any)
+            if session.get('customer_id', None) == favartist.customer_id:
+
+                # if its is, set the value in the dictionary of the key item_id to 'unlike'
+                button_favartist_label[favartist.artist_id] = 'unfollow'
 
     return button_favartist_label
 
@@ -146,16 +168,16 @@ def get_cost_data(session):
 
         for cart_item in cart_items:
 
-            cost_data[cart_item.item.artist_id] = cost_data.get(
-                cart_item.item.artist_id, 0) + cart_item.item.price
+            cost_data[cart_item.item.artist_id] = round(cost_data.get(
+                cart_item.item.artist_id, 0) + cart_item.item.price, 2)
 
     # customer not logged in
     else:
         for item_id in session.get('cartItems', []):
             item = crud.get_item_by_id(item_id)
             if item:
-                cost_data[item.artist_id] = cost_data.get(
-                    item.artist_id, 0) + item.price
+                cost_data[item.artist_id] = round(cost_data.get(
+                    item.artist_id, 0) + item.price, 2)
 
     return cost_data
 

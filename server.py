@@ -25,8 +25,12 @@ def homepage():
     # query all artists to display on homepage
     artist = crud.get_all_artists()
 
+    # favartists button labels for when the page is loaded
+    button_favartist_label = helper.get_favartist_button_label_home(
+        artist, session)
+
     # render an html and pass artists and login_button as data
-    return render_template("index.html",  artists=artist, login_button=login_button)
+    return render_template("index.html",  artists=artist, login_button=login_button, button_favartist_label=button_favartist_label)
 
 
 # create home route for POST request
@@ -62,13 +66,14 @@ def gallery(alias):
     login_button = helper.switch_profile_login(session)
 
     # favorite item button label for when the page is loaded
-    button_like_label = helper.get_like_button_label(artist, session)
+    button_like_label = helper.get_favitem_button_label(artist, session)
 
     # cart item button label for when the page is loaded
     button_cart_label = helper.get_cart_button_label(artist, session)
 
     # favartist button label for when the page is loaded
-    button_favartist_label = helper.get_favartist_button_label(artist, session)
+    button_favartist_label = helper.get_favartist_button_label_gallery(
+        artist, session)
 
     # render the gallery.html and pass the selected artist, the login button and the favitem button label as data
     return render_template("gallery.html", artist=artist, login_button=login_button, button_like_label=button_like_label, button_cart_label=button_cart_label, button_favartist_label=button_favartist_label)
@@ -323,7 +328,7 @@ def cart():
 
     cart_data = helper.get_cart_data(session)
     cost_data = helper.get_cost_data(session)
-    total_cost = sum(cost_data.values())
+    total_cost = round(sum(cost_data.values()), 2)
 
     return render_template("cart.html", login_button=login_button, cart_data=cart_data, cost_data=cost_data, total_cost=total_cost)
 
@@ -371,12 +376,20 @@ def add_cart_item():
                 db.session.add(cart_item)
                 db.session.commit()
                 added_item = True
+        # Recalculate cost data since that needs to be updated too
+        cost_data = helper.get_cost_data(session)
+        total_cost = round(sum(cost_data.values()), 2)
+
     else:
         added_item = False
+        cost_data = {}
+        total_cost = 0
 
     return {
         # fetch response
-        'added_item': added_item
+        'added_item': added_item,
+        'cost_data': cost_data,
+        'total_cost': total_cost
     }
 
 
