@@ -14,7 +14,7 @@
 
 
                 <button type="button" id='{{"buttonArtistLike" + "_" + (artist.artist_id) | string}}'
-                    class='artistLikeButton btn btn-primary'>{{ button_favartist_label[artist.artist_id] }}</button>
+                    class='artistLikeButton'>{{ button_favartist_label[artist.artist_id] }}</button>
                 <br><br>
             </div>
             <!-- <img class="img-fluid w-50 d-none d-sm-block" src="img/showcase.svg" alt="" /> -->
@@ -23,16 +23,16 @@
 </section>
 
 
+<BR><BR>
+
+
 
 {% for item in artist.item %}
-
 {% if item.in_stock %}
 <div class="container">
-    <div class="row row-cols-1 row-cols-md-2 g-4">
-
-        <div class="boxesWrapper">
+    <div class="card mb-3 cartData" style="max-width: 540px;">
+        <div class="card-body">
             <section class="p-5">
-
                 <div class="col-md">
                     <div class="card">
                         <img src="{{ item.picture_path }}" alt="">
@@ -46,19 +46,14 @@
                         </div>
                         <!-- <div> -->
                         <!-- add images of each item for the specific artist -->
-
                         <button type="button" id='{{ "buttonLike" + "_" + (item.item_id) | string }}'
                             class='itemLikeButton'>{{ button_like_label[item.item_id] }}</button>
                         <button type="button" id='{{ "buttonCart" + "_" + (item.item_id) | string }}'
                             class="itemCartButton">{{ button_cart_label[item.item_id] }}</button>
-
                     </div>
                 </div>
-
             </section>
         </div>
-
-
     </div>
 </div>
 
