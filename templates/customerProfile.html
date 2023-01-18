@@ -16,102 +16,93 @@
 
 <br><br>
 
-<div class="container1">
-    <div class="card mb-3" style="max-width: 540px;">
-        <div class="cartData">
-            <h3>customer details:</h3>
-            <br>
-            <section>
-                <div class="row g-0">
-                    <!-- <div class="col-md-4">
-                            <img src="" class="img-fluid rounded-start" alt="">
-                        </div> -->
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <!-- add customer name and details -->
-                            <p>First name: {{ customer.fname }}</p>
-                            <p>Last name: {{ customer.lname }}</p>
-                            <p>Email: {{ customer.email }}</p>
-                            <p>Phone: {{ customer.phone }}</p>
-                            <br>
-                        </div>
+
+<div class="container">
+    <div class="card mb-3 cartData" style="max-width: 540px;">
+        <div class="cardData">
+            <h3>Account Details:</h3>
+            <section class="p-5">
+                <div class="col-md">
+                    <!-- <img src="/static/data/img/FullSizeRender.jpg" class="card-img-top" alt="..."> -->
+                    <div class="card-body">
+                        <p>First Name: {{ customer.fname }}</p>
+                        <p>Last Name: {{ customer.lname }}</p>
+                        <p>Email: {{ customer.email }}</p>
+                        <p>Phone: {{ customer.phone }}</p>
+                        <br>
                     </div>
-                </div>
             </section>
         </div>
     </div>
 </div>
 
-<div class="container2">
-    <div class="card mb-3" style="max-width: 540px;">
-        <div class="cartData">
-            <h3>order history:</h3>
+<div class="container">
+    <div class="card mb-3 cartData" style="max-width: 540px;">
+        <div class="cardData">
+            <h3>Order History:</h3>
             {% for order in customer.order %}
-            <br>
-            <section>
-                <div class="row g-0">
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <!-- add customer name and details -->
-                            <h5>customer order id:{{ order.order_id }} </h5>
-                            <p> order date: {{ order.date }}</p>
-                            <p> order amount: {{ order.total }}</p>
-                            <p> order status: {{ order.status }}</p>
-                            <br>
-                        </div>
+            <section class="p-5">
+                <div class="col-md">
+                    <!-- <img src="/static/data/img/FullSizeRender.jpg" class="card-img-top" alt="..."> -->
+                    <div class="card-body">
+                        <p>Order Number: # {{ order.order_id }} </p>
+                        <p> Date Ordered: {{ order.date }}</p>
+                        <p> Total: $ {{ order.total }}</p>
+                        <p> Status: {{ order.status }}</p>
+                        <br>
                     </div>
-                </div>
             </section>
+            <hr>
             {% endfor %}
         </div>
     </div>
 </div>
 
-<div class="container3">
-    <div class="card mb-3" style="max-width: 540px;">
-        <div class="cartData">
-            <h3>customer favorite items: </h3>
-            {% for favitem in customer.favitem %}
-            <br>
-            <section>
-                <div class="row g-0">
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <!-- add customer name and details -->
-                            <p>customer favorite items: {{ favitem }} </p>
-                            <br>
-
-                        </div>
-                    </div>
-                </div>
-            </section>
-            {% endfor %}
-        </div>
-
-    </div>
-</div>
-
-<div class="container3">
-    <div class="card mb-3" style="max-width: 540px;">
-        <div class="cartData">
-            <h3>customer favorite artists: </h3>
+<div class="container">
+    <div class="card mb-3 cartData" style="max-width: 540px;">
+        <div class="cardData">
+            <h3>Favorite Artists:</h3>
             {% for favartist in customer.favartist %}
-            <br>
-            <section>
-                <div class="row g-0">
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <!-- add customer name and details -->
-                            <p>customer favorite artist: {{ favartist }} </p>
-                            <br>
-                        </div>
+            <section class="p-5">
+                <div class="col-md">
+                    <!-- <img src="/static/data/img/FullSizeRender.jpg" class="card-img-top" alt="..."> -->
+                    <div class="card-body">
+                        <p>Artist: {{ favartist.artist.fname }} {{ favartist.artist.lname }}</p>
+                        <a href="{{ url_for('gallery', alias = favartist.artist.alias) }}"><img
+                                src="{{ favartist.artist.profile_pic }}" class="card-img-top"></a>
+                        <br>
                     </div>
-                </div>
             </section>
+            <hr>
             {% endfor %}
         </div>
     </div>
 </div>
+
+<div class="container">
+    <div class="card mb-3 cartData" style="max-width: 540px;">
+        <div class="cardData">
+            <h3>Liked Items:</h3>
+            {% for favitem in customer.favitem %}
+            <section class="p-5">
+                <div class="col-md">
+                    <!-- <img src="/static/data/img/FullSizeRender.jpg" class="card-img-top" alt="..."> -->
+                    <div class="card-body">
+                        <p>Item ID: {{ favitem.item.item_id }}</p>
+                        <p>Artist: {{ favitem.item.artist.fname }} {{ favitem.item.artist.lname }}</p>
+                        <img src="{{ favitem.item.picture_path }}" class="card-img-top">
+                        <br>
+                    </div>
+            </section>
+            <hr>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+
+
+
 
 <!-- logout and delete account buttons -->
 <form action="/" method="POST">
