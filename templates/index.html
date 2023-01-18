@@ -16,47 +16,21 @@
 <!-- check all artists -->
 <div class="container">
     <div class="row row-cols-1 row-cols-md-2 g-4">
-
         {% for artist in artists %}
-
         <div class="boxesWrapper">
             <section class="p-5">
+                <div class="card">
+                    <h5 class="card-title"> {{ artist.alias }}</h5>
+                    <h6> {{ artist.fname + ' ' + artist.lname }} artist</h6>
+                    <a href="{{ url_for('gallery', alias = artist.alias) }}"><img src="{{ artist.profile_pic }}"
+                            class="card-img-top"></a>
 
-                <div class="col-md">
-                    <div class="card">
-                        <h5 class="card-title"> {{ artist.alias }}</h5>
-                        <h6> {{ artist.fname + ' ' + artist.lname }} artist</h6>
-
-                        <a href="{{ url_for('gallery', alias = artist.alias) }}"><img src="{{ artist.profile_pic }}"
-                                class="card-img-top"></a>
-                        <!-- <img src="/static/data/img/FullSizeRender.jpg" class="card-img-top" alt="..."> -->
-                        <div class="card-body">
-
-                            <!-- <p class="card-text">This is a longer card with supporting text below as a natural
-                                lead-in1
-                                to
-                                additional content. This content is a little bit longer.</p> -->
-                        </div>
-                        <!-- <a href="#" class="btn btn-primary">Read More</a> -->
-                        <div class="artist">
-                            <!-- add button for each artist -->
-                            <!-- <button type='button' class="btn btn-light"> -->
-                            <!-- add customize url for each artist using alias and pass information to inner html -->
-                            <!-- <a
-                                    href="{{ url_for('gallery', alias = artist.alias) }}">{{ artist.fname + ' ' + artist.lname }}</a>
-                            </button> -->
-
-                        </div>
-                        <!-- TODO: create dynamic follow button -->
-                        <!-- <a href="#" class="btn btn-primary">follow</a> -->
-                        <button type="button" id='{{"buttonArtistLike" + "_" + (artist.artist_id) | string}}'
-                            class='artistLikeButton btn btn-light'>{{ button_favartist_label[artist.artist_id] }}</button>
-                    </div>
+                    <button type="button" id='{{"buttonArtistLike" + "_" + (artist.artist_id) | string}}'
+                        class='artistLikeButton btn btn-light'>{{
+                        button_favartist_label[artist.artist_id] }}</button>
                 </div>
-
             </section>
         </div>
-
         {% endfor %}
     </div>
 </div>

@@ -66,3 +66,18 @@ ul {
 .col-md-6 {
   text-align: center;
 }
+
+.card-img-top {
+  width: 100%;
+  height: 15vw;
+  object-fit: cover;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+input[type="submit"]:hover {
+  color: rgb(0, 110, 255);
+}

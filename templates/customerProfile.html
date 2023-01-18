@@ -8,7 +8,6 @@
 <section class="bg-light text-dark p-5 p-lg-0 pt-lg-5 text-center text-sm-start">
     <div class="container">
         <div class="d-sm-flex align-items-center justify-content-between">
-
             <h1> welcome customer: {{ customer.fname + ' ' + customer.lname }}</h1>
             <!-- <img class="img-fluid w-50 d-none d-sm-block" src="img/showcase.svg" alt="" /> -->
         </div>
@@ -21,30 +20,25 @@
     <div class="card mb-3" style="max-width: 540px;">
         <div class="cartData">
             <h3>customer details:</h3>
-            <ul>
-                <br>
-                <section>
-                    <div class="row g-0">
-                        <!-- <div class="col-md-4">
+            <br>
+            <section>
+                <div class="row g-0">
+                    <!-- <div class="col-md-4">
                             <img src="" class="img-fluid rounded-start" alt="">
                         </div> -->
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <!-- add customer name and details -->
-                                <p>First name: {{ customer.fname }}</p>
-                                <p>Last name: {{ customer.lname }}</p>
-                                <p>Email: {{ customer.email }}</p>
-                                <p>Phone: {{ customer.phone }}</p>
-                                <br>
-
-                            </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <!-- add customer name and details -->
+                            <p>First name: {{ customer.fname }}</p>
+                            <p>Last name: {{ customer.lname }}</p>
+                            <p>Email: {{ customer.email }}</p>
+                            <p>Phone: {{ customer.phone }}</p>
+                            <br>
                         </div>
                     </div>
-                </section>
+                </div>
+            </section>
         </div>
-
-        </ul>
-
     </div>
 </div>
 
@@ -53,61 +47,44 @@
         <div class="cartData">
             <h3>order history:</h3>
             {% for order in customer.order %}
-            <ul>
-                <br>
-                <section>
-                    <div class="row g-0">
-
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <!-- add customer name and details -->
-                                <h5>customer order id:{{ order.order_id }} </h5>
-                                <p> order date: {{ order.date }}</p>
-                                <p> order amount: {{ order.total }}</p>
-                                <p> order status: {{ order.status }}</p>
-
-                                <br>
-
-                            </div>
+            <br>
+            <section>
+                <div class="row g-0">
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <!-- add customer name and details -->
+                            <h5>customer order id:{{ order.order_id }} </h5>
+                            <p> order date: {{ order.date }}</p>
+                            <p> order amount: {{ order.total }}</p>
+                            <p> order status: {{ order.status }}</p>
+                            <br>
                         </div>
                     </div>
-                </section>
-
-                <!-- </div> -->
-
-            </ul>
-
+                </div>
+            </section>
             {% endfor %}
-
         </div>
     </div>
 </div>
-
 
 <div class="container3">
     <div class="card mb-3" style="max-width: 540px;">
         <div class="cartData">
             <h3>customer favorite items: </h3>
             {% for favitem in customer.favitem %}
-            <ul>
-                <br>
-                <section>
-                    <div class="row g-0">
+            <br>
+            <section>
+                <div class="row g-0">
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <!-- add customer name and details -->
+                            <p>customer favorite items: {{ favitem }} </p>
+                            <br>
 
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <!-- add customer name and details -->
-                                <p>customer favorite items: {{ favitem }} </p>
-                                <br>
-
-                            </div>
                         </div>
                     </div>
-                </section>
-                <!-- </div> -->
-
-            </ul>
-
+                </div>
+            </section>
             {% endfor %}
         </div>
 
@@ -119,52 +96,27 @@
         <div class="cartData">
             <h3>customer favorite artists: </h3>
             {% for favartist in customer.favartist %}
-            <ul>
-                <br>
-                <section>
-                    <div class="row g-0">
-
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <!-- add customer name and details -->
-                                <p>customer favorite artist: {{ favartist }} </p>
-                                <br>
-
-                            </div>
+            <br>
+            <section>
+                <div class="row g-0">
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <!-- add customer name and details -->
+                            <p>customer favorite artist: {{ favartist }} </p>
+                            <br>
                         </div>
                     </div>
-                </section>
-            </ul>
+                </div>
+            </section>
+            {% endfor %}
         </div>
-
     </div>
-
-    {% endfor %}
 </div>
-</div>
-
-</div>
-
-
-
-
-
-
-<!-- add home button -->
-<button type='button'>
-    <a href="/ ">home</a>
-</button>
-
-
-<!-- add cart button -->
-<button type='button'>
-    <a href='/cart'>cart</a>
-</button>
 
 <!-- logout and delete account buttons -->
 <form action="/" method="POST">
-    <input type="submit" value="logout" name="logout" />
-    <input type="submit" value="delete account" name="delete_account" />
+    <input type="submit" class="btn btn-light" value="logout" name="logout" />
+    <input type="submit" class="btn btn-light" value="delete account" name="delete_account" />
 </form>
 
 

@@ -12,210 +12,168 @@
         </div>
     </div>
 </section>
+
 <br><br>
-<div class="container">
+
+<div class="container1">
     <div class="card mb-3" style="max-width: 540px;">
         <div class="cartData">
             <h3>artist details:</h3>
-            <ul>
-                <br>
-                <section>
-                    <div class="row g-0">
-                        <div class="col-md-4">
-                            <img src="" class="img-fluid rounded-start" alt="">
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <p>artist_id: {{ artist.artist_id }}</p>
-                                <p>fname: {{ artist.fname }}</p>
-                                <p>lname: {{ artist.lname }}</p>
-                                <p>email: {{ artist.email }}</p>
-                                <p>country: {{ artist.country }}</p>
-                                <p>alias: {{ artist.alias }}</p>
-                                <br>
-                            </div>
+            <br>
+            <section>
+                <div class="row g-0">
+                    <div class="card-body">
+                        <p>artist_id: {{ artist.artist_id }}</p>
+                        <p>fname: {{ artist.fname }}</p>
+                        <p>lname: {{ artist.lname }}</p>
+                        <p>email: {{ artist.email }}</p>
+                        <p>country: {{ artist.country }}</p>
+                        <p>alias: {{ artist.alias }}</p>
+                        <br>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+<br><br>
+
+<div class="container2">
+    <div class="card mb-3" style="max-width: 540px;">
+        <div class="cartData">
+            <h3>orders for artist: </h3>
+            {% for order in artist.order %}
+            <br>
+            <section>
+                <div class="row g-0">
+                    <div class="card-body">
+                        <p> order_id: {{ order.order_id }}</p>
+                        <p> date: {{ order.date }}</p>
+                        <p> total: $ {{ order.total}}</p>
+                        <p> status: {{ order.status}}</p>
+                        <p> fname: {{ order.fname }}</p>
+                        <p> lname: {{ order.lname }}</p>
+                        <p> city: {{ order.city}}</p>
+                        <p> state: {{ order.state }}</p>
+                        <p> zipcode: {{ order.zipcode }}</p>
+                        <p> country: {{ order.country}}</p>
+                        <p> email: {{ order.email }}</p>
+                        <p> phone: {{ order.phone}}</p>
+                        <br>
+                        <h3>order status:</h3>
+                        <br>
+                        <select class="statusOptions" id="{{ 'status' + '_' + (order.order_id) | string }}"
+                            placeholder="status">
+                            <option name='order received' value='order received' {%
+                                if
+                                order.status=='order received'
+                                %}selected{%
+                                endif
+                                %}>order
+                                received</option>
+                            <option name='preparing' value='preparing' {%
+                                if
+                                order.status=='preparing'
+                                %}selected{%
+                                endif
+                                %}>
+                                preparing
+                            </option>
+                            <option name='on the way' value='on the way' {%
+                                if
+                                order.status=='on the way'
+                                %}selected{%
+                                endif
+                                %}>on
+                                the
+                                way</option>
+                            <option name='sent' value='sent' {%
+                                if
+                                order.status=='sent'
+                                %}selected{%
+                                endif
+                                %}>sent</option>
+                            <option name='delayed' value='delayed' {%
+                                if
+                                order.status=='delayed'
+                                %}selected{%
+                                endif
+                                %}>delayed
+                            </option>
+                            <option name='delivered' value='delivered' {%
+                                if
+                                order.status=='delivered'
+                                %}selected{%
+                                endif
+                                %}>
+                                delivered
+                            </option>
+                        </select>
+                        <button class="statusButton btn btn-light"
+                            id="{{'statusButton' + '_' + (order.order_id) | string}}" type="button">update
+                            status</button>
+                    </div>
+                </div>
+            </section>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<!-- add artist full name and details-->
+
+<h3>previous orders - history:</h3>
+<h3>my items showing in gallery :</h3>
+<br>
+<br>
+
+<div class="container3">
+    <div class="card mb-3" style="max-width: 540px;">
+        <div class="cartData">
+            {% for item in artist.item %}
+            <br>
+            <section>
+                <div class="row g-0">
+                    <div class="col-md-6">
+                        <img src="{{ item.picture_path }}" class="img-fluid rounded-start img-align" alt="">
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card-body">
+                            <h4>item id: {{item.item_id}}</h4>
+                            <!-- <h4>item description: {{item.description}}</h4> -->
+                            <h4>price: {{item.price}}</h4>
+                            <!-- <img src="{{ item.picture_path }}" alt=""> -->
+
+                            {% if not item.order_id %}
+                            <button class="removeItemButton btn btn-light"
+                                id="{{'removeItemButton' + '_' + (item.item_id) | string}}" type="button">remove
+                                item</button>
+                            {% else %}
+                            <h4>order: {{item.order_id}}</h4>
+                            {% endif %}
                         </div>
                     </div>
-                </section>
-        </div>
-
-        </ul>
-    </div>
-
-
-
-    <br><br>
-
-    <div class="container2">
-        <div class="card mb-3" style="max-width: 540px;">
-            <div class="cartData">
-                <h3>orders for artist: </h3>
-                <ul>
-                    {% for order in artist.order %}
-                    <br>
-                    <section>
-                        <div class="row g-0">
-                            <div class="col-md-4">
-                                <img src="" class="img-fluid rounded-start" alt="">
-                            </div>
-                            <div class="col-md-8">
-                                <div class="card-body">
-                                    <ul>
-                                        <li>
-
-                                            <p> order_id: {{ order.order_id }}</p>
-                                            <p> date: {{ order.date }}</p>
-                                            <p> total: $ {{ order.total}}</p>
-                                            <p> status: {{ order.status}}</p>
-                                            <p> fname: {{ order.fname }}</p>
-                                            <p> lname: {{ order.lname }}</p>
-                                            <p> city: {{ order.city}}</p>
-                                            <p> state: {{ order.state }}</p>
-                                            <p> zipcode: {{ order.zipcode }}</p>
-                                            <p> country: {{ order.country}}</p>
-                                            <p> email: {{ order.email }}</p>
-                                            <p> phone: {{ order.phone}}</p>
-                                        </li>
-
-                                        <br>
-                                        <h3>order status:</h3>
-
-                                        <br>
-
-                                        <select class="statusOptions"
-                                            id="{{ 'status' + '_' + (order.order_id) | string }}" placeholder="status">
-                                            <option name='order received' value='order received'
-                                                {% if order.status == 'order received' %}selected{% endif %}>order
-                                                received</option>
-                                            <option name='preparing' value='preparing'
-                                                {% if order.status == 'preparing' %}selected{% endif %}>
-                                                preparing
-                                            </option>
-                                            <option name='on the way' value='on the way'
-                                                {% if order.status == 'on the way' %}selected{% endif %}>on
-                                                the
-                                                way</option>
-                                            <option name='sent' value='sent'
-                                                {% if order.status == 'sent' %}selected{% endif %}>sent</option>
-                                            <option name='delayed' value='delayed'
-                                                {% if order.status == 'delayed' %}selected{% endif %}>delayed
-                                            </option>
-                                            <option name='delivered' value='delivered'
-                                                {% if order.status == 'delivered' %}selected{% endif %}>
-                                                delivered
-                                            </option>
-                                        </select>
-                                        <button class="statusButton btn btn-light"
-                                            id="{{'statusButton' + '_' + (order.order_id) | string}}"
-                                            type="button">update
-                                            status</button>
-
-                                        </li>
-
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-            </div>
-            {% endfor %}
-            </ul>
-        </div>
-
-
-
-        <!-- add artist full name and details-->
-
-
-
-
-
-
-
-
-        <h3>previous orders - history:</h3>
-        <h3>my items showing in gallery :</h3>
-
-
-
-        <br><br>
-
-        <div class="container3">
-            <div class="card mb-3" style="max-width: 540px;">
-                <div class="cartData">
-                    {% for item in artist.item %}
-                    <ul>
-
-                        <br>
-
-                        <section>
-                            <div class="row g-0">
-                                <div class="col-md-6">
-                                    <img src="{{ item.picture_path }}" class="img-fluid rounded-start img-align" alt="">
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="card-body">
-
-                                        <li>
-                                            <h4>item id: {{item.item_id}}</h4>
-                                            <!-- <h4>item description: {{item.description}}</h4> -->
-                                            <h4>price: {{item.price}}</h4>
-                                            <!-- <img src="{{ item.picture_path }}" alt=""> -->
-
-                                            {% if not item.order_id %}
-                                            <button class="removeItemButton btn btn-light"
-                                                id="{{'removeItemButton' + '_' + (item.item_id) | string}}"
-                                                type="button">remove
-                                                item</button>
-                                            {% endif %}
-                                        </li>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-
-
-                        {% endfor %}
                 </div>
-                </ul>
-            </div>
-
-        </div>
-
-        <!-- <div class="card">
-        <div class="card-header">
-            Order Details
-        </div>
-        <div class="card-body">
-
-
-
-
+            </section>
+            {% endfor %}
         </div>
     </div>
-</div> -->
+</div>
 
+<!-- summary of items that tie back to the artist -->
 
+<!-- new item button -->
+<button type="'button" class="btn btn-light">
+    <a href="/add-item">add new</a>
+</button> <br> <br>
 
-        <!-- summary of items that tie back to the artist -->
+<!-- logout button -->
+<form action="/" method="POST">
+    <input type="submit" class="btn btn-light" value="logout" name="logout" />
+</form>
 
+<!-- Ajax file -->
+<script src="/static/js/ajax.js"></script>
 
-        <!-- new item button -->
-        <button type="'button" class="btn btn-light">
-            <a href="/add-item">add new</a>
-        </button> <br> <br>
-
-        <!-- home button -->
-        <button type='button' class="btn btn-light">
-            <a href="/ ">home</a>
-        </button> <br> <br>
-
-        <!-- Ajax file -->
-        <script src="/static/js/ajax.js"></script>
-
-        <!-- logout button -->
-        <form action="/" method="POST">
-            <input type="submit" value="logout" name="logout" />
-        </form>
-
-
-        {% endblock %}
+{% endblock %}

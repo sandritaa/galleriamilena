@@ -137,6 +137,10 @@ def login():
         # get the artist route since it is a dynamic route depending on the logged in artist
         artist_route = helper.get_artist_route(artist)
 
+        # empty cart if an artist logs in
+        session['cartItems'] = []
+        session.modified = True
+
         # go to the artist route
         return redirect(artist_route)
 
