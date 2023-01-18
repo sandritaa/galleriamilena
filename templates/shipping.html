@@ -68,7 +68,8 @@
                                         <label for="phone">Phone</label>
                                         <input type="text" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                                             required minlength='1' maxlength='20'> <br> <br>
-                                        <input type="submit" href='/payment' value="proceed to checkout">
+                                        <input type="submit" href='/payment' class="btn btn-light"
+                                            value="proceed to checkout">
 
                                     </form>
 
@@ -88,6 +89,6 @@
     </div>
 
     <!-- procees to checkout -->
-    <button type="button"><a href="/cart">back</a></button>
+    <button type="button" class="btn btn-light"><a href="/cart">back</a></button>
     <br><br>
     {% endblock %}

@@ -16,10 +16,6 @@
 
 <br><br>
 
-
-
-
-
 <div class="container">
     <div class="card mb-3 cartData" style="max-width: 540px;">
         {% for artist_id in cart_data %}
@@ -42,7 +38,7 @@
                                 <br><br>
                                 <br><br>
                                 <li>
-                                    <button type="button" class="editCartButton"
+                                    <button type="button" class="editCartButton btn btn-light"
                                         id="{{'buttonRemoveItem' + '_' + (item.item_id) | string}}">remove
                                         item
                                     </button>
@@ -75,11 +71,6 @@
 </div>
 
 
-
-
-
-
-
 <!-- add login button -->
 <button type='button' class="btn btn-light">
     <a href="{{ login_button['route'] }}">{{ login_button['label'] }}</a>
@@ -89,7 +80,6 @@
 <button type='button' class="btn btn-light"> <a href="/">home</a>
 
 </button>
-
 
 <!-- Ajax file -->
 <script src="/static/js/ajax.js"></script>

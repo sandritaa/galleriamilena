@@ -7,15 +7,12 @@
 <section class="bg-light text-dark p-5 p-lg-0 pt-lg-5 text-center text-sm-start">
     <div class="container">
         <div class="d-sm-flex align-items-center justify-content-between">
-
             <h2> welcome artist: {{ artist.fname + ' ' + artist.lname }}</h2>
             <!-- <img class="img-fluid w-50 d-none d-sm-block" src="img/showcase.svg" alt="" /> -->
         </div>
     </div>
 </section>
-
 <br><br>
-
 <div class="container">
     <div class="card mb-3" style="max-width: 540px;">
         <div class="cartData">
@@ -29,8 +26,6 @@
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
-
-
                                 <p>artist_id: {{ artist.artist_id }}</p>
                                 <p>fname: {{ artist.fname }}</p>
                                 <p>lname: {{ artist.lname }}</p>
@@ -38,7 +33,6 @@
                                 <p>country: {{ artist.country }}</p>
                                 <p>alias: {{ artist.alias }}</p>
                                 <br>
-
                             </div>
                         </div>
                     </div>
@@ -111,7 +105,7 @@
                                                 delivered
                                             </option>
                                         </select>
-                                        <button class="statusButton"
+                                        <button class="statusButton btn btn-light"
                                             id="{{'statusButton' + '_' + (order.order_id) | string}}"
                                             type="button">update
                                             status</button>
@@ -168,7 +162,7 @@
                                             <!-- <img src="{{ item.picture_path }}" alt=""> -->
 
                                             {% if not item.order_id %}
-                                            <button class="removeItemButton"
+                                            <button class="removeItemButton btn btn-light"
                                                 id="{{'removeItemButton' + '_' + (item.item_id) | string}}"
                                                 type="button">remove
                                                 item</button>
@@ -206,12 +200,12 @@
 
 
         <!-- new item button -->
-        <button type="'button">
+        <button type="'button" class="btn btn-light">
             <a href="/add-item">add new</a>
         </button> <br> <br>
 
         <!-- home button -->
-        <button type='button'>
+        <button type='button' class="btn btn-light">
             <a href="/ ">home</a>
         </button> <br> <br>
 
@@ -222,5 +216,6 @@
         <form action="/" method="POST">
             <input type="submit" value="logout" name="logout" />
         </form>
+
 
         {% endblock %}

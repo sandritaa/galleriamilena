@@ -54,15 +54,9 @@
                                             minlength='8' maxlength='12'><small>
                                             Format: 8 to 12
                                             characters</small> <br>
-
-
-
-
                                         <!-- add hidden field since it will be populated when an image is added so that I can send the url as part of the form  -->
                                         <input type="hidden" name="picture_path" id="picture_path_id" value=""> <br>
-
-                                        <input type="submit">
-
+                                        <input type="submit" class="btn btn-light">
                                 </form>
 
                                 {% for message in get_flashed_messages() %}
@@ -84,7 +78,7 @@
     {% endfor %}
 
     <!-- add home button -->
-    <button type='button'>
+    <button type='button' class="btn btn-light">
         <a href="/ ">home</a>
     </button>
 
