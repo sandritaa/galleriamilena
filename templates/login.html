@@ -16,29 +16,32 @@
 </section>
 
 
-
+<br>
 <!-- login form -->
-<div class="login">
-    <div class="modal-body">
-        <p class="lead">Please login</p>
-        <form action="/login">
-            <div class="mb-3">
-                <label for="email" class="col-form-label">
-                    Email
-                </label>
-                <input type="email" class="form-control" id="emaillog" name="email" required />
+<div class="container">
+    <div class="card mb-3 cartData" style="max-width: 540px;">
+        <div class="login">
+            <div class="modal-body">
+                <p class="lead">Please login</p>
+                <form action="/login">
+                    <div class="mb-3">
+                        <label for="email" class="col-form-label">
+                            Email
+                        </label>
+                        <input type="email" class="form-control" id="emaillog" name="email" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="col-form-label">Password</label>
+                        <input type="password" class="form-control" id="passwordlog" name="password" required />
+                    </div>
+                    <input type='submit' class="btn btn-light">
+                </form>
+                <br>
+                <!-- add create account button-->
+                <button type='button' class="btn btn-light">
+                    <a href='/profile'>not a member yet? create an account!</a>
             </div>
-            <div class="mb-3">
-                <label for="password" class="col-form-label">Password</label>
-                <input type="password" class="form-control" id="passwordlog" name="password" required />
-            </div>
-            <input type='submit' class="btn btn-light">
-        </form>
-        <br>
-        <!-- add create account button-->
-        <button type='button' class="btn btn-light">
-            <a href='/profile'>not a member yet? create an account!</a>
+        </div>
     </div>
 </div>
-
 {% endblock %}

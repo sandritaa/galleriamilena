@@ -33,13 +33,13 @@
                             <ul>
                                 {% for item in order_data[artist_id] %}
 
-                                <li> item id: {{ item.item_id }}
+                                <li> Item ID: {{ item.item_id }}
                                 </li>
-                                <li> item price: {{ item.price}}
+                                <li> Price: {{ item.price}}
                                 </li>
-                                <li> item date: {{ item.date }}
+                                <li> Order Date: {{ item.date }}
                                 </li>
-                                <li> item color: {{ item.color }}
+                                <li> Color: {{ item.color }}
                                 </li>
                                 <hr>
 
@@ -50,11 +50,34 @@
                     </div>
 
                 </div>
-                <p>Order subtotal is: $ {{ cost_data[artist_id] }}</p>
-                <p>Tax: $ {{ tax_data[artist_id] }}</p>
-                <p>Total of order is: $ {{ total_cost }}</p>
+
+
+                <div class="cartSummary" style="max-width: 540px;">
+                    <div class="card-header">
+                        Order Summary
+                    </div>
+
+                    <div class="card-body">
+                        <p>Order subtotal is: $ {{ cost_data[artist_id] }}</p>
+                        <p>Tax: $ {{ tax_data[artist_id] }}</p>
+                        <p>Total of order is: $ {{ total_cost }}</p>
+
+                        <!-- proceed to checkout -->
+                        <!-- <button type='button' class="btn btn-light"> <a href='/shipping'>proceed to checkout</a> </button>
+                        <br><br> -->
+
+                    </div>
+                </div>
             </section>
             {% endfor %}
 
-            <button type="button" class="btn btn-light><a href="/orderComplete">place order</a> </button> </div> </div>
-                </div> </div> </div> {% endblock %}
+            <button type="button" class="btn btn-light"><a href="/orderComplete">place order</a> </button> <button
+                type="button" class="btn btn-light"><a href="/cart">back</a></button>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+
+
+{% endblock %}
