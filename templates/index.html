@@ -20,8 +20,8 @@
         <div class="boxesWrapper">
             <section class="p-5">
                 <div class="card">
-                    <h5 class="card-title"> {{ artist.alias }}</h5>
-                    <h6> {{ artist.fname + ' ' + artist.lname }} artist</h6>
+
+                    <h5> {{ artist.fname + ' ' + artist.lname }} </h5>
                     <a href="{{ url_for('gallery', alias = artist.alias) }}"><img src="{{ artist.profile_pic }}"
                             class="card-img-top"></a>
 

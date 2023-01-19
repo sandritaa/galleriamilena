@@ -147,22 +147,24 @@
             </section>
             <hr>
             {% endfor %}
+            <!-- new item button -->
+            <button type="'button" class="btn btn-light">
+                <a href="/add-item">add new</a>
+            </button> <br> <br>
+
+            <!-- logout button -->
+            <form action="/" method="POST">
+                <input type="submit" class="btn btn-light" value="logout" name="logout" />
+            </form>
         </div>
     </div>
 </div>
 
 
+
 <!-- summary of items that tie back to the artist -->
 
-<!-- new item button -->
-<button type="'button" class="btn btn-light">
-    <a href="/add-item">add new</a>
-</button> <br> <br>
 
-<!-- logout button -->
-<form action="/" method="POST">
-    <input type="submit" class="btn btn-light" value="logout" name="logout" />
-</form>
 
 <!-- Ajax file -->
 <script src="/static/js/ajax.js"></script>

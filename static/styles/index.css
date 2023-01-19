@@ -44,9 +44,22 @@ body {
 }
 
 
-#email,
-#password {
+#emaillog,
+#passwordlog {
   width: 30%
+}
+
+#fname,
+#lname,
+#address1,
+#city,
+#state,
+#zipcode,
+#country,
+#email,
+#confirmemail,
+#phone {
+  width: 170px;
 }
 
 .navbar a:active,

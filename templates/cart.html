@@ -20,7 +20,8 @@
     <div class="card mb-3 cartData" style="max-width: 540px;">
         {% for artist_id in cart_data %}
         <div class="card-body">
-            <h2>artist {{ artist_id }}</h2>
+            <hr>
+            <p> Artist ID: {{ artist_id }}</p>
             <br>
             {% for item in cart_data[artist_id] %}
             <section>
@@ -34,7 +35,7 @@
                                 <li> Artist: {{ item.artist.fname + ' ' + item.artist.lname }}</li>
                                 <li> Price: $ {{ item.price }}</li>
                                 <li> Color: {{ item.color }}</li>
-                                <li> Style Number: {{ item.item_id}}</li>
+                                <li> Item ID: {{ item.item_id}}</li>
                                 <br><br>
                                 <br><br>
                                 <li>

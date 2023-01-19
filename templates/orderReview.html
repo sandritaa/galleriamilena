@@ -14,45 +14,47 @@
     </div>
 </section>
 
+<br>
 
-<div class="card">
-    <div class="card-header">
-        <h1>order summary</h1>
-    </div>
-    <div class="orderReview">
+<div class="container">
+    <div class="card mb-3 cartData" style="max-width: 540px;">
+        <div class="card-header">
+            <h1>order summary</h1>
+        </div>
         {% for artist_id in order_data %}
-        <ul>
-            <div class="card-body">
-                <!-- <h2>artist {{ artist_id }}</h2> -->
-                {% for item in order_data[artist_id] %}
-
-                <li> item id: {{ item.item_id }}
-                </li>
-                <li> item price: {{ item.price}}
-                </li>
-                <li> item date: {{ item.date }}
-                </li>
-                <li> item color: {{ item.color }}
-                </li>
-
-                {% endfor %}
-        </ul>
-        <p>Order subtotal is: $ {{ cost_data[artist_id] }}</p>
-        <p>Tax: $ {{ tax_data[artist_id] }}</p>
-        {% endfor %}
-        <p>Total of order is: $ {{ total_cost }}</p>
-    </div>
-
-</div>
-<button type="button"><a href="/orderComplete">place order</a> </button>
-</div>
+        <div class="card-body">
 
 
+            <section>
+                <div class="row g-0">
 
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <ul>
+                                {% for item in order_data[artist_id] %}
 
-</div>
+                                <li> item id: {{ item.item_id }}
+                                </li>
+                                <li> item price: {{ item.price}}
+                                </li>
+                                <li> item date: {{ item.date }}
+                                </li>
+                                <li> item color: {{ item.color }}
+                                </li>
+                                <hr>
 
-<!-- <button type="button"><a href="/orderComplete">place order</a> </button> -->
+                                {% endfor %}
+                            </ul>
 
+                        </div>
+                    </div>
 
-{% endblock %}
+                </div>
+                <p>Order subtotal is: $ {{ cost_data[artist_id] }}</p>
+                <p>Tax: $ {{ tax_data[artist_id] }}</p>
+                <p>Total of order is: $ {{ total_cost }}</p>
+            </section>
+            {% endfor %}
+
+            <button type="button" class="btn btn-light><a href="/orderComplete">place order</a> </button> </div> </div>
+                </div> </div> </div> {% endblock %}
