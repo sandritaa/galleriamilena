@@ -27,7 +27,7 @@ def create_customer_profile(fname, lname, email, phone, password):
 
 
 # delete customer
-def delete_customer(customer_id):
+def delete_customer_profile(customer_id):
     Customer.query.filter(Customer.customer_id == customer_id).delete()
 
 
@@ -69,8 +69,13 @@ def create_favartist(customer_id, artist_id):
 
 # delete favorite artist
 def delete_favartist(customer_id, artist_id):
-    return FavoriteArtist.query.filter((FavoriteArtist.customer_id ==
-                                        customer_id) & (FavoriteArtist.artist_id == artist_id)).delete()
+    FavoriteArtist.query.filter((FavoriteArtist.customer_id ==
+                                 customer_id) & (FavoriteArtist.artist_id == artist_id)).delete()
+
+
+def delete_favartist_by_customer_id(customer_id):
+    FavoriteArtist.query.filter(
+        FavoriteArtist.customer_id == customer_id).delete()
 
 
 # ITEM
@@ -111,6 +116,10 @@ def deleteFavItemById(favitem_id):
     FavoriteItem.query.filter((FavoriteItem.favitem_id == favitem_id)).delete()
 
 
+def delete_favitem_by_customer_id(customer_id):
+    FavoriteItem.query.filter(FavoriteItem.customer_id == customer_id).delete()
+
+
 def getFavItemByItemId(item_id):
     return FavoriteItem.query.filter((FavoriteItem.item_id == item_id)).all()
 
@@ -141,6 +150,10 @@ def delete_cartitem(customer_id, item_id):
 
 def deleteCartItemById(cartitem_id):
     CartItem.query.filter((CartItem.cartitem_id == cartitem_id)).delete()
+
+
+def delete_cartitem_by_customer_id(customer_id):
+    CartItem.query.filter(CartItem.customer_id == customer_id).delete()
 
 
 def getCartItemByItemId(item_id):
@@ -180,9 +193,19 @@ def update_order_status(order_id, status_option):
         {'status': status_option})
 
 
+def update_order_status(order_id, status_option):
+    Order.query.filter(Order.order_id == order_id).update(
+        {'status': status_option})
+
+
 def artistRemoveItem(item_id):
     Item.query.filter((Item.item_id ==
                        item_id)).delete()
+
+
+def update_customer_id_in_order(customer_id):
+    Order.query.filter(Order.customer_id == customer_id).update(
+        {'customer_id': None})
 
 
 if __name__ == "__main__":

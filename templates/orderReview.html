@@ -27,12 +27,10 @@
 
             <section>
                 <div class="row g-0">
-
                     <div class="col-md-8">
                         <div class="card-body">
                             <ul>
                                 {% for item in order_data[artist_id] %}
-
                                 <li> Item ID: {{ item.item_id }}
                                 </li>
                                 <li> Price: {{ item.price}}
@@ -42,42 +40,39 @@
                                 <li> Color: {{ item.color }}
                                 </li>
                                 <hr>
-
                                 {% endfor %}
                             </ul>
-
                         </div>
                     </div>
 
                 </div>
-
-
-                <div class="cartSummary" style="max-width: 540px;">
-                    <div class="card-header">
-                        Order Summary
-                    </div>
-
-                    <div class="card-body">
-                        <p>Order subtotal is: $ {{ cost_data[artist_id] }}</p>
-                        <p>Tax: $ {{ tax_data[artist_id] }}</p>
-                        <p>Total of order is: $ {{ total_cost }}</p>
-
-                        <!-- proceed to checkout -->
-                        <!-- <button type='button' class="btn btn-light"> <a href='/shipping'>proceed to checkout</a> </button>
-                        <br><br> -->
-
-                    </div>
-                </div>
             </section>
+
+            <p>Order subtotal is: $ {{ cost_data[artist_id] }}</p>
+            <p>Tax: $ {{ tax_data[artist_id] }}</p>
             {% endfor %}
 
+            <div class="cartSummary" style="max-width: 540px;">
+                <div class="card-header">
+                    Order Total
+                </div>
+
+                <div class="card-body">
+
+
+
+                    <p>Total of order is: $ {{ total_cost }}</p>
+                </div>
+            </div>
             <button type="button" class="btn btn-light"><a href="/orderComplete">place order</a> </button> <button
                 type="button" class="btn btn-light"><a href="/cart">back</a></button>
         </div>
     </div>
 </div>
-</div>
-</div>
+
+
+
+
 
 
 {% endblock %}

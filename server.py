@@ -48,8 +48,14 @@ def logout_delete():
 
     # if delete was clicked then delete the account from the db
     elif delete:
-        crud.create_customer_profile(session['customer_id'])
+        # to delete customer profile, first the dependencies on that customer in the db have to be deleted, so favartists, favitems and order have to remove customer_id
+        crud.delete_favartist_by_customer_id(session['customer_id'])
+        crud.delete_favitem_by_customer_id(session['customer_id'])
+        crud.delete_cartitem_by_customer_id(session['customer_id'])
+        crud.update_customer_id_in_order(session['customer_id'])
+        crud.delete_customer_profile(session['customer_id'])
         db.session.commit()
+        session['customer_id'] = None
 
     # finally go back to the home route for GET request
     return redirect('/')
@@ -260,7 +266,6 @@ def addItem():
         description, dimensions, price, date, color, in_stock, picture_path, session['artist_id'])
     db.session.add(item)
     db.session.commit()
-    flash("A new item has been added")
 
     # once the item has been added to the db redirect to the artists profile page
     return redirect('/admin/' + artist.alias)

@@ -116,13 +116,17 @@ for (let button of editCartButton) {
         let cartSummary = cardBody.parentElement.lastElementChild;
         cartSummary.lastElementChild.firstElementChild.innerHTML =
           "Total: $" + totalCost;
-        // if the cardBody  nly has one h2, one br, one section and one p
+        // if the cardBody  only has one h2, one hr, one br, one section and one p
         //  (so less or equal to 4 elements in total) then delete it
-
-        if (cardBody.children.length <= 4) {
+        if (cardBody.children.length <= 5) {
           cardBody.remove();
         } else {
           sectionItem.remove();
+        }
+
+        // if the total cost is zero, reload the page
+        if (totalCost <= 0) {
+          window.location.reload();
         }
       });
   });

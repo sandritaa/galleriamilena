@@ -53,19 +53,21 @@
             <p>Subtotal: ${{ cost_data[artist_id] }}</p>
         </div>
         {% endfor %}
-
         <div class="cartSummary" style="max-width: 540px;">
             <div class="card-header">
                 Order Summary
             </div>
 
-            <div class="card-body">
+            <div class="card-body cart-summary">
+                {% if cart_data %}
                 <p>Total: ${{ total_cost }}</p>
 
                 <!-- proceed to checkout -->
                 <button type='button' class="btn btn-light"> <a href='/shipping'>proceed to checkout</a> </button>
                 <br><br>
-
+                {% else %}
+                <p>Cart is empty</p>
+                {% endif %}
             </div>
         </div>
     </div>
