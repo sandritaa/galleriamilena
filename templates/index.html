@@ -6,7 +6,7 @@
 
 <section class="bg-light text-dark p-5 p-lg-0 pt-lg-5 text-center text-sm-start">
     <div class="container">
-        <h2>galleria</h2>
+        <h2 class="mainHeading">galleria</h2>
 
         <img class="img-fluid w-50 d-none d-sm-block" src="" alt="" />
     </div>
@@ -20,13 +20,14 @@
         <div class="boxesWrapper">
             <section class="p-5">
                 <div class="card">
-
-                    <h5> {{ artist.fname + ' ' + artist.lname }} </h5>
+                    <br>
+                    <h5 class="artistHeading"> {{ artist.fname + ' ' + artist.lname }} </h5>
+                    <br>
                     <a href="{{ url_for('gallery', alias = artist.alias) }}"><img src="{{ artist.profile_pic }}"
                             class="card-img-top"></a>
 
                     <button type="button" id='{{"buttonArtistLike" + "_" + (artist.artist_id) | string}}'
-                        class='artistLikeButton btn btn-light'>{{
+                        class='artistLikeButton btn btn-light '>{{
                         button_favartist_label[artist.artist_id] }}</button>
                 </div>
             </section>

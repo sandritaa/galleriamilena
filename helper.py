@@ -62,7 +62,7 @@ def get_favartist_button_label_gallery(artist, session):
     button_favartist_label = {}
 
     # for each item, add a label with an item_id as the key of a dictionary and set it 'like'
-    button_favartist_label[artist.artist_id] = 'follow'
+    button_favartist_label[artist.artist_id] = 'Follow'
 
     # go through every item of the artist
     for favartist in artist.favartist:
@@ -71,7 +71,7 @@ def get_favartist_button_label_gallery(artist, session):
         if session.get('customer_id', None) == favartist.customer_id:
 
             # if its is, set the value in the dictionary of the key item_id to 'unlike'
-            button_favartist_label[favartist.artist_id] = 'unfollow'
+            button_favartist_label[favartist.artist_id] = 'Unfollow'
 
     return button_favartist_label
 
@@ -84,7 +84,7 @@ def get_favartist_button_label_home(artists, session):
     for artist in artists:
 
         # for each item, add a label with an item_id as the key of a dictionary and set it 'like'
-        button_favartist_label[artist.artist_id] = 'follow'
+        button_favartist_label[artist.artist_id] = 'Follow'
 
         # go through every favartist of a specific item
         for favartist in artist.favartist:
@@ -93,7 +93,7 @@ def get_favartist_button_label_home(artists, session):
             if session.get('customer_id', None) == favartist.customer_id:
 
                 # if its is, set the value in the dictionary of the key item_id to 'unlike'
-                button_favartist_label[favartist.artist_id] = 'unfollow'
+                button_favartist_label[favartist.artist_id] = 'Unfollow'
 
     return button_favartist_label
 

@@ -11,6 +11,7 @@ body {
 
 .bodyWrapper {
   padding-left: 210px;
+
 }
 
 .boxesWrapper {
@@ -37,12 +38,51 @@ body {
   height: 100%;
   background-color: aliceblue;
   margin-right: 0px;
+
+}
+
+.navbar-brand {
+  font-family: 'Work Sans', sans-serif;
+  font-weight: light 300;
+  color: aqua;
+  text-transform: uppercase;
+  /* font-size: 230%; */
+}
+
+.nav-item {
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 200;
+  color: black;
+  /* font-family: 'Oswald', sans-serif; */
+  text-transform: uppercase;
+  /* font-size: 170%; */
 }
 
 .nav-link.active {
-  font-weight: bold;
+  font-weight: 400;
 }
 
+.mainHeading {
+  font-family: 'Work Sans', sans-serif;
+  text-transform: uppercase
+}
+
+.artistHeading {
+  font-family: 'Work Sans', sans-serif;
+  text-transform: uppercase;
+  font-weight: 400;
+  text-align: center;
+}
+
+.artistLikeButton {
+  font-family: 'Roboto Flex', sans-serif;
+  text-transform: lowercase;
+  font-weight: 400;
+  font-size: 100%;
+  text-transform: capitalize;
+  /* text-align: center; */
+
+}
 
 #emaillog,
 #passwordlog {

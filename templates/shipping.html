@@ -6,7 +6,7 @@
 <section class="bg-light text-dark p-5 p-lg-0 pt-lg-5 text-center text-sm-start">
     <div class="container">
         <div class="d-sm-flex align-items-center justify-content-between">
-            <h2>enter your shipping address</h2>
+            <h2 class="mainHeading">enter your shipping address</h2>
 
             <!-- <img class="img-fluid w-50 d-none d-sm-block" src="" alt="" /> -->
         </div>
@@ -30,56 +30,56 @@
                             <!-- <div class="col-md-4">
                                 <img src="" class="img-fluid rounded-start" alt="">
                             </div> -->
-                            <div class="col-md-8">
-                                <div class="card-body">
+                            <!-- <div class="col-md-8"> -->
+                            <div class="card-body">
 
 
-                                    <!-- send post request to server to create new item and update database when added -->
-                                    <form action='/payment'>
+                                <!-- send post request to server to create new item and update database when added -->
+                                <form action='/payment' class="form-horizontal>
 
-                                        <label for="fname">First name</label>
-                                        <input type="text" id="fname" name="fname" required minlength='1'
-                                            maxlength='50'> <br> <br>
-                                        <label for="lname">Last name</label>
-                                        <input type="text" id="lname" name="lname" required minlength='1'
-                                            maxlength='50'> <br> <br>
-                                        <label for="address1">Address</label>
-                                        <input type="text" id="address1" name="address1" required minlength='1'> <br>
-                                        <br>
-                                        <label for="address2">Address</label>
-                                        <input type="text" id="address2" name="address2" required minlength='1'> <br>
-                                        <br>
-                                        <label for="city">City</label>
-                                        <input type="text" id="city" name="city" required minlength='1'> <br> <br>
-                                        <label for="state">State</label>
-                                        <input type="text" id="state" name="state " required minlength='1'
-                                            maxlength='50'> <br> <br>
-                                        <label for="zipcode">Zipcode</label>
-                                        <input type="text" id="zipcode" name="zipcode" required minlength='1'
-                                            maxlength='10'> <br> <br>
-                                        <label for="country">Country</label>
-                                        <input type="text" id="country" name="country" required minlength='1'> <br> <br>
-                                        <label for="email">Email</label>
-                                        <input type="text" id="email" name="email" required minlength='4'
-                                            maxlength='50'> <br> <br>
-                                        <label for="email">Confirm email</label>
-                                        <input type="text" id="email" name="email" required minlength='4'
-                                            maxlength='50'> <br> <br>
-                                        <label for="phone">Phone</label>
-                                        <input type="text" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-                                            required minlength='1' maxlength='20'> <br> <br>
-                                        <input type="submit" href='/payment' class="btn btn-light"
-                                            value="proceed to checkout">
+                                    <label for=" fname">First name</label><br>
+                                    <input type="text" id="fname" name="fname" required minlength='1' maxlength='50'>
+                                    <br><br>
+                                    <label for="lname">Last name</label><br>
+                                    <input type="text" id="lname" name="lname" required minlength='1' maxlength='50'>
+                                    <br> <br>
+                                    <label for="address1">Address</label><br>
+                                    <input type="text" id="address1" name="address1" required minlength='1'> <br>
+                                    <br>
+                                    <!-- <label for="address2">Address</label><br> -->
+                                    <!-- <input type="text" id="address2" name="address2" required minlength='1'> <br> -->
+                                    <!-- <br> -->
+                                    <label for="city">City</label><br>
+                                    <input type="text" id="city" name="city" required minlength='1'> <br> <br>
+                                    <label for="state">State</label><br>
+                                    <input type="text" id="state" name="state " required minlength='1' maxlength='50'>
+                                    <br> <br>
+                                    <label for="zipcode">Zipcode</label><br>
+                                    <input type="text" id="zipcode" name="zipcode" required minlength='1'
+                                        maxlength='10'> <br> <br>
+                                    <label for="country">Country</label><br>
+                                    <input type="text" id="country" name="country" required minlength='1'> <br> <br>
+                                    <label for="email">Email</label><br>
+                                    <input type="text" id="email" name="email" required minlength='4' maxlength='50'>
+                                    <br> <br>
+                                    <label for="email">Confirm email</label><br>
+                                    <input type="text" id="email" name="email" required minlength='4' maxlength='50'>
+                                    <br> <br>
+                                    <label for="phone">Phone</label><br>
+                                    <input type="text" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                                        required minlength='1' maxlength='20'> <br> <br>
+                                    <input type="submit" href='/payment' class="btn btn-light"
+                                        value="proceed to checkout">
 
-                                    </form>
+                                </form>
 
-                                    {% for message in get_flashed_messages() %}
-                                    <div class="flash">{{ message }}</div>
-                                    {% endfor %}
+                                {% for message in get_flashed_messages() %}
+                                <div class="flash">{{ message }}</div>
+                                {% endfor %}
 
 
-                                </div>
                             </div>
+                            <!-- </div> -->
                         </div>
                     </section>
 

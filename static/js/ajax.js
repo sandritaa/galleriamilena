@@ -157,9 +157,9 @@ for (let button of artistButton) {
           if (responseJson.customer_logged_in == true) {
             // if the customer is logged in, toggle between like and unlike for the button depending on whether or not the favitem object has been or removed from the db
             if (responseJson.added_artist == true) {
-              button.innerHTML = "unfollow";
+              button.innerHTML = "Unfollow";
             } else if (responseJson.added_artist == false) {
-              button.innerHTML = "follow";
+              button.innerHTML = "Follow";
             }
           } else {
             // if the customer is not logged in, redirect the user to the login page
