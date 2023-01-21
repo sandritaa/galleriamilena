@@ -1,0 +1,113 @@
+<!-- inherit from base.html -->
+{% extends 'base.html' %}
+
+<!-- insert content block -->
+{% block body %}
+
+
+
+
+<section class="bg-light text-dark p-5 p-lg-0 pt-lg-5 text-center text-sm-start">
+    <div class="container">
+        <div class="d-sm-flex align-items-center justify-content-between">
+
+            <h2 class="mainHeading">billing information</h2>
+
+            <!-- <img class="img-fluid w-50 d-none d-sm-block" src="img/showcase.svg" alt="" /> -->
+        </div>
+    </div>
+</section>
+
+<br>
+<div class="paymentContainer">
+
+
+
+    <div class="'payment">
+        <div class="container">
+            <div class="card mb-3" style="max-width: 540px;">
+                <div class="cartData">
+                    <!-- <h3>Please fill out billing address: </h3> -->
+                    <ul>
+                        <br>
+                        <section>
+                            <div class="row g-0">
+                                <!-- <div class="col-md-4">
+                                <img src="" class="img-fluid rounded-start" alt="">
+                            </div> -->
+                                <div class="col-md-8">
+                                    <div class="card-body">
+
+                                        <form action="/checkout">
+                                            <label for="fname">First name</label><br>
+                                            <input type="text" id="fname" name="fname" required minlength='1'
+                                                maxlength='50'> <br> <br>
+                                            <label for="lname">Last name</label><br>
+                                            <input type="text" id="lname" name="lname" required minlength='1'
+                                                maxlength='50'> <br> <br>
+                                            <label for="address1">Address</label><br>
+                                            <input type="text" id="address1" name="address1" required minlength='1'>
+                                            <br> <br>
+                                            <!-- <label for="address2">Address</label>
+                                    <input type="text" id="address2" name="address2"> <br> <br> -->
+                                            <label for="city">City</label><br>
+                                            <input type="text" id="city" name="city" required minlength='1'> <br>
+                                            <br>
+                                            <label for="state">State</label><br>
+                                            <input type="text" id="state" name="state " required minlength='1'
+                                                maxlength='50'> <br> <br>
+                                            <label for="zipcode">Zipcode</label><br>
+                                            <input type="text" id="zipcode" name="zipcode" required minlength='1'
+                                                maxlength='10'> <br> <br>
+                                            <label for="country">Country</label><br>
+                                            <input type="text" id="country" name="country" required minlength='1'>
+                                            <br>
+                                            <br>
+                                            <label for="email">Email</label><br>
+                                            <input type="text" id="email" name="email" required minlength='4'
+                                                maxlength='50'> <br> <br>
+                                            <label for="email">Confirm email</label><br>
+                                            <input type="text" id="confirmemail" name="confirmemail" required
+                                                minlength='4' maxlength='50'> <br>
+                                            <br>
+                                            <label for="phone">Phone</label><br>
+                                            <input type="text" id="phone" name="phone"
+                                                pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required minlength='1'
+                                                maxlength='20'> <br> <small>Format: 123-456-7890</small> <br>
+
+                                        </form>
+
+
+                                        {% for message in get_flashed_messages() %}
+                                        <div class="flash">{{ message }}</div>
+                                        {% endfor %}
+
+
+                                    </div>
+                                    <button type="button" class="btn btn-light"><a href="/shipping">back</a></button>
+                                    <button type='button' class="btn btn-light"> <a href='/credit_card'>next</a>
+                                    </button>
+                                </div>
+                            </div>
+                        </section>
+
+                </div>
+
+                </ul>
+
+            </div>
+        </div>
+    </div>
+
+    <br><br>
+
+    <script type="text/javascript">
+        function confirmEmail() {
+            var email = document.getElementById("email").value
+            var confirmemail = document.getElementById("confirmemail").value
+            if (email != confirmemail) {
+                alert('Email Not Matching!');
+            }
+        }
+    </script>
+    {% endblock %}

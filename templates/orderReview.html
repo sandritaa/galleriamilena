@@ -18,9 +18,9 @@
 
 <div class="container">
     <div class="card mb-3 cartData" style="max-width: 540px;">
-        <div class="card-header">
-            <h1>order summary</h1>
-        </div>
+        <!-- <div class="card-header"> -->
+        <!-- <h1>order summary</h1> -->
+        <!-- </div> -->
         {% for artist_id in order_data %}
         <div class="card-body">
 
@@ -48,24 +48,37 @@
                 </div>
             </section>
 
-            <p>Order subtotal is: $ {{ cost_data[artist_id] }}</p>
-            <p>Tax: $ {{ tax_data[artist_id] }}</p>
-            {% endfor %}
 
             <div class="cartSummary" style="max-width: 540px;">
                 <div class="card-header">
-                    Order Total
+                    Order Subtotal & Tax:
+                </div>
+
+                <div class="card-body">
+                    <p>Tax: $ {{ tax_data[artist_id] }}</p>
+                    <p>Order subtotal: $ {{ cost_data[artist_id] }}</p>
+
+                    {% endfor %}
+
+                </div>
+            </div>
+
+
+
+            <div class="cartSummary" style="max-width: 540px;">
+                <div class="card-header">
+                    Order Total:
                 </div>
 
                 <div class="card-body">
 
 
 
-                    <p>Total of order is: $ {{ total_cost }}</p>
+                    <p>Order Total: $ {{ total_cost }}</p>
                 </div>
             </div>
-            <button type="button" class="btn btn-light"><a href="/orderComplete">place order</a> </button> <button
-                type="button" class="btn btn-light"><a href="/cart">back</a></button>
+            <button type="button" class="btn btn-light"><a href="/billing">back</a></button>
+            <button type="button" class="btn btn-light"><a href="/orderComplete">place order</a> </button>
         </div>
     </div>
 </div>

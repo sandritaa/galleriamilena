@@ -456,8 +456,8 @@ def shipping():
     return render_template("shipping.html", login_button=login_button)
 
 
-@app.route('/payment')
-def payment():
+@app.route('/billing')
+def billing():
     # get login or logout depending if a customer/artist is logged in or not
     login_button = helper.switch_profile_login(session)
 
@@ -475,7 +475,15 @@ def payment():
         'phone': request.args.get('phone'),
     }
 
-    return render_template("payment.html", login_button=login_button)
+    return render_template("billing.html", login_button=login_button)
+
+
+@app.route('/credit_card')
+def credit_card():
+    # get login or logout depending if a customer/artist is logged in or not
+    login_button = helper.switch_profile_login(session)
+
+    return render_template("creditCard.html", login_button=login_button)
 
 
 @app.route('/review')
@@ -504,6 +512,7 @@ def orderComplete():
     cart_data = helper.get_cart_data(session)
     cost_data = helper.get_cost_data(session)
     tax_data = helper.get_tax_data(cost_data)
+    total_cost = sum(cost_data.values()) + sum(tax_data.values())
 
     for artist_id in cart_data:
         orderItems = cart_data[artist_id]
@@ -518,7 +527,13 @@ def orderComplete():
             crud.update_item_with_order(orderItem, order.order_id, in_stock)
             db.session.commit()
 
-    return render_template("orderComplete.html", login_button=login_button)
+    if session.get('customer_id', None):
+        crud.delete_cartitem_by_customer_id(session['customer_id'])
+        db.session.commit()
+    else:
+        session['cartItems'] = []
+
+    return render_template("orderComplete.html", order_data=cart_data, cost_data=cost_data, tax_data=tax_data, total_cost=total_cost, login_button=login_button)
 
 
 @app.route('/artistUpdateOrder', methods=["POST"])

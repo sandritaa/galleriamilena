@@ -22,7 +22,7 @@
     <div class="container">
         <div class="card mb-3" style="max-width: 540px;">
             <div class="cartData">
-                <h3>Please fill out the below form: </h3>
+                <!-- <h3>Please fill out the below form: </h3> -->
                 <ul>
                     <br>
                     <section>
@@ -35,7 +35,7 @@
 
 
                                 <!-- send post request to server to create new item and update database when added -->
-                                <form action='/payment' class="form-horizontal>
+                                <form action='/billing' class="form-horizontal>
 
                                     <label for=" fname">First name</label><br>
                                     <input type="text" id="fname" name="fname" required minlength='1' maxlength='50'>
@@ -67,8 +67,11 @@
                                     <br> <br>
                                     <label for="phone">Phone</label><br>
                                     <input type="text" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-                                        required minlength='1' maxlength='20'> <br> <br>
-                                    <input type="submit" href='/payment' class="btn btn-light"
+                                        required minlength='1' maxlength='20'> <br> <small>Format: 123-456-7890</small>
+                                    <br>
+                                    <br>
+                                    <button type="button" class="btn btn-light"><a href="/cart">back</a></button>
+                                    <input type="submit" href='/billing' class="btn btn-light"
                                         value="proceed to checkout">
 
                                 </form>
@@ -91,6 +94,6 @@
     </div>
 
     <!-- procees to checkout -->
-    <button type="button" class="btn btn-light"><a href="/cart">back</a></button>
+
     <br><br>
     {% endblock %}
