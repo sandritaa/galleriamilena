@@ -36,8 +36,8 @@
                                 <li> Price: $ {{ item.price }}</li>
                                 <li> Color: {{ item.color }}</li>
                                 <li> Item ID: {{ item.item_id}}</li>
-                                <br><br>
-                                <br><br>
+                                <br>
+                                <!-- <br><br> -->
                                 <li>
                                     <button type="button" class="editCartButton btn btn-light"
                                         id="{{'buttonRemoveItem' + '_' + (item.item_id) | string}}">remove
@@ -50,6 +50,7 @@
                 </div>
             </section>
             {% endfor %}
+            <br>
             <p>Subtotal: ${{ cost_data[artist_id] }}</p>
         </div>
         {% endfor %}
@@ -63,7 +64,8 @@
                 <p>Total: ${{ total_cost }}</p>
 
                 <!-- proceed to checkout -->
-                <button type='button' class="btn btn-light"> <a href='/shipping'>proceed to checkout</a> </button>
+                <button type='button' class="shippingButton btn btn-light"> <a href='/shipping'>proceed to checkout</a>
+                </button>
                 <br><br>
                 {% else %}
                 <p>Cart is empty</p>

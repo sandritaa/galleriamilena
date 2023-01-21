@@ -4,7 +4,7 @@
 <!-- insert content block -->
 {% block body %}
 
-<section class="bg-light text-dark p-5 p-lg-0 pt-lg-5 text-center text-sm-start">
+<section id='wallHeading' class="bg-light text-dark p-5 p-lg-0 pt-lg-5 text-center text-sm-start">
     <div class="container">
         <h2 class="mainHeading">galleria</h2>
 
@@ -15,6 +15,7 @@
 
 <!-- check all artists -->
 <div class="container">
+    <!-- <div class="card mb-3 cartData" style="max-width: 540px;"> -->
     <div class="row row-cols-1 row-cols-md-2 g-4">
         {% for artist in artists %}
         <div class="boxesWrapper">

@@ -15,7 +15,7 @@
     </div>
 </section>
 
-
+<br>
 
 <!-- send post request to server to create new user account and update database -->
 
@@ -24,7 +24,7 @@
 <div class="container">
     <div class="card mb-3" style="max-width: 540px;">
         <div class="cartData">
-            <h3>Please fill out the below form: </h3>
+            <!-- <h3>Please fill out the below form: </h3> -->
             <ul>
                 <br>
                 <section>
@@ -46,17 +46,20 @@
                                         minlength='1' maxlength='50'><br>
                                     <label>Email</label> <br> <input type="email" name="email" required minlength='4'
                                         maxlength='50'> <br>
-                                    <label>Phone number/label> <br> <input type="tel" name="phone"
-                                            pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required minlength='1' maxlength='20'>
-                                        <small>Format: 123-456-7890</small>
-                                        <br>
-                                        <label>Password</label> <br> <input type="password" name="password" required
-                                            minlength='8' maxlength='12'><small>
-                                            Format: 8 to 12
-                                            characters</small> <br>
-                                        <!-- add hidden field since it will be populated when an image is added so that I can send the url as part of the form  -->
-                                        <input type="hidden" name="picture_path" id="picture_path_id" value=""> <br>
-                                        <input type="submit" class="btn btn-light">
+                                    <label>Phone number </label> <br> <input type="tel" name="phone"
+                                        pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required minlength='1' maxlength='20'><br>
+                                    <small>Format: 123-456-7890</small>
+                                    <br>
+                                    <label>Password</label> <br> <input type="password" name="password" required
+                                        minlength='8' maxlength='12'><br><small>
+                                        Format: 8-12
+                                        characters</small> <br>
+                                    <!-- add hidden field since it will be populated when an image is added so that I can send the url as part of the form  -->
+                                    <input type="hidden" name="picture_path" id="picture_path_id" value=""> <br>
+                                    <button type="button" class="loginButton btn btn-light"><a href="/login">back</a>
+                                    </button>
+                                    <input type="submit" class="createLoginButton btn btn-light">
+
                                 </form>
 
                                 {% for message in get_flashed_messages() %}
@@ -78,8 +81,8 @@
     {% endfor %}
 
     <!-- add home button -->
-    <button type='button' class="btn btn-light">
+    <!-- <button type='button' class="btn btn-light">
         <a href="/ ">home</a>
-    </button>
+    </button> -->
 
     {% endblock %}

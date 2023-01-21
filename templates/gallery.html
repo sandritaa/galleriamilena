@@ -49,6 +49,7 @@
                         <!-- add images of each item for the specific artist -->
                         <button type="button" id='{{ "buttonLike" + "_" + (item.item_id) | string }}'
                             class='itemLikeButton btn btn-light'>{{ button_like_label[item.item_id] }}</button>
+                        <br>
                         <button type="button" id='{{ "buttonCart" + "_" + (item.item_id) | string }}'
                             class="itemCartButton btn btn-light">{{ button_cart_label[item.item_id] }}</button>
                     </div>

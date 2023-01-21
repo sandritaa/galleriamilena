@@ -8,7 +8,7 @@
 <section class="bg-light text-dark p-5 p-lg-0 pt-lg-5 text-center text-sm-start">
     <div class="container">
         <div class="d-sm-flex align-items-center justify-content-between">
-            <h1 class="mainHeading"> welcome customer: {{ customer.fname + ' ' + customer.lname }}</h1>
+            <h1 class="mainHeading"> welcome {{ customer.fname + ' ' + customer.lname }}</h1>
             <!-- <img class="img-fluid w-50 d-none d-sm-block" src="img/showcase.svg" alt="" /> -->
         </div>
     </div>
@@ -20,7 +20,7 @@
 <div class="container">
     <div class="card mb-3 cartData" style="max-width: 540px;">
         <div class="cardData">
-            <h3>Account Details:</h3>
+            <h3>Customer Account Details:</h3>
             <section class="p-5">
                 <div class="col-md">
                     <!-- <img src="/static/data/img/FullSizeRender.jpg" class="card-img-top" alt="..."> -->
@@ -29,6 +29,10 @@
                         <p>Last Name: {{ customer.lname }}</p>
                         <p>Email: {{ customer.email }}</p>
                         <p>Phone: {{ customer.phone }}</p>
+                        <form action="/" method="POST">
+
+                            <input type="submit" class="btn btn-light" value="delete account" name="delete_account" />
+                        </form>
                         <br>
                     </div>
             </section>
@@ -97,6 +101,12 @@
             <hr>
             {% endfor %}
         </div>
+        <!-- logout and delete account buttons -->
+        <form action="/" method="POST">
+            <input type="submit" class="btn btn-light" value="logout" name="logout" />
+            <!-- <input type="submit" class="btn btn-light" value="delete account" name="delete_account" /> -->
+        </form>
+
     </div>
 </div>
 
@@ -104,11 +114,6 @@
 
 
 
-<!-- logout and delete account buttons -->
-<form action="/" method="POST">
-    <input type="submit" class="btn btn-light" value="logout" name="logout" />
-    <input type="submit" class="btn btn-light" value="delete account" name="delete_account" />
-</form>
 
 
 {% endblock %}
