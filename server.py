@@ -30,7 +30,7 @@ def homepage():
         artist, session)
 
     # render an html and pass artists and login_button as data
-    return render_template("index.html",  artists=artist, login_button=login_button, button_favartist_label=button_favartist_label)
+    return render_template("home.html",  artists=artist, login_button=login_button, button_favartist_label=button_favartist_label)
 
 
 # create home route for POST request
@@ -453,7 +453,7 @@ def shipping():
     # get login or logout depending if a customer/artist is logged in or not
     login_button = helper.switch_profile_login(session)
 
-    return render_template("shipping.html", login_button=login_button)
+    return render_template("shippingDetails.html", login_button=login_button)
 
 
 @app.route('/billing')
@@ -475,7 +475,7 @@ def billing():
         'phone': request.args.get('phone'),
     }
 
-    return render_template("billing.html", login_button=login_button)
+    return render_template("billingDetails.html", login_button=login_button)
 
 
 @app.route('/credit_card')
@@ -483,7 +483,7 @@ def credit_card():
     # get login or logout depending if a customer/artist is logged in or not
     login_button = helper.switch_profile_login(session)
 
-    return render_template("creditCard.html", login_button=login_button)
+    return render_template("paymentDetails.html", login_button=login_button)
 
 
 @app.route('/review')
