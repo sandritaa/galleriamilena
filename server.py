@@ -1,6 +1,3 @@
-
-#  TODO: create dynamic follow button
-
 from flask import Flask, render_template, request, flash, session, redirect, flash
 from model import connect_to_db, db
 from jinja2 import StrictUndefined
@@ -35,7 +32,7 @@ def homepage():
 
 # create home route for POST request
 @app.route('/', methods=['POST'])
-def logout_delete():
+def profile_logout_and_delete():
 
     # get data from form - logout or delete account button
     logout = request.form.get('logout') == 'logout'
@@ -205,7 +202,7 @@ def artist_profile(alias):
 
 # create register customer route
 @app.route('/profile')
-def profile():
+def new_customer_profile_form():
 
     # get login or logout depending if a customer/artist is logged in or not
     login_button = helper.switch_profile_login(session)
@@ -216,7 +213,7 @@ def profile():
 
 # create new customer profile route as POST request
 @app.route('/profile', methods=['POST'])
-def create_profile():
+def create_customer_profile():
 
     # get data posted from the form on the client side
     fname = request.form.get('fname')
@@ -245,9 +242,20 @@ def create_profile():
         return redirect("/login")
 
 
+# create add item route - GET request
+@app.route('/artist_add_item')
+def new_item_form():
+
+    # get login or logout depending if a customer/artist is logged in or not
+    login_button = helper.switch_profile_login(session)
+
+    # when its a get request just render the html without doing anything
+    return render_template('artistAddItem.html', login_button=login_button)
+
+
 # create add item route - POST request
-@app.route('/add-item', methods=['POST'])
-def addItem():
+@app.route('/artist_add_item', methods=['POST'])
+def artist_add_item():
 
     # get the data posted by the form
     description = request.form.get('description')
@@ -271,79 +279,54 @@ def addItem():
     return redirect('/admin/' + artist.alias)
 
 
-# create favitem route - POST request
-@app.route('/add-favorite-item', methods=['POST'])
-def add_fav_item():
+# create artist order update
+@app.route('/artist_order_update', methods=["POST"])
+def artist_order_update():
 
-    # get the item_id and convert it to an int from the client (ajax)
-    item_id = int(request.json.get('itemId'))
+    # get the order_id and convert it to an int from the client (ajax)
+    order_id = int(request.json.get('orderId'))
+    status_option = request.json.get('statusOption')
 
-    # get the customer_id from the session or None if no customer is logged in
-    customer_id = session.get("customer_id", None)
+    crud.update_order_status(order_id, status_option)
+    db.session.commit()
 
-    # check if the customer is logged in.
-    if customer_id == None:
+    # print('!!!!')
+    # print(status_option)
 
-        # if they aren't logged in, set both flags to false
-        customer_logged_in = False
-        added_item = False
+    helper.twilio_api()
 
-    else:
-
-        # if they are logged in, set the customer_logged_in to true
-        customer_logged_in = True
-
-        # Query a favorite item using both customer id and item id
-        favitem = crud.get_favitem(customer_id, item_id)
-
-        # if there is a favorite item then delete it from the db - otherwise add it
-        if favitem:
-
-            # delete the favitem from the db and set the added_item flag to false
-            crud.delete_favitem(customer_id, item_id)
-            db.session.commit()
-            added_item = False
-
-        else:
-
-            # create the favitem and add it ot the db and set the added_item flag to true
-            fav_item = crud.create_favitem(customer_id, item_id)
-            db.session.add(fav_item)
-            db.session.commit()
-            added_item = True
-
-    # return both flags to the client (ajax) so it can use them in its eventListeners
     return {
-        'customer_logged_in': customer_logged_in,
-        'added_item': added_item
+        'status_option': status_option
     }
 
 
-# create add item route - GET request
-@app.route('/add-item', methods=['GET'])
-def newItemForm():
+# create route for artist to remove item
+@app.route('/artist_remove_item', methods=["POST"])
+def artist_remove_item():
 
-    # get login or logout depending if a customer/artist is logged in or not
-    login_button = helper.switch_profile_login(session)
+    # get the order_id and convert it to an int from the client (ajax)
+    item_id = int(request.json.get('itemId'))
 
-    # when its a get request just render the html without doing anything
-    return render_template('addItem.html', login_button=login_button)
+    favitems = crud.getFavItemByItemId(item_id)
+    cartitems = crud.getCartItemByItemId(item_id)
+    for favitem in favitems:
+        crud.deleteFavItemById(favitem.favitem_id)
+        db.session.commit()
 
+    for cartitem in cartitems:
+        crud.deleteCartItemById(cartitem.cartitem_id)
+        db.session.commit()
 
-# create cart route
-@app.route('/cart')
-def cart():
-    login_button = helper.switch_profile_login(session)
+    crud.artistRemoveItem(item_id)
+    db.session.commit()
 
-    cart_data = helper.get_cart_data(session)
-    cost_data = helper.get_cost_data(session)
-    total_cost = round(sum(cost_data.values()), 2)
-
-    return render_template("cart.html", login_button=login_button, cart_data=cart_data, cost_data=cost_data, total_cost=total_cost)
+    return {
+        'success': True
+    }
 
 
 # create cartItem route - POST request
-@app.route('/add-cart-item', methods=['POST'])
+@app.route('/add_cart_item', methods=['POST'])
 def add_cart_item():
 
     # get the item_id and convert it to an int from the client (ajax)
@@ -402,8 +385,57 @@ def add_cart_item():
     }
 
 
-@app.route('/add_fav_artist', methods=['POST'])
-def add_fav_artist():
+# create favitem route - POST request
+@app.route('/add_favorite_item', methods=['POST'])
+def add_favorite_item():
+
+    # get the item_id and convert it to an int from the client (ajax)
+    item_id = int(request.json.get('itemId'))
+
+    # get the customer_id from the session or None if no customer is logged in
+    customer_id = session.get("customer_id", None)
+
+    # check if the customer is logged in.
+    if customer_id == None:
+
+        # if they aren't logged in, set both flags to false
+        customer_logged_in = False
+        added_item = False
+
+    else:
+
+        # if they are logged in, set the customer_logged_in to true
+        customer_logged_in = True
+
+        # Query a favorite item using both customer id and item id
+        favitem = crud.get_favitem(customer_id, item_id)
+
+        # if there is a favorite item then delete it from the db - otherwise add it
+        if favitem:
+
+            # delete the favitem from the db and set the added_item flag to false
+            crud.delete_favitem(customer_id, item_id)
+            db.session.commit()
+            added_item = False
+
+        else:
+
+            # create the favitem and add it ot the db and set the added_item flag to true
+            fav_item = crud.create_favitem(customer_id, item_id)
+            db.session.add(fav_item)
+            db.session.commit()
+            added_item = True
+
+    # return both flags to the client (ajax) so it can use them in its eventListeners
+    return {
+        'customer_logged_in': customer_logged_in,
+        'added_item': added_item
+    }
+
+
+# create favartist route - POST request
+@app.route('/add_favorite_artist', methods=['POST'])
+def add_favorite_artist():
 
     artist_id = int(request.json.get('artistId'))
     customer_id = session.get('customer_id', None)
@@ -445,9 +477,20 @@ def add_fav_artist():
         'added_artist': added_artist
     }
 
+
+# create cart route
+@app.route('/cart')
+def cart():
+    login_button = helper.switch_profile_login(session)
+
+    cart_data = helper.get_cart_data(session)
+    cost_data = helper.get_cost_data(session)
+    total_cost = round(sum(cost_data.values()), 2)
+
+    return render_template("cart.html", login_button=login_button, cart_data=cart_data, cost_data=cost_data, total_cost=total_cost)
+
+
 # create checkout route / order
-
-
 @app.route('/shipping')
 def shipping():
     # get login or logout depending if a customer/artist is logged in or not
@@ -456,6 +499,7 @@ def shipping():
     return render_template("shippingDetails.html", login_button=login_button)
 
 
+# create billing route
 @app.route('/billing')
 def billing():
     # get login or logout depending if a customer/artist is logged in or not
@@ -478,15 +522,17 @@ def billing():
     return render_template("billingDetails.html", login_button=login_button)
 
 
-@app.route('/credit_card')
-def credit_card():
+# create payment route
+@app.route('/payment')
+def payment():
     # get login or logout depending if a customer/artist is logged in or not
     login_button = helper.switch_profile_login(session)
 
     return render_template("paymentDetails.html", login_button=login_button)
 
 
-@app.route('/review')
+# create order review route
+@app.route('/order_review')
 def order_review():
 
     # get login or logout depending if a customer/artist is logged in or not
@@ -503,8 +549,9 @@ def order_review():
     return render_template("orderReview.html", order_data=cart_data, cost_data=cost_data, tax_data=tax_data, total_cost=total_cost, login_button=login_button)
 
 
-@app.route('/orderComplete')
-def orderComplete():
+# create order complete route
+@app.route('/order_complete')
+def order_complete():
 
     # get login or logout depending if a customer/artist is logged in or not
     login_button = helper.switch_profile_login(session)
@@ -536,52 +583,9 @@ def orderComplete():
     return render_template("orderComplete.html", order_data=cart_data, cost_data=cost_data, tax_data=tax_data, total_cost=total_cost, login_button=login_button)
 
 
-@app.route('/artistUpdateOrder', methods=["POST"])
-def artist_order_update():
-
-    # get the order_id and convert it to an int from the client (ajax)
-    order_id = int(request.json.get('orderId'))
-    status_option = request.json.get('statusOption')
-
-    crud.update_order_status(order_id, status_option)
-    db.session.commit()
-
-    # print('!!!!')
-    # print(status_option)
-
-    helper.twilio_api()
-
-    return {
-        'status_option': status_option
-    }
-
-
-@app.route('/artistRemoveItem', methods=["POST"])
-def artistRemoveItem():
-
-    # get the order_id and convert it to an int from the client (ajax)
-    item_id = int(request.json.get('itemId'))
-
-    favitems = crud.getFavItemByItemId(item_id)
-    cartitems = crud.getCartItemByItemId(item_id)
-    for favitem in favitems:
-        crud.deleteFavItemById(favitem.favitem_id)
-        db.session.commit()
-
-    for cartitem in cartitems:
-        crud.deleteCartItemById(cartitem.cartitem_id)
-        db.session.commit()
-
-    crud.artistRemoveItem(item_id)
-    db.session.commit()
-
-    return {
-        'success': True
-    }
-
-
-@app.route('/artistStockItem', methods=["POST"])
-def artistStockItem():
+# create route for order to update stock
+@app.route('/order_update_stock', methods=["POST"])
+def order_update_stock():
 
     # get the order_id and convert it to an int from the client (ajax)
     item_id = int(request.json.get('itemId'))

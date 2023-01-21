@@ -14,7 +14,7 @@ for (let button of likeButtons) {
     let itemId = buttonIdArray.at(-1);
 
     // do a post request to the server sending the item_id
-    fetch("/add-favorite-item", {
+    fetch("/add_favorite_item", {
       method: "POST",
       body: JSON.stringify({ itemId: itemId }),
       headers: {
@@ -55,7 +55,7 @@ for (let button of cartButtons) {
     let itemId = buttonIdArray.at(-1);
 
     // do a post request to the server sending the item_id
-    fetch("/add-cart-item", {
+    fetch("/add_cart_item", {
       method: "POST",
       body: JSON.stringify({ itemId: itemId }),
       headers: {
@@ -84,7 +84,7 @@ for (let button of editCartButton) {
     let buttonIdArray = button.id.split("_");
     let itemId = buttonIdArray.at(-1);
 
-    fetch("/add-cart-item", {
+    fetch("/add_cart_item", {
       method: "POST",
       body: JSON.stringify({ itemId: itemId }),
       headers: {
@@ -105,8 +105,7 @@ for (let button of editCartButton) {
         let cardBody = sectionItem.parentElement;
 
         // Update subtotal - first get the artist id
-        let artistString =
-          sectionItem.parentElement.firstElementChild.innerHTML;
+        let artistString = sectionItem.parentElement.children[1].innerHTML;
         let artistIdArray = artistString.split(" ");
         let artistId = artistIdArray.at(-1);
         cardBody.lastElementChild.innerHTML =
@@ -118,7 +117,7 @@ for (let button of editCartButton) {
           "Total: $" + totalCost;
         // if the cardBody  only has one h2, one hr, one br, one section and one p
         //  (so less or equal to 4 elements in total) then delete it
-        if (cardBody.children.length <= 5) {
+        if (cardBody.children.length <= 6) {
           cardBody.remove();
         } else {
           sectionItem.remove();
@@ -143,7 +142,7 @@ for (let button of artistButton) {
       let buttonIdArray = button.id.split("_");
       let artistId = buttonIdArray.at(-1);
       // do a post request to the server sending the artist_id
-      fetch("/add_fav_artist", {
+      fetch("/add_favorite_artist", {
         method: "POST",
         body: JSON.stringify({ artistId: artistId }),
         headers: {
@@ -181,7 +180,7 @@ for (let button of statusButton) {
     let statusElement = document.getElementById("status" + "_" + orderId);
     let statusOption = statusElement.value;
 
-    fetch("/artistUpdateOrder", {
+    fetch("/artist_order_update", {
       method: "POST",
       body: JSON.stringify({ orderId: orderId, statusOption: statusOption }),
       headers: {
@@ -204,7 +203,7 @@ for (let button of removeItemButton) {
     let buttonIdArray = button.id.split("_");
     let itemId = buttonIdArray.at(-1);
 
-    fetch("/artistRemoveItem", {
+    fetch("/artist_remove_item", {
       method: "POST",
       body: JSON.stringify({ itemId: itemId }),
       headers: {

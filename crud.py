@@ -178,7 +178,7 @@ def create_order_by_session(session, artist_id, totalOrder):
         country=session['shipment']['country'],
         email=session['shipment']['email'],
         phone=session['shipment']['phone'],
-        customer_id=session['customer_id'],
+        customer_id=session.get('customer_id', None),
         artist_id=artist_id
     )
 

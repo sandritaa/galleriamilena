@@ -1,3 +1,5 @@
+<!-- TODO: remove hr lines and fix widget image upload -->
+
 <!-- inherit from base.html -->
 {% extends 'base.html' %}
 
@@ -26,12 +28,12 @@
 <div class="container">
     <div class="card mb-3 cartData" style="max-width: 540px;">
         <div class="cardData">
-            <h3>New item details:</h3>
+            <!-- <h3>New item details:</h3> -->
             <section class="p-5">
                 <div class="col-md">
                     <!-- <img src="/static/data/img/FullSizeRender.jpg" class="card-img-top" alt="..."> -->
                     <div class="card-body">
-                        <form action='/add-item' method="POST">
+                        <form action='/artist_add_item' method="POST">
                             <!-- item attributes -->
                             <label>Item description </label> <br> <input type="text" name="description" required
                                 minlength='1' maxlength='50'><br>
@@ -49,13 +51,10 @@
                             <img id="uploadedimage" src="">
                             </img>
                             <!-- add hidden field since it will be populated when an image is added so that I can send the url as part of the form  -->
-                            <input type="hidden" name="picture_path" id="picture_path_id" value=""> <br>
+                            <input type="hidden" name="picture_path" id="picture_path_id" value="" required
+                                minlength="2"></input> <br>
 
                             <input type="submit" class="btn btn-light">
-
-                            {% for message in get_flashed_messages() %}
-                            <div class="flash">{{ message }}</div>
-                            {% endfor %}
                         </form>
                     </div>
             </section>
