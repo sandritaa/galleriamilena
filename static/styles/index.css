@@ -77,11 +77,10 @@ body {
   border-radius: 2px;
   border: 1px solid #bebebe;
   color: rgb(0, 0, 0);
-
 }
 
 .customButton:hover {
-  transform: scale(1.1);
+  /* transform: scale(1.1); */
   background-color: #cfc4c4;
   border: 1px solid #bebebe;
   color: rgb(0, 0, 0) !important;

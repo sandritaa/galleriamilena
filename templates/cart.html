@@ -11,65 +11,61 @@
 
 <div class="container pt-5">
     <div class="row justify-content-center">
-        <!-- widht of column -->
         <div class="col-7">
-            <div class="mt-6">
-                {% for artist_id in cart_data %}
-                <div class="mt-4">
-                    <div class="card cartCard pb-4">
-                        <div class="row no-gutters justify-content-start">
-                            <p> Artist ID: {{ artist_id }}</p>
-                            {% for item in cart_data[artist_id] %}
-                            <!-- <div class="card cartItemCard"> -->
-                            <div class="col-md-7">
+            {% for artist_id in cart_data %}
+            <div class="mt-4">
+                <div class="card cartCard pb-4" id="{{'cartCard' + '_' + (artist_id) | string}}">
+                    <h5>Sold by {{ cart_data[artist_id][0].artist.fname + ' ' + cart_data[artist_id][0].artist.lname }}
+                    </h5>
+                    {% for item in cart_data[artist_id] %}
+                    <div class="card cartItemCard" id="{{'cartItemCard' + '_' + (item.item_id) | string}}">
+                        <div class="row g-0 justify-content-start">
+                            <div class="col-md-5">
                                 <img src="{{ item.picture_path }}" class="card-img-top" style="padding-bottom: 10px;">
                             </div>
                             <div class="col-md-5">
                                 <div class="card-body">
                                     <ul>
-                                        <li> Artist: {{ item.artist.fname + ' ' + item.artist.lname
-                                            }}
-                                        </li>
-                                        <li> Price: $ {{ item.price }}</li>
-                                        <li> Color: {{ item.color }}</li>
-                                        <li> Item ID: {{ item.item_id}}</li>
+                                        <li> <b>Price: </b>${{ item.price }}</li>
+                                        <li> <b>Color: </b> {{ item.color }}</li>
+                                        <li> <b>Item ID: </b> {{ item.item_id}}</li>
                                         <br>
                                         <li>
                                             <button type="button"
                                                 class="removeItemCartButton btn btn-light customButton"
-                                                id="{{'buttonRemoveItem' + '_' + (item.item_id) | string}}">remove
+                                                id="{{'buttonRemoveItem' + '_' + (item.artist_id) | string + '_' + (item.item_id) | string}}">remove
                                                 item
                                             </button>
                                         </li>
                                     </ul>
                                 </div>
                             </div>
-                            {% endfor %}
                         </div>
-                        <p class="card-text">Subtotal: ${{ cost_data[artist_id] }}</p>
                     </div>
+                    {% endfor %}
+                    <p class="card-text pt-3"> <b>Subtotal: </b>${{ cost_data[artist_id] }}</p>
                 </div>
-                {% endfor %}
-                <div class="card cartCard">
-                    <div class="row no-gutters justify-content-start">
-                        <div class="card-header">
-                            Order Summary
-                        </div>
-                        <div class="card-body">
-                            {% if cart_data %}
-                            <p id="cartTotalCost">Total: ${{ total_cost }}</p>
+            </div>
 
-                            <button type='button' class="shippingButton btn btn-light customButton"> <a
-                                    href='/shipping'>proceed
-                                    to
-                                    checkout</a>
-                            </button>
-                            {% else %}
-                            <p>Cart is empty</p>
-                            {% endif %}
-                        </div>
+            {% endfor %}
+            <div class="card cartCard">
+                <div class="row no-gutters justify-content-start">
+
+                    <div class="card-body">
+                        {% if cart_data %}
+                        <p id="cartTotalCost"><b>Total: </b> ${{ total_cost }}</p>
+
+                        <button type='button' class="shippingButton btn btn-light customButton"> <a
+                                href='/shipping'>proceed
+                                to
+                                checkout</a>
+                        </button>
+                        {% else %}
+                        <p>Cart is empty</p>
+                        {% endif %}
                     </div>
                 </div>
+                <!-- </div> -->
             </div>
         </div>
     </div>

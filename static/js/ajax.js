@@ -87,6 +87,7 @@ for (let button of removeItemCartButton) {
     // tokenize the button_id string by _ and get last element in the array which is the item_id as a string
     let buttonIdArray = button.id.split("_");
     let itemId = buttonIdArray.at(-1);
+    let artistId = buttonIdArray.at(-2);
 
     // do a post request to the server sending the item_id
     fetch("/add_cart_item", {
@@ -103,28 +104,23 @@ for (let button of removeItemCartButton) {
         let costData = responseJson.cost_data;
         let totalCost = responseJson.total_cost;
 
-        // Get elements to remove - get the card
-        let cartCard =
-          button.parentElement.parentElement.parentElement.parentElement
-            .parentElement;
+        // Get elements to remove - get the card of the artist
+        let cartCard = document.getElementById("cartCard_" + artistId);
 
-        // Update subtotal - first get the artist id by tokenizing the element where the artist id is
-        let artistString = cartCard.firstElementChild.innerHTML;
-        let artistIdArray = artistString.split(" ");
-        let artistId = artistIdArray.at(-1);
         // Then modify the cost for the right artist
-        cartCard.parentElement.lastElementChild.innerHTML =
-          "Subtotal: $" + costData[artistId];
+        cartCard.lastElementChild.innerHTML =
+          "<b>Subtotal: </b>$" + costData[artistId];
 
         // Update total - get cartSummary first
         let cartTotal = document.getElementById("cartTotalCost");
-        cartTotal.innerHTML = "Total: $" + totalCost;
-        // if the cardBody  only has one h2, one hr, one br, one section and one p
-        //  (so less or equal to 4 elements in total) then delete it
-        if (cartCard.children.length <= 1) {
+        cartTotal.innerHTML = "<b>Total: </b>$" + totalCost;
+
+        // if the cardBody only has one h5, one p and one cartItemCard (the one that is being removed) then delete it
+        if (cartCard.children.length <= 3) {
           cartCard.remove();
         } else {
-          sectionItem.remove();
+          let cartItemCard = document.getElementById("cartItemCard_" + itemId);
+          cartItemCard.remove();
         }
         // if the total cost is zero, reload the page
         if (totalCost <= 0) {

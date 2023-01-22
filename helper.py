@@ -27,25 +27,22 @@ def switch_profile_login(session):
         button['route'] = '/login'
     return button
 
+
 # get the dynamic route of a customer profile
-
-
 def get_customer_route(customer):
     customer_route = '/profile/' + \
         str(customer.fname.lower() + customer.lname.lower() +
             '_' + str(customer.customer_id))
     return customer_route
 
+
 # get the dynamic route of an artist profile
-
-
 def get_artist_route(artist):
     artist_route = '/admin/' + str(artist.alias)
     return artist_route
 
+
 # get the label of the favorite item button (like or unlike)
-
-
 def get_favitem_button_label(artist, session):
 
     # favorite logic for when the page is loaded
@@ -111,9 +108,8 @@ def get_favartist_button_label_home(artists, session):
 
     return button_favartist_label
 
+
 # get the label for cart items button when the page is first loaded (add to cart or remove from cart)
-
-
 def get_cart_button_label(artist, session):
 
     # create an empty dictionary where the labels will be stored
@@ -149,9 +145,8 @@ def get_cart_button_label(artist, session):
 
     return button_cart_label
 
+
 # get the cart data in an organized dictionary which separates the cart items by artist
-
-
 def get_cart_data(session):
 
     # create an emprty dictionary where the cart items will be stored and organized by artist

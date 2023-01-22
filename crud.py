@@ -4,9 +4,8 @@ from sqlalchemy import func
 #####################################################################
 # CUSTOMER
 
+
 # get customer by email
-
-
 def get_customer_by_email(email):
     return Customer.query.filter(Customer.email == email).first()
 
@@ -95,9 +94,8 @@ def create_item(description, dimensions, price, date, color, in_stock, picture_p
     return Item(description=description, dimensions=dimensions, price=price,
                 date=date, color=color, in_stock=in_stock, picture_path=picture_path, artist_id=artist_id)
 
+
 # delete item by id
-
-
 def delete_item_by_id(item_id):
     Item.query.filter((Item.item_id ==
                        item_id)).delete()
@@ -117,9 +115,8 @@ def get_favitem(customer_id, item_id):
     return FavoriteItem.query.filter((FavoriteItem.customer_id == customer_id) & (
         FavoriteItem.item_id == item_id)).first()
 
+
 # get favorite items by item id
-
-
 def get_favitems_by_item_id(item_id):
     return FavoriteItem.query.filter((FavoriteItem.item_id == item_id)).all()
 
@@ -134,9 +131,8 @@ def delete_favitem(customer_id, item_id):
     FavoriteItem.query.filter((FavoriteItem.customer_id ==
                               customer_id) & (FavoriteItem.item_id == item_id)).delete()
 
+
 # delete favorite item by id
-
-
 def delete_favitem_by_id(favitem_id):
     FavoriteItem.query.filter((FavoriteItem.favitem_id == favitem_id)).delete()
 
@@ -175,9 +171,8 @@ def delete_cartitem(customer_id, item_id):
     CartItem.query.filter((CartItem.customer_id ==
                            customer_id) & (CartItem.item_id == item_id)).delete()
 
+
 # delete cart item by id
-
-
 def delete_cartitem_by_id(cartitem_id):
     CartItem.query.filter((CartItem.cartitem_id == cartitem_id)).delete()
 
