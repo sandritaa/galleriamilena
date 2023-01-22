@@ -1,3 +1,4 @@
+
 from flask import Flask, render_template, request, flash, session, redirect, flash
 from model import connect_to_db, db
 from jinja2 import StrictUndefined
@@ -112,7 +113,7 @@ def login():
         # get the customer route since it is a dynamic route depending on the logged in customer
         customer_route = helper.get_customer_route(customer)
 
-        for item_id in session.get('cartItems', []):
+        for item_id in session.get('cartitems', []):
 
             cart_item_db = crud.get_cartitem(
                 session.get('customer_id'), item_id)
@@ -124,7 +125,7 @@ def login():
                 db.session.add(cart_item)
                 db.session.commit()
 
-        session['cartItems'] = []
+        session['cartitems'] = []
         session.modified = True
 
         # go to the customer route
@@ -141,7 +142,7 @@ def login():
         artist_route = helper.get_artist_route(artist)
 
         # empty cart if an artist logs in
-        session['cartItems'] = []
+        session['cartitems'] = []
         session.modified = True
 
         # go to the artist route
@@ -257,7 +258,7 @@ def new_item_form():
 @app.route('/artist_add_item', methods=['POST'])
 def artist_add_item():
 
-    # get the data posted by the form
+    # get the data posted on the form - the item is always in stock if an artist adds it
     description = request.form.get('description')
     dimensions = request.form.get('dimensions')
     price = request.form.get('price')
@@ -287,7 +288,7 @@ def artist_order_update():
     order_id = int(request.json.get('orderId'))
     status_option = request.json.get('statusOption')
 
-    crud.update_order_status(order_id, status_option)
+    crud.update_order_status_by_id(order_id, status_option)
     db.session.commit()
 
     # print('!!!!')
@@ -307,17 +308,23 @@ def artist_remove_item():
     # get the order_id and convert it to an int from the client (ajax)
     item_id = int(request.json.get('itemId'))
 
-    favitems = crud.getFavItemByItemId(item_id)
-    cartitems = crud.getCartItemByItemId(item_id)
+    # in order to delete an item, it cannot be part of a cart or it cannot be a favorite item.
+    # therefore, first query if it is a cartitem or a favitem and delete these cartitems and favitems
+    favitems = crud.get_favitems_by_item_id(item_id)
+    cartitems = crud.get_cartitems_by_item_id(item_id)
+
+    # loop through all of the favitems found and delete the like
     for favitem in favitems:
-        crud.deleteFavItemById(favitem.favitem_id)
+        crud.delete_favitem_by_id(favitem.favitem_id)
         db.session.commit()
 
+    # loop through all of the cartitems found and delete the item for the carts
     for cartitem in cartitems:
-        crud.deleteCartItemById(cartitem.cartitem_id)
+        crud.delete_cartitem_by_id(cartitem.cartitem_id)
         db.session.commit()
 
-    crud.artistRemoveItem(item_id)
+    # now remove the item
+    crud.delete_item_by_id(item_id)
     db.session.commit()
 
     return {
@@ -325,7 +332,7 @@ def artist_remove_item():
     }
 
 
-# create cartItem route - POST request
+# create cart item route - POST request
 @app.route('/add_cart_item', methods=['POST'])
 def add_cart_item():
 
@@ -336,42 +343,52 @@ def add_cart_item():
     customer_id = session.get("customer_id", None)
     artist_id = session.get("artist_id", None)
 
-    # check if the customer is logged in or not
-    # if the customer is NOT logged in - use session to store cartitems
+    # start by checking if an artist is logged in, if they are not
     if artist_id == None:
+        # check if the customer is logged in or not
+        # if the customer is NOT logged in - use session to store cartitems
         if customer_id == None:
 
-            if item_id in session.get('cartItems', []):
+            if item_id in session.get('cartitems', []):
 
-                session['cartItems'].remove(item_id)
+                session['cartitems'].remove(item_id)
                 session.modified = True
                 added_item = False
 
             else:
                 # item_id goes into my session
-                session.setdefault('cartItems', []).append(item_id)
+                session.setdefault('cartitems', []).append(item_id)
                 session.modified = True
                 added_item = True
 
         # if instead the customer is logged in - used the db to store cartitems
         else:
 
-            # Query for a cartitems
+            # query for a cartitems
             cartitem = crud.get_cartitem(customer_id, item_id)
+
+            # if the item is already in the cart then the item will be removed from the cart
+            # use the added_item flag to send back to the front end information on whether an item has
+            # been added or removed from the cart
             if cartitem:
                 crud.delete_cartitem(customer_id, item_id)
                 db.session.commit()
                 added_item = False
 
             else:
+                # if the item is not in the cart then the item will be added to the cart
+                # use the added_item flag to send back to the front end information on whether an item has
+                # been added or removed from the cart
                 cart_item = crud.create_cartitem(customer_id, item_id)
                 db.session.add(cart_item)
                 db.session.commit()
                 added_item = True
+
         # Recalculate cost data since that needs to be updated too
         cost_data = helper.get_cost_data(session)
         total_cost = round(sum(cost_data.values()), 2)
 
+    # if an artist is logged in set everything to false, empty or zero as the artist cannot add items to the cart
     else:
         added_item = False
         cost_data = {}
@@ -483,6 +500,8 @@ def add_favorite_artist():
 def cart():
     login_button = helper.switch_profile_login(session)
 
+    # get the cart data, cost data and total cost of the order. The cart data, cost data and tax data
+    # are stored in dictionaries where the keys are the artists ids since there will be a separate order for each artist
     cart_data = helper.get_cart_data(session)
     cost_data = helper.get_cost_data(session)
     total_cost = round(sum(cost_data.values()), 2)
@@ -538,12 +557,11 @@ def order_review():
     # get login or logout depending if a customer/artist is logged in or not
     login_button = helper.switch_profile_login(session)
 
-    login_button = helper.switch_profile_login(session)
-
+    # get the cart data, cost data, tax data and total  of the order. The cart data, cost data and tax data
+    # are stored in dictionaries where the keys are the artists ids since there will be a separate order for each artist
     cart_data = helper.get_cart_data(session)
     cost_data = helper.get_cost_data(session)
     tax_data = helper.get_tax_data(cost_data)
-
     total_cost = sum(cost_data.values()) + sum(tax_data.values())
 
     return render_template("orderReview.html", order_data=cart_data, cost_data=cost_data, tax_data=tax_data, total_cost=total_cost, login_button=login_button)
@@ -556,47 +574,52 @@ def order_complete():
     # get login or logout depending if a customer/artist is logged in or not
     login_button = helper.switch_profile_login(session)
 
+    # get the cart data, cost data, tax data and total cost of the order. The cart data, cost data and tax data
+    # are stored in dictionaries where the keys are the artists ids since there will be a separate order for each artist
     cart_data = helper.get_cart_data(session)
     cost_data = helper.get_cost_data(session)
     tax_data = helper.get_tax_data(cost_data)
     total_cost = sum(cost_data.values()) + sum(tax_data.values())
 
+    # loop through each artist id in the cart_data (which are the same as the ones in cost_data and tax_data)
     for artist_id in cart_data:
-        orderItems = cart_data[artist_id]
-        totalOrder = cost_data[artist_id] + tax_data[artist_id]
-        order = crud.create_order_by_session(session, artist_id, totalOrder)
 
+        # get the items that are part of the order for each artist id
+        order_items = cart_data[artist_id]
+
+        # calculate the subtotal for each order by symming the cost of the order and the tax data
+        total_order = cost_data[artist_id] + tax_data[artist_id]
+
+        # create a new order in the db with all the information
+        order = crud.create_order_by_session(session, artist_id, total_order)
         db.session.add(order)
         db.session.commit()
 
-        for orderItem in orderItems:
+        # loop through each item in the order
+        for order_item in order_items:
+
+            # change the stock value to False as each piece is one of a kind
             in_stock = False
-            crud.update_item_with_order(orderItem, order.order_id, in_stock)
+
+            # update the item stock level
+            crud.update_item_with_order_by_id(
+                order_item, order.order_id, in_stock)
             db.session.commit()
 
+    # if the customer is logged in
     if session.get('customer_id', None):
+
+        # empty the cart by removing the cartitems in the db for that customer
         crud.delete_cartitem_by_customer_id(session['customer_id'])
         db.session.commit()
+
+    # if the customer is not logged in
     else:
-        session['cartItems'] = []
+
+        # empty the cart setting the value of the cartitems key of the session dictionary to an empty list
+        session['cartitems'] = []
 
     return render_template("orderComplete.html", order_data=cart_data, cost_data=cost_data, tax_data=tax_data, total_cost=total_cost, login_button=login_button)
-
-
-# create route for order to update stock
-@app.route('/order_update_stock', methods=["POST"])
-def order_update_stock():
-
-    # get the order_id and convert it to an int from the client (ajax)
-    item_id = int(request.json.get('itemId'))
-    stock_option = bool(request.json.get('stockOption'))
-
-    crud.update_item_stock(item_id, stock_option)
-    db.session.commit()
-
-    return {
-        'success': True
-    }
 
 
 if __name__ == "__main__":

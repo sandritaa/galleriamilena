@@ -2,60 +2,39 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
-  /* padding-left: 200px !important; */
-  /* width of your navbar */
 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-.bodyWrapper {
-  padding-left: 210px;
-
+.bodyContent {
+  padding-left: 200px;
 }
-
-.boxesWrapper {
-  padding-left: 210px;
-}
-
-.wrapper {
-  padding-left: 210px;
-}
-
-/* code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-} */
-
-/* .new-color {
-  background-color: blue;
-} */
 
 .navbar-fixed-left {
   width: 200px;
   position: fixed;
   border-radius: 0;
   height: 100%;
-  background-color: aliceblue;
   margin-right: 0px;
+}
 
+.navbar a:active,
+.navbar a:hover {
+  text-decoration: underline;
 }
 
 .navbar-brand {
   font-family: 'Work Sans', sans-serif;
   font-weight: light 300;
-  color: aqua;
   text-transform: uppercase;
-  /* font-size: 230%; */
 }
 
 .nav-item {
   font-family: 'Work Sans', sans-serif;
   font-weight: 200;
   color: black;
-  /* font-family: 'Oswald', sans-serif; */
   text-transform: uppercase;
-  /* font-size: 170%; */
 }
 
 .nav-link.active {
@@ -64,24 +43,76 @@ body {
 
 .mainHeading {
   font-family: 'Work Sans', sans-serif;
-  text-transform: uppercase
-}
-
-.artistHeading {
-  font-family: 'Work Sans', sans-serif;
   text-transform: uppercase;
   font-weight: 400;
   text-align: center;
 }
 
-.artistLikeButton {
+.card-img-top {
+  width: 100%;
+  height: 15vw;
+  object-fit: cover;
+}
+
+@media (max-width: 992px) {
+  .card-img-top {
+    width: 100%;
+    height: 80vw;
+    object-fit: cover;
+  }
+}
+
+.cardHover:hover {
+  transform: scale(1.05);
+  border-color: #bebebe;
+}
+
+.customButton {
   font-family: 'Roboto Flex', sans-serif;
   text-transform: lowercase;
   font-weight: 400;
   font-size: 100%;
   text-transform: capitalize;
-  /* text-align: center; */
+  background-color: white;
+  border-radius: 2px;
+  border: 1px solid #bebebe;
+  color: rgb(0, 0, 0);
 
+}
+
+.customButton:hover {
+  transform: scale(1.1);
+  background-color: #cfc4c4;
+  border: 1px solid #bebebe;
+  color: rgb(0, 0, 0) !important;
+}
+
+.cartCard {
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+}
+
+.cartItemCard {
+  border: 0;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+a:hover {
+  color: black;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.img-align {
+  display: block;
+  margin: 0 auto;
 }
 
 #emaillog,
@@ -101,89 +132,3 @@ body {
 #phone {
   width: 170px;
 }
-
-#wallHeading {
-  height: 200px;
-
-}
-
-.itemLikeButton,
-.itemCartButton,
-.artistLikeButton,
-.loginButton,
-.createLoginButton,
-.editCartButton,
-.shippingButton,
-.billingButton,
-.cartButton,
-.creditCardButton,
-.reviewOrderButton,
-.orderCompleteButton {
-  font-family: 'Roboto Flex', sans-serif;
-  text-transform: lowercase;
-  font-weight: 400;
-  font-size: 100%;
-  text-transform: capitalize;
-
-  /* width: max-content; */
-  background-color: white;
-  border-radius: 2px;
-  border: 1px solid #bebebe;
-  color: rgb(0, 0, 0);
-  /* padding: 10px 24px; */
-}
-
-.itemLikeButton:hover,
-.itemCartButton:hover,
-.artistLikeButton:hover,
-.loginButton:hover,
-.createLoginButton:hover,
-.editCartButton:hover,
-.shippingButton:hover,
-.billingButton:hover,
-.cartButton:hover,
-.creditCardButton:hover,
-.reviewOrderButton:hover,
-.orderCompleteButton:hover {
-  background-color: #f8f0f0;
-  border: 1px solid #bebebe;
-  padding: 10px 24px;
-  color: rgb(0, 0, 0) !important;
-}
-
-a:hover {
-  color: black;
-}
-
-.navbar a:active,
-.navbar a:hover {
-  text-decoration: underline;
-}
-
-ul {
-  list-style-type: none;
-}
-
-.img-align {
-  display: block;
-  margin: 0 auto;
-}
-
-.col-md-6 {
-  text-align: center;
-}
-
-.card-img-top {
-  width: 100%;
-  height: 15vw;
-  object-fit: cover;
-}
-
-a {
-  text-decoration: none;
-  color: black;
-}
-
-/* input[type="submit"]:hover {
-  color: rgb(0, 110, 255);
-} */

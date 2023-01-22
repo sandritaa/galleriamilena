@@ -1,10 +1,12 @@
 from model import connect_to_db, db, Customer, Artist, Item, FavoriteItem, CartItem, FavoriteArtist, Order
 from sqlalchemy import func
 
+#####################################################################
 # CUSTOMER
 
-
 # get customer by email
+
+
 def get_customer_by_email(email):
     return Customer.query.filter(Customer.email == email).first()
 
@@ -31,6 +33,7 @@ def delete_customer_profile(customer_id):
     Customer.query.filter(Customer.customer_id == customer_id).delete()
 
 
+#####################################################################
 # ARTIST
 
 # get all artists
@@ -45,17 +48,17 @@ def get_artist_by_id(artist_id):
 
 #  get artist by login
 def get_artist_by_login(email, password):
-    artist = Artist.query.filter((Artist.email == email) & (
+    return Artist.query.filter((Artist.email == email) & (
         Artist.password == password)).first()
-    return artist
 
 
 # get artist by alias
 def get_artist_by_alias(alias):
     return Artist.query.filter(Artist.alias == alias).first()
 
-# FAVORITE ARTIST
 
+#####################################################################
+# FAVORITE ARTIST
 
 # get favorite artist
 def get_favartist(customer_id, artist_id):
@@ -73,12 +76,18 @@ def delete_favartist(customer_id, artist_id):
                                  customer_id) & (FavoriteArtist.artist_id == artist_id)).delete()
 
 
+# delete favorite artist by customer id
 def delete_favartist_by_customer_id(customer_id):
     FavoriteArtist.query.filter(
         FavoriteArtist.customer_id == customer_id).delete()
 
 
+#####################################################################
 # ITEM
+
+# get item by id
+def get_item_by_id(item_id):
+    return Item.query.get(item_id)
 
 
 # create new item
@@ -86,13 +95,33 @@ def create_item(description, dimensions, price, date, color, in_stock, picture_p
     return Item(description=description, dimensions=dimensions, price=price,
                 date=date, color=color, in_stock=in_stock, picture_path=picture_path, artist_id=artist_id)
 
-
-# get item by id
-def get_item_by_id(item_id):
-    return Item.query.get(item_id)
+# delete item by id
 
 
+def delete_item_by_id(item_id):
+    Item.query.filter((Item.item_id ==
+                       item_id)).delete()
+
+
+# update item with order_id
+def update_item_with_order_by_id(item, order_id, in_stock):
+    Item.query.filter(Item.item_id == item.item_id).update(
+        {'order_id': order_id, 'in_stock': in_stock})
+
+
+#####################################################################
 # FAVORITE ITEM
+
+# get favorite item by id
+def get_favitem(customer_id, item_id):
+    return FavoriteItem.query.filter((FavoriteItem.customer_id == customer_id) & (
+        FavoriteItem.item_id == item_id)).first()
+
+# get favorite items by item id
+
+
+def get_favitems_by_item_id(item_id):
+    return FavoriteItem.query.filter((FavoriteItem.item_id == item_id)).all()
 
 
 # create favorite item
@@ -105,31 +134,20 @@ def delete_favitem(customer_id, item_id):
     FavoriteItem.query.filter((FavoriteItem.customer_id ==
                               customer_id) & (FavoriteItem.item_id == item_id)).delete()
 
-
-# get favorite item by id
-def get_favitem(customer_id, item_id):
-    return FavoriteItem.query.filter((FavoriteItem.customer_id == customer_id) & (
-        FavoriteItem.item_id == item_id)).first()
+# delete favorite item by id
 
 
-def deleteFavItemById(favitem_id):
+def delete_favitem_by_id(favitem_id):
     FavoriteItem.query.filter((FavoriteItem.favitem_id == favitem_id)).delete()
 
 
+# delete favorite item by customer id
 def delete_favitem_by_customer_id(customer_id):
     FavoriteItem.query.filter(FavoriteItem.customer_id == customer_id).delete()
 
 
-def getFavItemByItemId(item_id):
-    return FavoriteItem.query.filter((FavoriteItem.item_id == item_id)).all()
-
+#####################################################################
 # CART ITEMS
-
-
-# create a cart item
-def create_cartitem(customer_id, item_id):
-    return CartItem(customer_id=customer_id, item_id=item_id)
-
 
 # get cart item
 def get_cartitem(customer_id, item_id):
@@ -138,8 +156,18 @@ def get_cartitem(customer_id, item_id):
 
 
 # get cart item by customer_id
-def get_cartitem_by_customer(customer_id):
+def get_cartitem_by_customer_id(customer_id):
     return CartItem.query.filter(CartItem.customer_id == customer_id).all()
+
+
+# get cart items by item id
+def get_cartitems_by_item_id(item_id):
+    return CartItem.query.filter((CartItem.item_id == item_id)).all()
+
+
+# create a cart item
+def create_cartitem(customer_id, item_id):
+    return CartItem(customer_id=customer_id, item_id=item_id)
 
 
 # delete cart item
@@ -147,22 +175,22 @@ def delete_cartitem(customer_id, item_id):
     CartItem.query.filter((CartItem.customer_id ==
                            customer_id) & (CartItem.item_id == item_id)).delete()
 
+# delete cart item by id
 
-def deleteCartItemById(cartitem_id):
+
+def delete_cartitem_by_id(cartitem_id):
     CartItem.query.filter((CartItem.cartitem_id == cartitem_id)).delete()
 
 
+# delete cart item by customer id
 def delete_cartitem_by_customer_id(customer_id):
     CartItem.query.filter(CartItem.customer_id == customer_id).delete()
 
 
-def getCartItemByItemId(item_id):
-    return CartItem.query.filter((CartItem.item_id == item_id)).all()
-
-
+#####################################################################
 # ORDER
 
-
+# create order using the session dictionary
 def create_order_by_session(session, artist_id, totalOrder):
     return Order(
         status='order received',
@@ -183,26 +211,13 @@ def create_order_by_session(session, artist_id, totalOrder):
     )
 
 
-def update_item_with_order(item, order_id, in_stock):
-    Item.query.filter(Item.item_id == item.item_id).update(
-        {'order_id': order_id, 'in_stock': in_stock})
-
-
-def update_order_status(order_id, status_option):
+# update order status by id
+def update_order_status_by_id(order_id, status_option):
     Order.query.filter(Order.order_id == order_id).update(
         {'status': status_option})
 
 
-def update_order_status(order_id, status_option):
-    Order.query.filter(Order.order_id == order_id).update(
-        {'status': status_option})
-
-
-def artistRemoveItem(item_id):
-    Item.query.filter((Item.item_id ==
-                       item_id)).delete()
-
-
+# update customer id in order
 def update_customer_id_in_order(customer_id):
     Order.query.filter(Order.customer_id == customer_id).update(
         {'customer_id': None})

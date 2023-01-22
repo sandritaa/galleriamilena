@@ -3,38 +3,27 @@
 
 <!-- insert content block -->
 {% block body %}
+<div class="bg-light text-dark py-sm-5">
+    <h1 class="mainHeading">Galleria Milena</h1>
+</div>
 
-<section id='wallHeading' class="bg-light text-dark p-5 p-lg-0 pt-lg-5 text-center text-sm-start">
-    <div class="container">
-        <h2 class="mainHeading">galleria</h2>
-
-        <img class="img-fluid w-50 d-none d-sm-block" src="" alt="" />
-    </div>
-    </div>
-</section>
-
-<!-- check all artists -->
-<div class="container">
-    <!-- <div class="card mb-3 cartData" style="max-width: 540px;"> -->
-    <div class="row row-cols-1 row-cols-md-2 g-4">
+<div class="container pt-5">
+    <div class="row row-cols-1 row-cols-lg-3">
         {% for artist in artists %}
-        <div class="boxesWrapper">
-            <section class="p-5">
-                <div class="card">
-                    <br>
-                    <h5 class="artistHeading"> {{ artist.fname + ' ' + artist.lname }} </h5>
-                    <br>
-                    <a href="{{ url_for('gallery', alias = artist.alias) }}"><img src="{{ artist.profile_pic }}"
-                            class="card-img-top"></a>
-
-                    <button type="button" id='{{"buttonArtistLike" + "_" + (artist.artist_id) | string}}'
-                        class='artistLikeButton btn btn-light '>{{
-                        button_favartist_label[artist.artist_id] }}</button>
+        <div class="mb-4">
+            <div class="card pt-4 px-4 cardHover">
+                <a href="{{ url_for('gallery', alias = artist.alias) }}"><img src="{{ artist.profile_pic }}"
+                        class="card-img-top img-fluid w-100"></a>
+                <div class="card-body">
+                    <h5 class="cart-title text-center"> {{ artist.fname + ' ' + artist.lname
+                        }}
+                    </h5>
                 </div>
-            </section>
+            </div>
         </div>
         {% endfor %}
     </div>
 </div>
+
 <script src="/static/js/ajax.js"></script>
 {% endblock %}
