@@ -16,7 +16,7 @@ While there are great applications out there that help small and talented artist
 
 - **Database:** PostgreSQL, SQLAlchemy
 - **Backend:** Python 3, Flask
-- **Frontend:** JavaScript, Jinja, Bootstrap
+- **Frontend:** JavaScript, Jinja, Bootstrap, HTML, CSS
 
 ### Dependencies
 
@@ -25,6 +25,7 @@ While there are great applications out there that help small and talented artist
   - Flask
 - APIs/external data sources:
   - Cloudinary API
+  - Twilio SendGrid API
 - Browser/client-side dependencies:
   - Bootstrap
 
