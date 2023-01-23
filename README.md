@@ -1,6 +1,6 @@
 # Galleria Milena
 
-A web application that allows multiple artists to showcase and sell their artwork
+Galleria Milena is a web application that allows multiple artists to showcase and sell their artwork. As an artist, you can upload your art pieces to the web application using the Cloudinary API and sell them through your own personalized virtual gallery. You can also view all the orders you have in place and send order updates directly to your customer’s inbox using the Twilio SendGrid API. As a customer, you can view all of the artists’ galleries and purchase a variety items from multiple artists in one transaction. As a subscribed customer, you are also able to like different art pieces, follow artists and keep track of your orders.
 
 ## Background
 
