@@ -595,7 +595,7 @@ def order_complete():
         order_items = cart_data[artist_id]
 
         # calculate the subtotal for each order by symming the cost of the order and the tax data
-        total_order = cost_data[artist_id] + tax_data[artist_id]
+        total_order = round(cost_data[artist_id] + tax_data[artist_id], 2)
 
         # create a new order in the db with all the information
         order = crud.create_order_by_session(session, artist_id, total_order)
