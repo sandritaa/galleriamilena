@@ -5,43 +5,42 @@
 {% block body %}
 
 
-<section class="bg-light text-dark p-5 p-lg-0 pt-lg-5 text-center text-sm-start">
-    <div class="container">
-        <div class="d-sm-flex align-items-center justify-content-between">
-            <h2 class="mainHeading">login</h2>
+<div class="bg-light text-dark py-sm-5 topbar">
+    <h1 class="mainHeading">Login</h1>
+</div>
 
-            <!-- <img class="img-fluid w-50 d-none d-sm-block" src="img/showcase.svg" alt="" /> -->
-        </div>
-    </div>
-</section>
-
-
-<br>
-<!-- login form -->
-<div class="container">
-    <div class="card mb-3 cartData" style="max-width: 540px;">
-        <div class="login">
-            <div class="modal-body">
-                <!-- <p class="lead">Please login</p> -->
-                <form action="/login">
-                    <div class="mb-3">
-                        <label for="email" class="col-form-label">
-                            Email
-                        </label>
-                        <input type="email" class="form-control" id="emaillog" name="email" required />
+<div class="container pt-5">
+    <div class="row justify-content-center">
+        <div class="col-5">
+            <div class="mt-4">
+                <div class="card pb-4">
+                    <div class="card-body">
+                        <!-- send post request to server to create new item and update database when added -->
+                        <form action='/login' class="row g-3">
+                            <div class="md-6">
+                                <label for="email" class="form-label">Email: </label>
+                                <input type="email" class="form-control" id="emaillog" name="email" required
+                                    minlength='1' maxlength='50'>
+                            </div>
+                            <div class="md-6">
+                                <label for="password" class="form-label">Password: </label>
+                                <input type="password" class="form-control" id="passwordlog" name="password" required
+                                    minlength='1'>
+                            </div>
+                            <div class="col-12">
+                                <input type='submit' class="loginButton btn btn-light">
+                                <!-- add create account button-->
+                                <button type='button' class="createLoginButton btn btn-light">
+                                    <a href='/profile'>Create Account</a>
+                            </div>
+                        </form>
                     </div>
-                    <div class="mb-3">
-                        <label for="password" class="col-form-label">Password</label>
-                        <input type="password" class="form-control" id="passwordlog" name="password" required />
-                    </div>
-                    <input type='submit' class="loginButton btn btn-light">
-                </form>
-                <br>
-                <!-- add create account button-->
-                <button type='button' class="createLoginButton btn btn-light">
-                    <a href='/profile'>Create Account</a>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
+
+
 {% endblock %}

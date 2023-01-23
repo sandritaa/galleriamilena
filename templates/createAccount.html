@@ -5,84 +5,56 @@
 {% block body %}
 
 
-<section class="bg-light text-dark p-5 p-lg-0 pt-lg-5 text-center text-sm-start">
-    <div class="container">
-        <div class="d-sm-flex align-items-center justify-content-between">
-            <h2 class="mainHeading">Create an Account</h2>
+<div class="bg-light text-dark py-sm-5 topbar">
+    <h1 class="mainHeading">Create an Account</h1>
+</div>
 
-            <!-- <img class="img-fluid w-50 d-none d-sm-block" src="img/showcase.svg" alt="" /> -->
-        </div>
-    </div>
-</section>
-
-<br>
-
-<!-- send post request to server to create new user account and update database -->
-
-
-
-<div class="container">
-    <div class="card mb-3" style="max-width: 540px;">
-        <div class="cartData">
-            <!-- <h3>Please fill out the below form: </h3> -->
-            <ul>
-                <br>
-                <section>
-                    <div class="row g-0">
-                        <!-- <div class="col-md-4">
-                            <img src="" class="img-fluid rounded-start" alt="">
-                        </div> -->
-                        <div class="col-md-8">
-                            <div class="card-body">
-
-
-                                <!-- send post request to server to create new item and update database when added -->
-                                <form action='/profile' method="POST">
-
-                                    <!-- item attributes -->
-                                    <label>First name </label> <br> <input type="text" name="fname" required
-                                        minlength='1' maxlength='50'><br>
-                                    <label>Last name </label> <br> <input type="text" name="lname" required
-                                        minlength='1' maxlength='50'><br>
-                                    <label>Email</label> <br> <input type="email" name="email" required minlength='4'
-                                        maxlength='50'> <br>
-                                    <label>Phone number </label> <br> <input type="tel" name="phone"
-                                        pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required minlength='1' maxlength='20'><br>
-                                    <small>Format: 123-456-7890</small>
-                                    <br>
-                                    <label>Password</label> <br> <input type="password" name="password" required
-                                        minlength='8' maxlength='12'><br><small>
-                                        Format: 8-12
-                                        characters</small> <br>
-                                    <!-- add hidden field since it will be populated when an image is added so that I can send the url as part of the form  -->
-                                    <input type="hidden" name="picture_path" id="picture_path_id" value=""> <br>
-                                    <button type="button" class="loginButton btn btn-light"><a href="/login">back</a>
-                                    </button>
-                                    <input type="submit" class="createLoginButton btn btn-light">
-
-                                </form>
-
-                                {% for message in get_flashed_messages() %}
-                                <div class="flash">{{ message }}</div>
-                                {% endfor %}
-
-
+<div class="container pt-5">
+    <div class="row justify-content-center">
+        <div class="col-5">
+            <div class="mt-4">
+                <div class="card pb-4">
+                    <div class="card-body">
+                        <!-- send post request to server to create new item and update database when added -->
+                        <form action='/profile' method="POST" class="row g-3">
+                            <div class="col-md-6">
+                                <label for="inputFname" class="form-label">First name *</label>
+                                <input type="text" class="form-control" id="inputFname" name="fname" required
+                                    minlength='1' maxlength='50'>
                             </div>
-                        </div>
+                            <div class="col-md-6">
+                                <label for="inputLname" class="form-label">Last name *</label>
+                                <input type="text" class="form-control" id="inputLname" name="lname" required
+                                    minlength='1' maxlength='50'>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="inputPhone" class="form-label">Phone *</label>
+                                <input type="text" class="form-control" id="inputPhone" placeholder="123-456-7890"
+                                    name="phone" required minlength='1' maxlength='50'>
+                            </div>
+                            <div class="md-6">
+                                <label for="email" class="form-label">Email * </label>
+                                <input type="email" class="form-control" id="emaillog" placeholder="jsmith@gmail.com"
+                                    name="email" required minlength='1' maxlength='50'>
+                            </div>
+                            <div class="md-6">
+                                <label for="password" class="form-label">Password * </label>
+                                <input type="password" class="form-control" id="passwordlog"
+                                    placeholder=" 8-12 characters" name="password" required minlength='1'>
+                            </div>
+                            <div class="col-12">
+                                <!-- add hidden field since it will be populated when an image is added so that I can send the url as part of the form  -->
+                                <input type="hidden" name="picture_path" id="picture_path_id" value=""> <br>
+                                <button type="button" class="loginButton btn btn-light"><a href="/login">back</a>
+                                </button>
+                                <input type="submit" class="createLoginButton btn btn-light">
+                            </div>
+                        </form>
                     </div>
-                </section>
+                </div>
+            </div>
         </div>
-
-        </ul>
     </div>
+</div>
 
-    {% for message in get_flashed_messages() %}
-    <div class="flash">{{ message }}</div>
-    {% endfor %}
-
-    <!-- add home button -->
-    <!-- <button type='button' class="btn btn-light">
-        <a href="/ ">home</a>
-    </button> -->
-
-    {% endblock %}
+{% endblock %}
