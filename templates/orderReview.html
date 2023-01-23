@@ -4,88 +4,64 @@
 <!-- insert content block -->
 {% block body %}
 
-<section class="bg-light text-dark p-5 p-lg-0 pt-lg-5 text-center text-sm-start">
-    <div class="container">
-        <div class="d-sm-flex align-items-center justify-content-between">
-            <h2 class="mainHeading">review your order</h2>
+<div class="bg-light text-dark py-sm-5 topbar">
+    <h1 class="mainHeading">Review your order</h2>
+</div>
 
-            <!-- <img class="img-fluid w-50 d-none d-sm-block" src="img/showcase.svg" alt="" /> -->
-        </div>
-    </div>
-</section>
-
-<br>
-
-<div class="container">
-    <div class="card mb-3 cartData" style="max-width: 540px;">
-        <!-- <div class="card-header"> -->
-        <!-- <h1>order summary</h1> -->
-        <!-- </div> -->
-        {% for artist_id in order_data %}
-        <div class="card-body">
-
-
-            <section>
-                <div class="row g-0">
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <ul>
-                                {% for item in order_data[artist_id] %}
-                                <li> Item ID: {{ item.item_id }}
-                                </li>
-                                <li> Price: {{ item.price}}
-                                </li>
-                                <li> Order Date: {{ item.date }}
-                                </li>
-                                <li> Color: {{ item.color }}
-                                </li>
-                                <hr>
-                                {% endfor %}
-                            </ul>
+<div class="container pt-5">
+    <div class="row justify-content-center">
+        <div class="col-7">
+            {% for artist_id in order_data %}
+            <div class="mt-4">
+                <div class="card cartCard pb-4" id="{{'cartCard' + '_' + (artist_id) | string}}">
+                    <h5>Sold by {{ order_data[artist_id][0].artist.fname + ' ' +
+                        order_data[artist_id][0].artist.lname }}
+                    </h5>
+                    {% for item in order_data[artist_id] %}
+                    <div class="card cartItemCard" id="{{'cartItemCard' + '_' + (item.item_id) | string}}">
+                        <div class="row g-0 justify-content-start">
+                            <div class="col-md-5">
+                                <img src="{{ item.picture_path }}" class="card-img-top" style="padding-bottom: 10px;">
+                            </div>
+                            <div class="col-md-5">
+                                <div class="card-body">
+                                    <ul>
+                                        <li> <b>Price: </b>${{ item.price }}</li>
+                                        <li> <b>Color: </b> {{ item.color }}</li>
+                                        <li> <b>Item ID: </b> {{ item.item_id}}</li>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
-
-                </div>
-            </section>
-
-
-            <div class="cartSummary" style="max-width: 540px;">
-                <div class="card-header">
-                    Order Subtotal & Tax:
-                </div>
-
-                <div class="card-body">
-                    <p>Tax: $ {{ tax_data[artist_id] }}</p>
-                    <p>Order subtotal: $ {{ cost_data[artist_id] }}</p>
-
                     {% endfor %}
-
+                    <div class="card cartItemCard pt-0">
+                        <p class="card-text"> <b>Tax: </b>${{ tax_data[artist_id] }}</p>
+                        <p class="card-text"> <b>Subtotal: </b>${{ cost_data[artist_id] }}</p>
+                    </div>
                 </div>
             </div>
 
+            {% endfor %}
+            <div class="card cartCard">
+                <div class="row no-gutters justify-content-start">
+                    <div class="card-body">
+                        <p><b>Items Subtotal: </b> ${{ total_items }}</p>
+                        <p><b>Total Taxes: </b> ${{ total_tax }}</p>
+                        <p><b>Order Total: </b> ${{ total_cost }}</p>
+                        <p><i> * Free shipping</i></p>
+                        <button type='button' class="shippingButton btn btn-light customButton"> <a
+                                href='/order_complete'>Place your order</a>
+                        </button>
 
-
-            <div class="cartSummary" style="max-width: 540px;">
-                <div class="card-header">
-                    Order Total:
+                    </div>
                 </div>
-
-                <div class="card-body">
-
-
-
-                    <p>Order Total: $ {{ total_cost }}</p>
-                </div>
+                <!-- </div> -->
             </div>
-            <button type="button" class="billingButton btn btn-light"><a href="/billing">back</a></button>
-            <button type="button" class="orderCompleteButton btn btn-light"><a href="/order_complete">place order</a>
-            </button>
         </div>
     </div>
 </div>
-
-
-
 
 
 

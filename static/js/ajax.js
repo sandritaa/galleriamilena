@@ -230,3 +230,64 @@ for (let button of removeItemButton) {
       });
   });
 }
+
+// SET BILLING EQUAL TO SHIPPING
+// query checkbox
+let billingIsShipping = document.getElementById("billingIsShipping");
+
+billingIsShipping.addEventListener("click", (evt) => {
+  // avoid the default behavior to not reload the page
+  evt.preventDefault();
+  // do a get request from the server to get shipping information
+  fetch("/set_billing_to_shipping", {
+    method: "GET",
+  })
+    // use the response (promise) from the server and convert it to a JSON
+    .then((response) => response.json())
+    .then((responseJson) => {
+      // get all input fields
+      let inputs = document.querySelectorAll(
+        "form input[type='text'], form input[type='email']"
+      );
+
+      // if the checkbox is marked then unmark it and set all the fields to enabled and empty the value
+      if (billingIsShipping.checked) {
+        // uncheck the checkmark
+        billingIsShipping.checked = false;
+        // loop through every field of the inputs
+        for (let input of inputs) {
+          // for each input set it to enabled by setting disabled to false
+          input.disabled = false;
+          // for each input set the value to an empty string
+          input.value = "";
+        }
+        // if the checkbox is unmarked then mark it and set all the fields to the same as the shipping
+      } else {
+        // check the checkmark
+        billingIsShipping.checked = true;
+        // loop through every field of the inputs
+        for (let input of inputs) {
+          // for each input set it to disabled by setting disabled to true
+          input.disabled = true;
+          // for each input set the value to the value stored in the shipment disctionary sent by the server
+          // and using as keys the name attribute of the input (which is the same as the one in the dictionaru)
+          input.value = responseJson.shipment[input.name];
+        }
+      }
+    });
+});
+
+// var checkbox = document.getElementById("billingIsShipping");
+// var shipping_details = JSON.parse(document.getElementById("shipping_details").value);
+
+// checkbox.addEventListener("change", function () {
+//   for (var i = 0; i < inputs.length; i++) {
+//     if (this.checked) {
+//       inputs[i].disabled = true;
+//       inputs[i].value = "";
+//     } else {
+//       inputs[i].disabled = false;
+//       inputs[i].value = shipping_details[inputs[i].name];
+//     }
+//   }
+// });

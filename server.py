@@ -538,7 +538,7 @@ def billing():
         'phone': request.args.get('phone'),
     }
 
-    return render_template("billingDetails.html", login_button=login_button)
+    return render_template("billingDetails.html", login_button=login_button, shipping_details=session['shipment'])
 
 
 # create payment route
@@ -562,9 +562,11 @@ def order_review():
     cart_data = helper.get_cart_data(session)
     cost_data = helper.get_cost_data(session)
     tax_data = helper.get_tax_data(cost_data)
-    total_cost = sum(cost_data.values()) + sum(tax_data.values())
+    total_tax = round(sum(tax_data.values()), 2)
+    total_cost = round(sum(cost_data.values()) + sum(tax_data.values()), 2)
+    total_items = round(total_cost - total_tax, 2)
 
-    return render_template("orderReview.html", order_data=cart_data, cost_data=cost_data, tax_data=tax_data, total_cost=total_cost, login_button=login_button)
+    return render_template("orderReview.html", order_data=cart_data, cost_data=cost_data, tax_data=tax_data, total_cost=total_cost, total_tax=total_tax, total_items=total_items, login_button=login_button)
 
 
 # create order complete route
@@ -579,7 +581,12 @@ def order_complete():
     cart_data = helper.get_cart_data(session)
     cost_data = helper.get_cost_data(session)
     tax_data = helper.get_tax_data(cost_data)
-    total_cost = sum(cost_data.values()) + sum(tax_data.values())
+    total_tax = round(sum(tax_data.values()), 2)
+    total_cost = round(sum(cost_data.values()) + sum(tax_data.values()), 2)
+    total_items = round(total_cost - total_tax, 2)
+
+    # create an empty list to store orders
+    orders = []
 
     # loop through each artist id in the cart_data (which are the same as the ones in cost_data and tax_data)
     for artist_id in cart_data:
@@ -594,6 +601,9 @@ def order_complete():
         order = crud.create_order_by_session(session, artist_id, total_order)
         db.session.add(order)
         db.session.commit()
+
+        # append each order to the orders list
+        orders.append(order)
 
         # loop through each item in the order
         for order_item in order_items:
@@ -619,7 +629,18 @@ def order_complete():
         # empty the cart setting the value of the cartitems key of the session dictionary to an empty list
         session['cartitems'] = []
 
-    return render_template("orderComplete.html", order_data=cart_data, cost_data=cost_data, tax_data=tax_data, total_cost=total_cost, login_button=login_button)
+    return render_template("orderComplete.html", order_data=cart_data, cost_data=cost_data, tax_data=tax_data, total_cost=total_cost, total_tax=total_tax, total_items=total_items, orders=orders, login_button=login_button)
+
+# create route to set the billing the same as the shipping
+
+
+@app.route('/set_billing_to_shipping')
+def set_billing_to_shipping():
+
+    # send only the dictionary in session stored under the key shipment
+    return {
+        'shipment': session['shipment'],
+    }
 
 
 if __name__ == "__main__":

@@ -5,8 +5,8 @@
 {% block body %}
 
 
-<div class="bg-light text-dark py-sm-5">
-    <h2 class="mainHeading">Cart</h2>
+<div class="bg-light text-dark py-sm-5 topbar">
+    <h1 class="mainHeading">Review your cart</h2>
 </div>
 
 <div class="container pt-5">
@@ -15,7 +15,8 @@
             {% for artist_id in cart_data %}
             <div class="mt-4">
                 <div class="card cartCard pb-4" id="{{'cartCard' + '_' + (artist_id) | string}}">
-                    <h5>Sold by {{ cart_data[artist_id][0].artist.fname + ' ' + cart_data[artist_id][0].artist.lname }}
+                    <h5>Sold by {{ cart_data[artist_id][0].artist.fname + ' ' +
+                        cart_data[artist_id][0].artist.lname }}
                     </h5>
                     {% for item in cart_data[artist_id] %}
                     <div class="card cartItemCard" id="{{'cartItemCard' + '_' + (item.item_id) | string}}">
@@ -53,8 +54,10 @@
 
                     <div class="card-body">
                         {% if cart_data %}
-                        <p id="cartTotalCost"><b>Total: </b> ${{ total_cost }}</p>
 
+                        <p id="cartTotalCost"><b>Total: </b> ${{ total_cost }}</p>
+                        <p><i> * Tax not included</i></p>
+                        <p><i> * Free shipping</i></p>
                         <button type='button' class="shippingButton btn btn-light customButton"> <a
                                 href='/shipping'>proceed
                                 to
