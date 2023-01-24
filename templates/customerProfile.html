@@ -6,203 +6,49 @@
 
 
 <div class="bg-light text-dark py-sm-5 topbar">
-    <h1 class="mainHeading">Welcome {{ customer.fname + ' ' + customer.lname }}</h2>
+    <h1 class="mainHeading">Welcome {{ customer.fname + ' ' + customer.lname }}</h1>
 </div>
+
 
 <div class="container pt-5">
     <div class="row justify-content-center">
-        <div class="col-9">
-            <div class="mb-3">
-                <div class="card">
-                    <div class="row justify-content-center">
-                        <div class="col-8">
-                            <div class="mt-4">
-                                <h2>Account Details</h2>
-                                <div class="mb-4">
-                                    <div class="row">
-                                        <div class="card topBorderCard pt-4 px-0">
-                                            <ul>
-                                                <li> <b>First Name: </b>{{
-                                                    customer.fname
-                                                    }}
-                                                </li>
-                                                <li> <b>Last Name: </b>{{
-                                                    customer.lname
-                                                    }}
-                                                </li>
-                                                <li> <b>Email: </b>{{
-                                                    customer.email
-                                                    }}
-                                                </li>
-                                                <li> <b>Phone Number: </b>{{ customer.phone }}
-                                                </li>
-                                                <br>
-                                                <li>
-                                                    <form action="/" method="POST">
-                                                        <input type="submit" class="btn btn-light customButton"
-                                                            value="delete account" name="delete_account" />
-                                                    </form>
-                                                    <form action="/" method="POST">
-                                                        <input type="submit" class="btn btn-light customButton"
-                                                            value="logout" name="logout" />
-                                                    </form>
-                                                </li>
-                                            </ul>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+        <div class="col-7">
+            <div class="card bottomBorderCard">
+                <div class="row g-0">
+                    <div class="col-6">
+                        <div class="card p-4 noBordersCard">
+                            <ul>
+                                <li>
+                                    <h3>Account details</h3>
+                                </li>
+                                <li> <b>Name: </b>{{customer.fname + ' ' + customer.lname}}
+                                </li>
+                                <li> <b>Email: </b>{{
+                                    customer.email
+                                    }}
+                                </li>
+                                <li><b>Phone Number: </b>{{ customer.phone }}</li>
+                            </ul>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="mb-3">
-                <div class="card">
-                    <div class="row justify-content-center">
-                        <div class="col-8">
-                            <div class="mt-4">
-                                <h2>Past Orders</h2>
-                                {% for order in customer.order %}
-                                <div class="mb-4">
-                                    <div class="row">
-                                        <div class="card topBorderCard pt-4 px-0">
-                                            <ul>
-                                                <li> <b>Order Number: </b>{{
-                                                    order.order_id
-                                                    }}
-                                                </li>
-                                                <li> <b>Artist: </b>{{
-                                                    order.artist.fname + ' ' +
-                                                    order.artist.lname
-                                                    }}
-                                                </li>
-                                                <li> <b>Date: </b>{{
-                                                    order.date.strftime('%Y-%m-%d')
-                                                    }}
-                                                </li>
-                                                <li> <b>Status: </b>{{ order.status }}</li>
-                                                <li> <b>Total Order (including Tax): </b>${{
-                                                    order.total
-                                                    }}
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        {% for item in order.item %}
-                                        <div class="card noBordersCard">
-                                            <div class="row g-0">
-                                                <div class="col-md-3">
-                                                    <img src="{{ item.picture_path }}" class="card-img-top-thumbnail"
-                                                        style="padding-bottom: 1px;">
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <div class="card-body">
-                                                        <ul>
-                                                            <li> <b>Item Price: </b>${{
-                                                                item.price
-                                                                }}
-                                                            </li>
-                                                            <li> <b>Color: </b> {{ item.color }}
-                                                            </li>
-                                                            <li> <b>Item ID: </b> {{
-                                                                item.item_id}}
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        {% endfor %}
-                                    </div>
-                                </div>
-                                {% endfor %}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="mb-3">
-                <div class="card">
-                    <div class="row justify-content-center">
-                        <div class="col-8">
-                            <div class="mt-4">
-                                <h2>Liked Items</h2>
-                                {% for favitem in customer.favitem %}
-                                <div class="mb-4">
-                                    <div class="card topBorderCard pt-4 px-0">
-                                        <div class="row g-0">
-                                            <div class="col-md-3">
-                                                <img src="{{ favitem.item.picture_path }}"
-                                                    class="card-img-top-thumbnail" style="padding-bottom: 1px;">
-                                            </div>
-                                            <div class="col-md-8">
-                                                <div class="card-body">
-                                                    <ul>
-                                                        <li> <b>Artist: </b>{{
-                                                            favitem.item.artist.fname
-                                                            + ' ' + favitem.item.artist.lname
-                                                            }}
-                                                        </li>
-                                                        <li> <b>Item Price: </b>${{
-                                                            favitem.item.price
-                                                            }}
-                                                        </li>
-                                                        <li> <b>Color: </b> {{
-                                                            favitem.item.color }}
-                                                        </li>
-                                                        <li> <b>Item ID: </b> {{
-                                                            favitem.item.item_id}}
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                {% endfor %}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="mb-3">
-                <div class="card">
-                    <div class="row justify-content-center">
-                        <div class="col-8">
-                            <div class="mt-4">
-                                <h2>Liked Artists</h2>
-                                {% for favartist in customer.favartist %}
-                                <div class="mb-4">
-                                    <div class="card  topBorderCard pt-4 px-0">
-                                        <div class="row g-0">
-                                            <div class="col-md-3">
-                                                <a href="{{ url_for('gallery', alias = favartist.artist.alias) }}"><img
-                                                        src="{{ favartist.artist.profile_pic }}"
-                                                        class="card-img-top-thumbnail" style="padding-bottom: 1px;"></a>
-                                            </div>
-                                            <div class="col-md-8">
-                                                <div class="card-body">
-                                                    <ul>
-                                                        <li> <b>Name: </b> {{
-                                                            favartist.artist.fname + ' ' +
-                                                            favartist.artist.lname}}
-                                                        </li>
-                                                        <li> <b>Alias: </b> {{
-                                                            favartist.artist.alias}}
-                                                        </li>
-                                                        <li> <b>Country of Origin: </b> {{
-                                                            favartist.artist.country}}
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                {% endfor %}
-                            </div>
+                    <div class="col-6">
+                        <div class="card p-4 noBordersCard">
+                            <ul>
+                                <br>
+                                <li>
+                                    <form action="/" method="POST">
+                                        <input type="submit" class="btn btn-light customButton" value="logout"
+                                            name="logout" />
+                                    </form>
+                                </li>
+                                <br>
+                                <li>
+                                    <form action="/" method="POST">
+                                        <input type="submit" class="btn btn-light customButton" value="delete account"
+                                            name="delete_account" />
+                                    </form>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -210,5 +56,129 @@
         </div>
     </div>
 </div>
+
+<div class="container pt-5">
+    <div class="row row-cols-1 row-cols-lg-2">
+        <div class="mb-4">
+            <div class="card pt-4 px-0 noBordersCard">
+                <h3>Order History</h3>
+                {% for order in customer.order %}
+                <div class="my-2">
+                    <div class="card p-4">
+                        <ul: style="margin:0; padding: 0;">
+                            <li><b>Order Number: </b>{{
+                                order.order_id
+                                }}</li>
+                            <li> <b>Artist: </b>{{
+                                order.artist.fname + ' ' +
+                                order.artist.lname
+                                }}
+                            </li>
+                            <li> <b>Date: </b>{{
+                                order.date.strftime('%Y-%m-%d')
+                                }}</li>
+                            <li> <b>Status: </b>{{ order.status }}</li>
+                            <li> <b>Total Order (including Tax): </b>${{
+                                order.total
+                                }}
+                            </li>
+                            <br>
+                            </ul>
+                            {% for item in order.item %}
+                            <div class="row g-0">
+                                <div class="col-md-4">
+                                    <img src="{{ item.picture_path }}" class="card-img-top-thumbnail"
+                                        style="padding-bottom: 3px;">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <ul>
+                                            <li> <b>Item Price: </b>${{
+                                                item.price
+                                                }}
+                                            </li>
+                                            <li> <b>Color: </b> {{ item.color }}
+                                            </li>
+                                            <li> <b>Item ID: </b> {{
+                                                item.item_id}}
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="mb-4">
+            <div class="card pt-4 px-4 noBordersCard">
+                <div class="row row-cols-1 row-cols-lg-2">
+                    <div class="my-2">
+                        <h3>Liked Items</h3>
+                        {% for favitem in customer.favitem %}
+                        <div class="my-2">
+                            <div class="card pt-4 px-4">
+                                <a href="{{ url_for('gallery', alias = favitem.item.artist.alias) }}"><img
+                                        src="{{ favitem.item.picture_path }}" class="card-img-top-thumbnail"
+                                        style="padding-bottom: 1px;"></a>
+                                <div class="card-body">
+                                    <ul>
+                                        <li> <b>Artist: </b>{{
+                                            favitem.item.artist.fname
+                                            + ' ' + favitem.item.artist.lname
+                                            }}
+                                        </li>
+                                        <li> <b>Item Price: </b>${{
+                                            favitem.item.price
+                                            }}
+                                        </li>
+                                        <li> <b>Item ID: </b> {{
+                                            favitem.item.item_id}}
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div class="my-2">
+                        <h3>Followed Artists</h3>
+                        {% for favartist in customer.favartist %}
+                        <div class="my-2">
+                            <div class="card pt-4 px-4">
+                                <a href="{{ url_for('gallery', alias = favartist.artist.alias) }}"><img
+                                        src="{{ favartist.artist.profile_pic }}" class="card-img-top-thumbnail"
+                                        style="padding-bottom: 1px;"></a>
+                                <div class="card-body">
+                                    <ul>
+                                        <li> <b>Name: </b> {{
+                                            favartist.artist.fname + ' ' +
+                                            favartist.artist.lname}}
+                                        </li>
+                                        <li> <b>Alias: </b> {{
+                                            favartist.artist.alias}}
+                                        </li>
+                                        <li> <b>Country: </b> {{
+                                            favartist.artist.country}}
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
 {% endblock %}

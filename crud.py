@@ -55,6 +55,13 @@ def get_artist_by_login(email, password):
 def get_artist_by_alias(alias):
     return Artist.query.filter(Artist.alias == alias).first()
 
+# create artist profile
+
+
+def create_artist_profile(fname, lname, email, password, country, alias, about, profile_pic):
+    return Artist(fname=fname, lname=lname, email=email, password=password, country=country,
+                  alias=alias, about=about, profile_pic=profile_pic)
+
 
 #####################################################################
 # FAVORITE ARTIST

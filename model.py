@@ -46,9 +46,7 @@ class Artist(db.Model):
     country = db.Column(db.String)
     alias = db.Column(db.String)
     about = db.Column(db.Text)
-    logo = db.Column(db.String)
     profile_pic = db.Column(db.String)
-    social = db.Column(db.String)
 
     # add relationships
     item = db.relationship('Item', back_populates='artist')
