@@ -14,8 +14,8 @@
             <div class="card bottomBorderCard">
                 <div class="row no-gutters justify-content-start">
                     <div class="card-body">
-                        <h5>Thank you for your order!</h5>
-                        <p>Here are your order number(s):</p>
+                        <h5>Thank you for your order! 🎉</h5>
+                        <p>Here is your order number(s):</p>
                         <ul>
                             {% for order in orders%}
                             <li><b> Order number: </b>{{ order.order_id }}</li>
@@ -23,6 +23,8 @@
                         </ul>
                         <p>We will be in touch via email for updates on the status of your order(s)
                         </p>
+                        <button type='button' class="homeButton btn btn-light customButton"> <a href='/'>Home</a>
+                        </button>
                     </div>
                 </div>
             </div>
