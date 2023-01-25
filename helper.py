@@ -276,33 +276,24 @@ def order_data(session):
     return orders_dict
 
 
-def twilio_api():
+def twilio_api(order_id):
 
+    #  Get order from db
+    order = crud.get_order_by_id(order_id)
+
+    # Write message
+    message = f"Thank you for your order!\n\nPlease see below the updated status of order number {order.order_id}:\n\nStatus: {order.status}"
+
+    # Send email via SendGrid
     from_email = Email("milenasatelier@gmail.com")
     to_email = "aprender.link@gmail.com"
-    # to_email = To("aprender.link@gmail.com")
-    subject = "Sending with SendGrid is Fun"
+    subject = "Galleria Milena - Order Update"
     content = Content(
-        "text/plain", "and easy to do anywhere, even with Python")
+        "text/plain",
+        message
+    )
     mail = Mail(from_email, to_email, subject, content)
-    # print(os.environ.get('SENDGRID_KEY'))
-    # try:
 
     sg = SendGridAPIClient(os.environ.get('SENDGRID_KEY'))
-    print(mail.headers)
-    print(sg.api_key)
-    print(sg.host)
-    # print(sg.send())
 
     response = sg.send(mail)
-
-    # response = sg.client.mail.send.post(request_body=mail.get())
-    # print('fjaskj')
-
-    print(response)
-    print(response.status_code)
-    print(response.body)
-    print(response.headers)
-
-    # except Exception as e:
-    # print(e)

@@ -192,6 +192,11 @@ def delete_cartitem_by_customer_id(customer_id):
 #####################################################################
 # ORDER
 
+# get order by id
+def get_order_by_id(order_id):
+    return Order.query.get(order_id)
+
+
 # create order using the session dictionary
 def create_order_by_session(session, artist_id, totalOrder):
     return Order(

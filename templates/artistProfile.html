@@ -77,8 +77,8 @@
                             </li>
                             <br>
                             <li> <b>Status: </b>
-                                <select class="customButton" id="{{ 'status' + '_' + (order.order_id) | string }}"
-                                    placeholder="status">
+                                <select class="customButton statusButton"
+                                    id="{{ 'status' + '_' + (order.order_id) | string }}" placeholder="status">
                                     <option name='order received' value='order received' {%
                                         if
                                         order.status=='order received'
@@ -162,11 +162,11 @@
                 <h3>Current Art</h3>
                 {% for item in artist.item %}
                 {% if not item.order_id %}
-                <div class="my-2">
+                <div class="my-2" id="{{'removeItemCard' + '_' + (item.item_id) | string}}">
                     <div class="card pt-4 px-4">
                         <img class="card-img-top" src="{{ item.picture_path }}">
                         <div class="card-body">
-                            <button class="customButton btn btn-light"
+                            <button class="customButton btn btn-light removeItemButton"
                                 id="{{'removeItemButton' + '_' + (item.item_id) | string}}" type="button">remove
                                 item</button>
                         </div>

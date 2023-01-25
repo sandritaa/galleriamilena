@@ -13,10 +13,16 @@ const myWidget = cloudinary.createUploadWidget(
     if (!error && result && result.event === "success") {
       console.log("Done! Here is the image info: ", result.info);
 
-      // upload and set thumbnail attribute
-      document
-        .getElementById("uploadedimage")
-        .setAttribute("src", result.info.thumbnail_url);
+      // display image preview
+      let uploadedImage = document.getElementById("uploadedImage");
+      uploadedImage.removeAttribute("hidden");
+
+      // remove image required message and enable submit button
+      document.getElementById("addImageRequired").remove();
+      document.getElementById("addItemSubmit").removeAttribute("disabled");
+
+      // upload and set thumbnail
+      uploadedImage.setAttribute("src", result.info.secure_url);
 
       // set secure url attribute to my picture path ID
       document

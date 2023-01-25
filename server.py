@@ -291,10 +291,7 @@ def artist_order_update():
     crud.update_order_status_by_id(order_id, status_option)
     db.session.commit()
 
-    # print('!!!!')
-    # print(status_option)
-
-    helper.twilio_api()
+    helper.twilio_api(order_id)
 
     return {
         'status_option': status_option
@@ -604,6 +601,9 @@ def order_complete():
 
         # append each order to the orders list
         orders.append(order)
+
+        # send email
+        helper.twilio_api(order.order_id)
 
         # loop through each item in the order
         for order_item in order_items:
