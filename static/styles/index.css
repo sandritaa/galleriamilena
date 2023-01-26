@@ -41,6 +41,10 @@ body {
   font-weight: 400;
 }
 
+.navbar-light .navbar-nav .nav-link {
+  color: rgb(0, 0, 0);
+}
+
 .mainHeading {
   font-family: 'Work Sans', sans-serif;
   text-transform: uppercase;
@@ -93,7 +97,7 @@ body {
 
 .customButton:hover {
   /* transform: scale(1.1); */
-  background-color: #cfc4c4;
+  background-color: #ede9e9;
   border: 1px solid #bebebe;
   color: rgb(0, 0, 0) !important;
 }
@@ -130,6 +134,12 @@ ul {
 .img-align {
   display: block;
   margin: 0 auto;
+}
+
+.introContainer {
+  margin-right: -450px;
+  margin-top: 210px;
+  /* margin: 250px; */
 }
 
 

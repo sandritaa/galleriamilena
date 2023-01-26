@@ -129,7 +129,7 @@ def login():
         session.modified = True
 
         # go to the customer route
-        return redirect(customer_route)
+        return redirect('/')
 
     # check if artist query above checks out - if it does, redirect to be below artist route
     elif artist:
@@ -631,9 +631,8 @@ def order_complete():
 
     return render_template("orderComplete.html", order_data=cart_data, cost_data=cost_data, tax_data=tax_data, total_cost=total_cost, total_tax=total_tax, total_items=total_items, orders=orders, login_button=login_button)
 
+
 # create route to set the billing the same as the shipping
-
-
 @app.route('/set_billing_to_shipping')
 def set_billing_to_shipping():
 
@@ -641,6 +640,13 @@ def set_billing_to_shipping():
     return {
         'shipment': session['shipment'],
     }
+
+
+# create intro route
+@app.route('/intro')
+def intro():
+
+    return render_template("intro.html")
 
 
 if __name__ == "__main__":
