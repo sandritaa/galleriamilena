@@ -7,6 +7,22 @@
   -moz-osx-font-smoothing: grayscale;
 } */
 
+h3,
+h5 {
+  /* font-family: 'Oswald', sans-serif; */
+  /* font-family: 'Roboto Flex', sans-serif; */
+  font-family: 'Work Sans', sans-serif;
+
+  /* font-family: 'Roboto', sans-serif; */
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 19px;
+}
+
+.aboutArtist {
+  font-size: 18px;
+}
+
 .bodyContent {
   padding-left: 200px;
 }

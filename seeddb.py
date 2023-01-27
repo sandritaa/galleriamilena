@@ -31,72 +31,72 @@ db.session.commit()
 
 
 db.session.add(crud.create_item('This mandala art piece is created with vibrant hues of blue, green, and yellow using fine-tipped markers and a compass for precision geometric shapes.',
-               '16x16',  30.0, '12/7/2022', 'green', True,  'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674006183/s1_w9pcma.jpg', 1))
+               '16x16',  30.0, '12/7/2022', 'Green', True,  'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674006183/s1_w9pcma.jpg', 1))
 db.session.commit()
 db.session.add(crud.create_item('Handpainted mandala art with a vibrant color palette and intricate patterns created using fine brushwork for a mesmerizing and harmonious masterpiece',
-               '20x20', 45.00, '8/30/2022', 'black',  True,  'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674006183/s2_xcj7gu.jpg', 1))
+               '20x20', 45.00, '8/30/2022', 'Blue',  True,  'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674006183/s2_xcj7gu.jpg', 1))
 db.session.commit()
 db.session.add(crud.create_item('Elegant handpainted mandala art with a subtle color palette and delicate patterns created using a fine brush and ink for a serene masterpiece',
-               '10x10', 25.00, '4/24/2022', 'red',    True,  'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674006183/s4_pnfdae.jpg', 1))
+               '10x10', 25.00, '4/24/2022', 'Red',    True,  'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674006183/s4_pnfdae.jpg', 1))
 db.session.commit()
 db.session.add(crud.create_item('Intricate handpainted mandala art featuring a harmonious blend of colors and patterns crafted using traditional persian painting techniques',
-               '4x4',   12.45, '7/2/2022', 'blue', True,  'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674006183/s5_ehuvpn.jpg', 1))
+               '4x4',   12.45, '7/2/2022', 'Black', True,  'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674006183/s5_ehuvpn.jpg', 1))
 db.session.commit()
 db.session.add(crud.create_item('Handpainted mandala art with bold hues and geometric patterns created using stencils and a variety of mark-making tools for a striking visual impact"',
-               '30x45', 79.43, '1/18/2022', 'purple', True,  'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674006183/s6_dpgaur.jpg', 1))
+               '30x45', 79.43, '1/18/2022', 'Turquoise', True,  'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674006183/s6_dpgaur.jpg', 1))
 db.session.commit()
 db.session.add(crud.create_item('Vibrant mixed media canvas w/ intricate patterns crafted using stencils, spray paint, & a variety of mark making tools.',
-               '150x11', 90.00, '8/30/2022', 'black',  True, 'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674504985/5-1_sojy1z.png', 2))
+               '150x11', 90.00, '8/30/2022', 'Orange',  True, 'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674504985/5-1_sojy1z.png', 2))
 db.session.commit()
 db.session.add(crud.create_item('Mixed media canvas featuring bold patterns created with layering, collage & textured tools for a dynamic, abstract masterpiece',
-               '150x16', 75.00, '1/18/2022', 'purple', True,  'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674504986/5-3_qdyc8u.png', 2))
+               '150x16', 75.00, '1/18/2022', 'Pink', True,  'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674504986/5-3_qdyc8u.png', 2))
 db.session.commit()
 db.session.add(crud.create_item('Elegant oil painting, featuring a harmonious blend of muted colors and subtle brushstrokes for a timeless and sophisticated masterpiece.',
-               '150x11', 95.77, '8/12/2022', 'red', True,  'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674504977/5-4_z9mvyh.png', 2))
+               '150x11', 95.77, '8/12/2022', 'Orange', True,  'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674504977/5-4_z9mvyh.png', 2))
 db.session.commit()
 db.session.add(crud.create_item('Mixed media canvas with patterns crafted using stencils, spray paint, and a variety of mark making tools.',
-               '33x37', 100.00, '1/2/2022', 'yellow',  True, 'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674504986/5-2_oz6lt5.png', 2))
+               '33x37', 100.00, '1/2/2022', 'Blue',  True, 'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674504986/5-2_oz6lt5.png', 2))
 db.session.commit()
 db.session.add(crud.create_item('Rich oil painting featuring bold hues & organic patterns created with palette knife & brushstrokes for a dynamic, textured masterpiece.',
-               '20x12', 95.77, '8/12/2022', 'red',    True,  'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674763401/IMG_0407_dgiglt.png', 3))
+               '20x12', 95.77, '8/12/2022', 'Red',    True,  'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674763401/IMG_0407_dgiglt.png', 3))
 db.session.commit()
 db.session.add(crud.create_item('Vibrant oil painting with bold colors and intricate patterns crafted using impasto and palette knife techniques for a striking visual impact.',
-               '45x45',   83.00, '7/2/2022', 'blue',    True,  'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674009959/IMG_4237_ujp7tt.jpg', 3))
+               '45x45',   83.00, '7/2/2022', 'Multi',    True,  'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674009959/IMG_4237_ujp7tt.jpg', 3))
 db.session.commit()
 db.session.add(crud.create_item('Luminous oil painting with a harmonious blend of colors & patterns created using layering & brushstrokes for a serene, ethereal masterpiece.',
-               '30x45',  74.00, '12/7/2022', 'green',  True,  'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674763401/IMG_0435_c6yik0.png', 3))
+               '30x45',  74.00, '12/7/2022', 'Blue',  True,  'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674763401/IMG_0435_c6yik0.png', 3))
 db.session.commit()
 db.session.add(crud.create_item('Luminous oil painting with a harmonious blend of colors & patterns created using layering & brushstrokes for a serene, ethereal masterpiece.',
-               '110x220', 50.00, '8/30/2022', 'black',  True, 'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674504475/4-5_ndrppf.png', 4))
+               '110x220', 50.00, '8/30/2022', 'Black',  True, 'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674504475/4-5_ndrppf.png', 4))
 db.session.commit()
 db.session.add(crud.create_item('Rich oil painting featuring bold hues & organic patterns created with palette knife & brushstrokes for a dynamic, textured masterpiece',
-               '160x220', 63.81, '8/30/2022', 'black',  True, 'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674504474/4-1_tvkisg.png', 4))
+               '160x220', 63.81, '8/30/2022', 'Green',  True, 'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674504474/4-1_tvkisg.png', 4))
 db.session.commit()
 db.session.add(crud.create_item('Vibrant oil painting with bold colors & intricate patterns crafted using impasto and palette knife techniques for a striking visual impact.',
-               '198x162', 250.00, '8/30/2022', 'black',  True, 'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674504475/4-3_cg0zc0.png', 4))
+               '198x162', 250.00, '8/30/2022', 'Red',  True, 'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674504475/4-3_cg0zc0.png', 4))
 db.session.commit()
 db.session.add(crud.create_item('Elegant oil painting, featuring a harmonious blend of muted colors and subtle brushstrokes for a timeless and sophisticated masterpiece.',
-               '6x10', 20.00, '2/7/2022', 'red',     True, 'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674762490/7-1_rsg8ti.png', 5))
+               '6x10', 20.00, '2/7/2022', 'Red',     True, 'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674762490/7-1_rsg8ti.png', 5))
 db.session.commit()
 db.session.add(crud.create_item('Luminous oil painting with a harmonious blend of colors & patterns created using layering & brushstrokes for a serene, ethereal masterpiece.',
-               '10x10',  20.00,  '7/6/2022', 'gray',    True, 'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674762490/7-3_k7stuv.png', 5))
+               '10x10',  20.00,  '7/6/2022', 'Black',    True, 'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674762490/7-3_k7stuv.png', 5))
 db.session.commit()
 db.session.add(crud.create_item('Expressive oil painting, featuring a vibrant color palette and bold brushstrokes for a dynamic and textured masterpiece',
-               '8x10',   20.00, '5/12/2022', 'green',  True,  'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674762490/7-2_cqggh5.png', 5))
+               '8x10',   20.00, '5/12/2022', 'Yellow',  True,  'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674762490/7-2_cqggh5.png', 5))
 db.session.commit()
 db.session.add(crud.create_item('Rich oil painting featuring bold hues & organic patterns created with palette knife & brushstrokes for a dynamic, textured masterpiece',
-               '8x10',   20.00, '5/12/2022', 'green',  True,  'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674762490/7-4_mw3vz5.png', 5))
+               '8x10',   20.00, '5/12/2022', 'Black',  True,  'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674762490/7-4_mw3vz5.png', 5))
 db.session.commit()
 db.session.add(crud.create_item('Luminous painting with a harmonious blend of colors & patterns created using layering & brushstrokes for a serene, ethereal masterpiece.',
-               '150x115', 51.00, '4/24/2022', 'red',    True, 'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674505245/6-3_acomuf.png', 6))
+               '150x115', 51.00, '4/24/2022', 'Orange',    True, 'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674505245/6-3_acomuf.png', 6))
 db.session.commit()
 db.session.add(crud.create_item('Expressive oil painting, featuring a vibrant color palette and bold brushstrokes for a dynamic and textured masterpiece',
-               '115x70', 63.00, '2/7/2022', 'red',     True, 'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674505245/6-4_wcnfom.png', 6))
+               '115x70', 63.00, '2/7/2022', 'Green',     True, 'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674505245/6-4_wcnfom.png', 6))
 db.session.commit()
 db.session.add(crud.create_item('Oil painting with a harmonious blend of warm and cool colors, created using layering and palette knife techniques for a striking visual impact.',
-               '50x30', 90.00, '2/7/2022', 'red',     True, 'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674505245/6-2_lvhihh.png', 6))
+               '50x30', 90.00, '2/7/2022', 'Purple',     True, 'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674505245/6-2_lvhihh.png', 6))
 db.session.commit()
 
 db.session.add(crud.create_item('Rich oil painting featuring bold hues & organic patterns created with palette knife & brushstrokes for a dynamic, textured masterpiece',
-               ' 50x30', 67.14, '1/2/2022', 'yellow',  True, 'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674505245/6-1_dkoosx.png', 6))
+               ' 50x30', 67.14, '1/2/2022', 'Red',  True, 'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674505245/6-1_dkoosx.png', 6))
 db.session.commit()

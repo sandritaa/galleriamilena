@@ -10,7 +10,7 @@
 
 <div class="container pt-5">
     <h3>About me</h3>
-    <p class="lead my-4">{{ artist.about }}</p>
+    <p class="aboutArtist lead my-4">{{ artist.about }}</p>
     <button type="button" id='{{"buttonArtistLike" + "_" + (artist.artist_id) | string}}'
         class='artistLikeButton customButton btn btn-light'>{{
         button_favartist_label[artist.artist_id] }}</button>
