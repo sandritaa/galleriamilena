@@ -1,5 +1,6 @@
 import crud
-from model import db
+db.create_all()
+
 
 db.session.add(crud.create_artist_profile('Shirin', 'Haghi', 'shirin@gmail.com', 'testtest', 'Persia', 'shirin',
                'I am a young Persian artist, with a passion for drawing mandalas. I specialize in traditional Persian patterns and symbols, and my intricate works evoke reflection and introspection. I am constantly pushing the boundaries of mandala art and exploring new possibilities in this meditative art form. I am excited to share my art with the world and see where my talent will take me in the future.', 'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674006183/s1_w9pcma.jpg'))
@@ -12,7 +13,8 @@ db.session.commit()
 db.session.add(crud.create_artist_profile('Camila', 'Orpen', 'camila@gmail.com', 'testtest', 'France', 'jannel',
                'Born in Paris on May 12th, 1959, I studied at the Polimoda in Florence, Italy. I specialize in creating art using oil on canvas. I enjoy exploring different themes and styles in my work, and am always seeking new ways to express myself through my paintings.', 'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674504474/4-1_tvkisg.png'))
 db.session.commit()
-db.session.add(crud.create_artist_profile('Silvia', 'Brogi', 'silvia@gmail.com', 'testtest', 'Italy', 'silvia', 'I am an Italian artist who loves to paint rocks and transform them into unique characters during my free time. I find inspiration in nature and aim to create whimsical and imaginative pieces. My rock paintings have a strong sense of storytelling and are meant to delight both adults and children. I am constantly experimenting with new techniques and materials during my free time, and I am excited to see where my art will take me next.', 'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674004760/bbf6ebc6-8b16-462e-8fd0-24b22419d7b6_uzrgzs.jpg'))
+db.session.add(crud.create_artist_profile('Silvio', 'Brogi', 'silvio@gmail.com', 'testtest', 'Italy', 'silvio',
+               ' In 1960 he began to exhibit in Pistoia and Florence. The works were paintings, photographs, casts, sculptures and topographies which he also presented in Rome in 1963. It was in Rome that he met Cesare Vivaldi, who in 1965 invited him to Revort/1, a show organised as part of the ‘gruppo 63’ festival in Palermo. ', 'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674762490/7-1_rsg8ti.png'))
 db.session.commit()
 db.session.add(crud.create_artist_profile('Laura', 'Jane', 'laura@gmail.com', 'testtest', 'Italy', 'laura',
                'I am a Milan-based artist, working with various media such as photography, performance, video and installation to explore the concepts of history and memory. My approach is provocative and I always play on the thin border between irony and parody, between displacement and visual and semantic detournement. I specialize in print on glass and mirror.', 'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674505245/6-2_lvhihh.png'))
@@ -26,69 +28,75 @@ db.session.commit()
 db.session.add(crud.create_customer_profile('Bertullio', 'Tomide',
                'bertullio@gmail.com', '246-589-8124', 'testtest'))
 db.session.commit()
-db.session.add(crud.create_item('pede posuere nonummy integer non velit donec diam neque vestibulum eget vulputate ut ultrices vel augue vestibulum ante ipsum primis in fauc',
+
+
+db.session.add(crud.create_item('This mandala art piece is created with vibrant hues of blue, green, and yellow using fine-tipped markers and a compass for precision geometric shapes.',
                '16x16',  30.0, '12/7/2022', 'green', True,  'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674006183/s1_w9pcma.jpg', 1))
 db.session.commit()
-db.session.add(crud.create_item('hac habitasse platea dictumst aliquam augue quam sollicitudin vitae consectetuer eget rutrum at lorem integer tincidunt ante vel ipsum praes',
+db.session.add(crud.create_item('Handpainted mandala art with a vibrant color palette and intricate patterns created using fine brushwork for a mesmerizing and harmonious masterpiece',
                '20x20', 45.00, '8/30/2022', 'black',  True,  'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674006183/s2_xcj7gu.jpg', 1))
 db.session.commit()
-db.session.add(crud.create_item('morbi a ipsum integer a nibh in quis justo maecenas rhoncus aliquam lacus morbi quis tortor id Nonea ultrices aliquet maecenas leo odio cond',
+db.session.add(crud.create_item('Elegant handpainted mandala art with a subtle color palette and delicate patterns created using a fine brush and ink for a serene masterpiece',
                '10x10', 25.00, '4/24/2022', 'red',    True,  'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674006183/s4_pnfdae.jpg', 1))
 db.session.commit()
-db.session.add(crud.create_item('hac habitasse platea dictumst aliquam augue quam sollicitudin vitae consectetuer eget rutrum at lorem integer tincidunt ante vel ipsum praes',
-               '150x11', 90.00, '8/30/2022', 'black',  True, 'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674504985/5-1_sojy1z.png', 2))
-db.session.commit()
-db.session.add(crud.create_item('aenean lectus pellentesque eget nunc donec quis orci eget orci vehicula condimentum curabitur in libero ut massa volutpat convallis morbi od',
-               '150x16', 75.00, '1/18/2022', 'purple', True,  'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674504986/5-2_oz6lt5.png', 2))
-db.session.commit()
-db.session.add(crud.create_item('eleifend donec ut dolor morbi vel lectus in quam fringilla rhoncus mauris enim leo rhoncus sed vestibulum sit amet cursus id turpis integer ',
-               '33x37x3,5', 100.00, '1/2/2022', 'yellow',  True, 'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674504986/5-3_qdyc8u.png', 2))
-db.session.commit()
-db.session.add(crud.create_item('tellus in sagittis dui vel nisl duis ac nibh fusce lacus purus aliquet at feugiat non pretium quis lectus suspendisse potenti in eleifend qu',
-               '20x12', 95.77, '8/12/2022', 'red',    True,  'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1673229399/FullSizeRender_c3qqdu.jpg', 3))
-db.session.commit()
-db.session.add(crud.create_item('tristique est et tempus semper est quam pharetra magna ac consequat metus sapien ut nunc vestibulum ante ipsum primis in faucibus orci luctu',
-               '45x45',   83.00, '7/2/2022', 'blue',    True,  'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674009959/IMG_4237_ujp7tt.jpg', 3))
-db.session.commit()
-db.session.add(crud.create_item('pede posuere nonummy integer non velit donec diam neque vestibulum eget vulputate ut ultrices vel augue vestibulum ante ipsum primis in fauc',
-               '30x45',  74.00, '12/7/2022', 'green',  True,  'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674009959/IMG_0458_i1jhob.jpg', 3))
-db.session.commit()
-db.session.add(crud.create_item('hac habitasse platea dictumst aliquam augue quam sollicitudin vitae consectetuer eget rutrum at lorem integer tincidunt ante vel ipsum praes',
-               '110x220', 50.00, '8/30/2022', 'black',  True, 'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674504475/4-5_ndrppf.png', 4))
-db.session.commit()
-db.session.add(crud.create_item('hac habitasse platea dictumst aliquam augue quam sollicitudin vitae consectetuer eget rutrum at lorem integer tincidunt ante vel ipsum praes',
-               '160x220', 63.81, '8/30/2022', 'black',  True, 'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674504474/4-1_tvkisg.png', 4))
-db.session.commit()
-db.session.add(crud.create_item('hac habitasse platea dictumst aliquam augue quam sollicitudin vitae consectetuer eget rutrum at lorem integer tincidunt ante vel ipsum praes',
-               '198x162', 250.00, '8/30/2022', 'black',  True, 'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674504475/4-3_cg0zc0.png', 4))
-db.session.commit()
-db.session.add(crud.create_item('sit amet erat Nonea tempus vivamus in felis eu sapien cursus vestibulum proin eu mi Nonea ac enim in tempor turpis nec euismod scelerisque q',
-               '6x10', 20.00, '2/7/2022', 'red',     True, 'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674004760/bbf6ebc6-8b16-462e-8fd0-24b22419d7b6_uzrgzs.jpg', 5))
-db.session.commit()
-db.session.add(crud.create_item('pede libero quis orci Noneam molestie nibh in lectus pellentesque at Nonea suspendisse potenti cras in purus eu magna vulputate luctus cum s',
-               '10x10',  20.00,  '7/6/2022', 'gray',    True, 'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1673735759/eqb6g9ohus9fdbltjhkk.jpg', 5))
-db.session.commit()
-db.session.add(crud.create_item('semper sapien a libero nam dui proin leo odio porttitor id consequat in consequat ut Nonea sed accumsan felis ut at dolor quis odio consequ',
-               '8x10',   20.00, '5/12/2022', 'green',  True,  'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1673229395/e63209a8-ebda-4ecc-acca-4ac86aa98e8b_juvnyu.jpg', 5))
-db.session.commit()
-db.session.add(crud.create_item('morbi a ipsum integer a nibh in quis justo maecenas rhoncus aliquam lacus morbi quis tortor id Nonea ultrices aliquet maecenas leo odio cond',
-               '150x115', 51.00, '4/24/2022', 'red',    True, 'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674505245/6-3_acomuf.png', 6))
-db.session.commit()
-db.session.add(crud.create_item('sit amet erat Nonea tempus vivamus in felis eu sapien cursus vestibulum proin eu mi Nonea ac enim in tempor turpis nec euismod scelerisque q',
-               '115x70', 63.00, '2/7/2022', 'red',     True, 'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674505245/6-4_wcnfom.png', 6))
-db.session.commit()
-db.session.add(crud.create_item('sit amet erat Nonea tempus vivamus in felis eu sapien cursus vestibulum proin eu mi Nonea ac enim in tempor turpis nec euismod scelerisque q',
-               '50x30', 90.00, '2/7/2022', 'red',     True, 'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674505245/6-2_lvhihh.png', 6))
-db.session.commit()
-db.session.add(crud.create_item('tellus in sagittis dui vel nisl duis ac nibh fusce lacus purus aliquet at feugiat non pretium quis lectus suspendisse potenti in eleifend qu',
-               '150x11', 95.77, '8/12/2022', 'red', True,  'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674504977/5-4_z9mvyh.png', 2))
-db.session.commit()
-db.session.add(crud.create_item('tristique est et tempus semper est quam pharetra magna ac consequat metus sapien ut nunc vestibulum ante ipsum primis in faucibus orci luctu',
+db.session.add(crud.create_item('Intricate handpainted mandala art featuring a harmonious blend of colors and patterns crafted using traditional persian painting techniques',
                '4x4',   12.45, '7/2/2022', 'blue', True,  'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674006183/s5_ehuvpn.jpg', 1))
 db.session.commit()
-db.session.add(crud.create_item('aenean lectus pellentesque eget nunc donec quis orci eget orci vehicula condimentum curabitur in libero ut massa volutpat convallis morbi od',
+db.session.add(crud.create_item('Handpainted mandala art with bold hues and geometric patterns created using stencils and a variety of mark-making tools for a striking visual impact"',
                '30x45', 79.43, '1/18/2022', 'purple', True,  'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674006183/s6_dpgaur.jpg', 1))
 db.session.commit()
-db.session.add(crud.create_item('eleifend donec ut dolor morbi vel lectus in quam fringilla rhoncus mauris enim leo rhoncus sed vestibulum sit amet cursus id turpis integer ',
+db.session.add(crud.create_item('Vibrant mixed media canvas w/ intricate patterns crafted using stencils, spray paint, & a variety of mark making tools.',
+               '150x11', 90.00, '8/30/2022', 'black',  True, 'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674504985/5-1_sojy1z.png', 2))
+db.session.commit()
+db.session.add(crud.create_item('Mixed media canvas featuring bold patterns created with layering, collage & textured tools for a dynamic, abstract masterpiece',
+               '150x16', 75.00, '1/18/2022', 'purple', True,  'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674504986/5-3_qdyc8u.png', 2))
+db.session.commit()
+db.session.add(crud.create_item('Elegant oil painting, featuring a harmonious blend of muted colors and subtle brushstrokes for a timeless and sophisticated masterpiece.',
+               '150x11', 95.77, '8/12/2022', 'red', True,  'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674504977/5-4_z9mvyh.png', 2))
+db.session.commit()
+db.session.add(crud.create_item('Mixed media canvas with patterns crafted using stencils, spray paint, and a variety of mark making tools.',
+               '33x37', 100.00, '1/2/2022', 'yellow',  True, 'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674504986/5-2_oz6lt5.png', 2))
+db.session.commit()
+db.session.add(crud.create_item('Rich oil painting featuring bold hues & organic patterns created with palette knife & brushstrokes for a dynamic, textured masterpiece.',
+               '20x12', 95.77, '8/12/2022', 'red',    True,  'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674763401/IMG_0407_dgiglt.png', 3))
+db.session.commit()
+db.session.add(crud.create_item('Vibrant oil painting with bold colors and intricate patterns crafted using impasto and palette knife techniques for a striking visual impact.',
+               '45x45',   83.00, '7/2/2022', 'blue',    True,  'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674009959/IMG_4237_ujp7tt.jpg', 3))
+db.session.commit()
+db.session.add(crud.create_item('Luminous oil painting with a harmonious blend of colors & patterns created using layering & brushstrokes for a serene, ethereal masterpiece.',
+               '30x45',  74.00, '12/7/2022', 'green',  True,  'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674763401/IMG_0435_c6yik0.png', 3))
+db.session.commit()
+db.session.add(crud.create_item('Luminous oil painting with a harmonious blend of colors & patterns created using layering & brushstrokes for a serene, ethereal masterpiece.',
+               '110x220', 50.00, '8/30/2022', 'black',  True, 'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674504475/4-5_ndrppf.png', 4))
+db.session.commit()
+db.session.add(crud.create_item('Rich oil painting featuring bold hues & organic patterns created with palette knife & brushstrokes for a dynamic, textured masterpiece',
+               '160x220', 63.81, '8/30/2022', 'black',  True, 'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674504474/4-1_tvkisg.png', 4))
+db.session.commit()
+db.session.add(crud.create_item('Vibrant oil painting with bold colors & intricate patterns crafted using impasto and palette knife techniques for a striking visual impact.',
+               '198x162', 250.00, '8/30/2022', 'black',  True, 'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674504475/4-3_cg0zc0.png', 4))
+db.session.commit()
+db.session.add(crud.create_item('Elegant oil painting, featuring a harmonious blend of muted colors and subtle brushstrokes for a timeless and sophisticated masterpiece.',
+               '6x10', 20.00, '2/7/2022', 'red',     True, 'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674762490/7-1_rsg8ti.png', 5))
+db.session.commit()
+db.session.add(crud.create_item('Luminous oil painting with a harmonious blend of colors & patterns created using layering & brushstrokes for a serene, ethereal masterpiece.',
+               '10x10',  20.00,  '7/6/2022', 'gray',    True, 'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674762490/7-3_k7stuv.png', 5))
+db.session.commit()
+db.session.add(crud.create_item('Expressive oil painting, featuring a vibrant color palette and bold brushstrokes for a dynamic and textured masterpiece',
+               '8x10',   20.00, '5/12/2022', 'green',  True,  'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674762490/7-2_cqggh5.png', 5))
+db.session.commit()
+db.session.add(crud.create_item('Rich oil painting featuring bold hues & organic patterns created with palette knife & brushstrokes for a dynamic, textured masterpiece',
+               '8x10',   20.00, '5/12/2022', 'green',  True,  'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674762490/7-4_mw3vz5.png', 5))
+db.session.commit()
+db.session.add(crud.create_item('Luminous painting with a harmonious blend of colors & patterns created using layering & brushstrokes for a serene, ethereal masterpiece.',
+               '150x115', 51.00, '4/24/2022', 'red',    True, 'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674505245/6-3_acomuf.png', 6))
+db.session.commit()
+db.session.add(crud.create_item('Expressive oil painting, featuring a vibrant color palette and bold brushstrokes for a dynamic and textured masterpiece',
+               '115x70', 63.00, '2/7/2022', 'red',     True, 'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674505245/6-4_wcnfom.png', 6))
+db.session.commit()
+db.session.add(crud.create_item('Oil painting with a harmonious blend of warm and cool colors, created using layering and palette knife techniques for a striking visual impact.',
+               '50x30', 90.00, '2/7/2022', 'red',     True, 'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674505245/6-2_lvhihh.png', 6))
+db.session.commit()
+
+db.session.add(crud.create_item('Rich oil painting featuring bold hues & organic patterns created with palette knife & brushstrokes for a dynamic, textured masterpiece',
                ' 50x30', 67.14, '1/2/2022', 'yellow',  True, 'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674505245/6-1_dkoosx.png', 6))
 db.session.commit()
