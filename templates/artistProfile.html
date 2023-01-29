@@ -68,6 +68,9 @@
                             <li><b>Order Number: </b>{{
                                 order.order_id
                                 }}</li>
+                            <li><b>Customer: </b>{{
+                                    order.fname + ' ' + order.lname
+                                    }}</li>
                             <li> <b>Date: </b>{{
                                 order.date.strftime('%Y-%m-%d')
                                 }}</li>

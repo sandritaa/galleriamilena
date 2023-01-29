@@ -23,12 +23,8 @@ def homepage():
     # query all artists to display on homepage
     artist = crud.get_all_artists()
 
-    # favartists button labels for when the page is loaded
-    button_favartist_label = helper.get_favartist_button_label_home(
-        artist, session)
-
     # render an html and pass artists and login_button as data
-    return render_template("home.html",  artists=artist, login_button=login_button, button_favartist_label=button_favartist_label)
+    return render_template("home.html",  artists=artist, login_button=login_button)
 
 
 # create home route for POST request

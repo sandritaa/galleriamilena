@@ -40,11 +40,15 @@ db.session.add(crud.create_item('Elegant handpainted mandala art with a subtle c
                '10x10', 25.00, '4/24/2022', 'Red',    True,  'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674006183/s4_pnfdae.jpg', 1))
 db.session.commit()
 db.session.add(crud.create_item('Intricate handpainted mandala art featuring a harmonious blend of colors and patterns crafted using traditional persian painting techniques',
-               '4x4',   12.45, '7/2/2022', 'Black', True,  'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674006183/s5_ehuvpn.jpg', 1))
+               '24x24',   40.00, '7/2/2022', 'Black', True,  'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674006183/s5_ehuvpn.jpg', 1))
 db.session.commit()
 db.session.add(crud.create_item('Handpainted mandala art with bold hues and geometric patterns created using stencils and a variety of mark-making tools for a striking visual impact"',
-               '30x45', 79.43, '1/18/2022', 'Turquoise', True,  'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674006183/s6_dpgaur.jpg', 1))
+               '30x45', 30.00, '1/18/2022', 'Turquoise', True,  'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674006183/s6_dpgaur.jpg', 1))
 db.session.commit()
+db.session.add(crud.create_item('This mandala art piece is created with vibrant hues of blue, gold, and red using fine-tipped markers and a compass for precision geometric shapes.',
+               '40x40', 80.00, '1/18/2022', 'Blue', True,  'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674795796/IMG_4443_ipfofg.jpg', 1))
+db.session.commit()
+
 db.session.add(crud.create_item('Vibrant mixed media canvas w/ intricate patterns crafted using stencils, spray paint, & a variety of mark making tools.',
                '150x11', 90.00, '8/30/2022', 'Orange',  True, 'https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674504985/5-1_sojy1z.png', 2))
 db.session.commit()

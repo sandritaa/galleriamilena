@@ -4,6 +4,9 @@ import os
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import *
 
+#####################################################################
+# LOGIN
+
 
 # switch button between login, profile and admin
 def switch_profile_login(session):
@@ -28,6 +31,10 @@ def switch_profile_login(session):
     return button
 
 
+#####################################################################
+# CUSTOMER
+
+
 # get the dynamic route of a customer profile
 def get_customer_route(customer):
     customer_route = '/profile/' + \
@@ -35,11 +42,17 @@ def get_customer_route(customer):
             '_' + str(customer.customer_id))
     return customer_route
 
+#####################################################################
+# ARTIST
+
 
 # get the dynamic route of an artist profile
 def get_artist_route(artist):
     artist_route = '/admin/' + str(artist.alias)
     return artist_route
+
+#####################################################################
+# FAVITEM
 
 
 # get the label of the favorite item button (like or unlike)
@@ -65,6 +78,9 @@ def get_favitem_button_label(artist, session):
 
     return button_favitem_label
 
+#####################################################################
+# FAVARTIST
+
 
 # get the label of the favorite artist button (follow or unfollow) in gallery.html
 def get_favartist_button_label_gallery(artist, session):
@@ -86,27 +102,8 @@ def get_favartist_button_label_gallery(artist, session):
     return button_favartist_label
 
 
-# get the label of the favorite artist button (follow or unfollow) in home.html
-def get_favartist_button_label_home(artists, session):
-    # favorite logic for when the page is loaded
-    button_favartist_label = {}
-
-    # go through every item of the artist
-    for artist in artists:
-
-        # for each item, add a label with an item_id as the key of a dictionary and set it 'like'
-        button_favartist_label[artist.artist_id] = 'Follow'
-
-        # go through every favartist of a specific item
-        for favartist in artist.favartist:
-
-            # check if the customer id of the favitem is the same of the customer that is logged in (if any)
-            if session.get('customer_id', None) == favartist.customer_id:
-
-                # if its is, set the value in the dictionary of the key item_id to 'unlike'
-                button_favartist_label[favartist.artist_id] = 'Unfollow'
-
-    return button_favartist_label
+#####################################################################
+# CART
 
 
 # get the label for cart items button when the page is first loaded (add to cart or remove from cart)
@@ -274,6 +271,9 @@ def order_data(session):
             orders_dict.append(dict)
 
     return orders_dict
+
+#####################################################################
+# SENDGRID API
 
 
 def twilio_api(order_id):
