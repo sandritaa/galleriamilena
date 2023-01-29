@@ -2,6 +2,7 @@
 from flask import Flask, render_template, request, flash, session, redirect, flash
 from model import connect_to_db, db
 from jinja2 import StrictUndefined
+from datetime import datetime
 import crud
 import helper
 import keys
@@ -262,6 +263,9 @@ def artist_add_item():
     color = request.form.get('color')
     in_stock = True
     picture_path = request.form.get('picture_path')
+
+    # convert date to right format
+    date = datetime.strptime(date, "%Y-%m-%d")
 
     # get the artist by using the logged in artist (since they will be the ones adding the item)
     artist = crud.get_artist_by_id(session['artist_id'])

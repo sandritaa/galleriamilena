@@ -1,0 +1,329 @@
+{
+    "artists": [
+        {
+            "fname": "Shirin",
+            "lname": "Haghi",
+            "email": "shirin@gmail.com",
+            "password": "testtest",
+            "country": "Persia",
+            "alias": "shirin",
+            "about": "I am a young Persian artist, with a passion for drawing mandalas. I specialize in traditional Persian patterns and symbols, and my intricate works evoke reflection and introspection. I am constantly pushing the boundaries of mandala art and exploring new possibilities in this meditative art form. I am excited to share my art with the world and see where my talent will take me in the future.",
+            "profile_pic": "https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674006183/s1_w9pcma.jpg"
+        },
+        {
+            "fname": "Marta",
+            "lname": "Cecilia",
+            "email": "marta@gmail.com",
+            "password": "testtest",
+            "country": "Colombia",
+            "alias": "marta",
+            "about": "Colombian artist who likes to use mixed media on canvas to create unique and expressive pieces. My work often combines traditional techniques with modern materials to create a dynamic visual language. I am constantly exploring new ways to express myself through art and am always looking for new inspiration.",
+            "profile_pic": "https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674504985/5-1_sojy1z.png"
+        },
+        {
+            "fname": "Antonello",
+            "lname": "Rossi",
+            "email": "antonello@gmail.com",
+            "password": "testtest",
+            "country": "South Africa",
+            "alias": "antonello",
+            "about": "As a long-term artist from South Africa, I have been painting for many years, honing my skills and developing my style. I specialize in oil paintings and am known for my use of vibrant colors. I draw inspiration from the diverse landscapes and cultures of my country, and I strive to capture the essence of South Africa in my paintings. My work has been exhibited in galleries and art fairs around the world and I am proud to have my paintings in private collections globally. I continue to push my boundaries and evolve as an artist.",
+            "profile_pic": "https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674009959/IMG_4237_ujp7tt.jpg"
+        },
+        {
+            "fname": "Camila",
+            "lname": "Orpen",
+            "email": "camila@gmail.com",
+            "password": "testtest",
+            "country": "France",
+            "alias": "jannel",
+            "about": "Born in Paris on May 12th,1959, I studied at the Polimoda in Florence, Italy. I specialize in creating art using oil on canvas. I enjoy exploring different themes and styles in my work, and am always seeking new ways to express myself through my paintings.",
+            "profile_pic": "https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674504474/4-1_tvkisg.png"
+        },
+        {
+            "fname": "Silvio",
+            "lname": "Brogi",
+            "email": "silvio@gmail.com",
+            "password": "testtest",
+            "country": "Italy",
+            "alias": "silvio",
+            "about": "In 1960 he began to exhibit in Pistoia and Florence. The works were paintings, photographs, casts, sculptures and topographies which he also presented in Rome in 1963. It was in Rome that he met Cesare Vivaldi, who in 1965 invited him to Revort/1, a show organised as part of the ‘gruppo 63’ festival in Palermo.",
+            "profile_pic": "https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674762490/7-1_rsg8ti.png"
+        },
+        {
+            "fname": "Laura",
+            "lname": "Jane",
+            "email": "laura@gmail.com",
+            "password": "testtest",
+            "country": "Italy",
+            "alias": "laura",
+            "about": "I am a Milan-based artist, working with various media such as photography, performance, video and installation to explore the concepts of history and memory. My approach is provocative and I always play on the thin border between irony and parody, between displacement and visual and semantic detournement. I specialize in print on glass and mirror.",
+            "profile_pic": "https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674505245/6-2_lvhihh.png"
+        }
+    ],
+    "customers": [
+        {
+            "fname": "John",
+            "lname": "Doe",
+            "email": "john@gmail.com",
+            "phone": "990-165-0100",
+            "password": "testtest"
+        },
+        {
+            "fname": "Jane",
+            "lname": "Smith",
+            "email": "hane@gmail.com",
+            "phone": "268-342-8970",
+            "password": "testtest"
+        },
+        {
+            "fname": "Bertullio",
+            "lname": "Tomide",
+            "email": "bertullio@gmail.com",
+            "phone": "246-589-8124",
+            "password": "testtest"
+        }
+    ],
+    "items": [
+        {
+            "description": "This mandala art piece is created with vibrant hues of blue, green, and yellow using fine-tipped markers and a compass for precision geometric shapes.",
+            "dimensions": "16x16",
+            "price": 30.00,
+            "date": "2022-12-07",
+            "color": "Green",
+            "in_stock": true,
+            "picture_path": "https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674006183/s1_w9pcma.jpg",
+            "artist_id": 1
+        },
+        {
+            "description": "Handpainted mandala art with a vibrant color palette and intricate patterns created using fine brushwork for a mesmerizing and harmonious masterpiece",
+            "dimensions": "20x20",
+            "price": 45.00,
+            "date": "2022-08-30",
+            "color": "Blue",
+            "in_stock": true,
+            "picture_path": "https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674006183/s2_xcj7gu.jpg",
+            "artist_id": 1
+        },
+        {
+            "description": "Elegant handpainted mandala art with a subtle color palette and delicate patterns created using a fine brush and ink for a serene masterpiece",
+            "dimensions": "10x10",
+            "price": 25.00,
+            "date": "2022-04-24",
+            "color": "Red",
+            "in_stock": true,
+            "picture_path": "https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674006183/s4_pnfdae.jpg",
+            "artist_id": 1
+        },
+        {
+            "description": "Intricate handpainted mandala art featuring a harmonious blend of colors and patterns crafted using traditional persian painting techniques",
+            "dimensions": "24x24",
+            "price": 40.00,
+            "date": "2022-07-02",
+            "color": "Black",
+            "in_stock": true,
+            "picture_path": "https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674006183/s5_ehuvpn.jpg",
+            "artist_id": 1
+        },
+        {
+            "description": "Handpainted mandala art with bold hues and geometric patterns created using stencils and a variety of mark-making tools for a striking visual impact",
+            "dimensions": "30x45",
+            "price": 30.00,
+            "date": "2022-01-18",
+            "color": "Turquoise",
+            "in_stock": true,
+            "picture_path": "https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674006183/s6_dpgaur.jpg",
+            "artist_id": 1
+        },
+        {
+            "description": "This mandala art piece is created with vibrant hues of blue, gold, and red using fine-tipped markers and a compass for precision geometric shapes.",
+            "dimensions": "40x40",
+            "price": 80.00,
+            "date": "2022-01-18",
+            "color": "Blue",
+            "in_stock": true,
+            "picture_path": "https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674795796/IMG_4443_ipfofg.jpg",
+            "artist_id": 1
+        },
+        {
+            "description": "Vibrant mixed media canvas w/ intricate patterns crafted using stencils, spray paint, & a variety of mark making tools.",
+            "dimensions": "150x11",
+            "price": 90.00,
+            "date": "2022-08-30",
+            "color": "Orange",
+            "in_stock": true,
+            "picture_path": "https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674504985/5-1_sojy1z.png",
+            "artist_id": 2
+        },
+        {
+            "description": "Mixed media canvas featuring bold patterns created with layering, collage & textured tools for a dynamic, abstract masterpiece",
+            "dimensions": "150x16",
+            "price": 75.00,
+            "date": "2022-01-18",
+            "color": "Pink",
+            "in_stock": true,
+            "picture_path": "https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674504986/5-3_qdyc8u.png",
+            "artist_id": 2
+        },
+        {
+            "description": "Elegant oil painting, featuring a harmonious blend of muted colors and subtle brushstrokes for a timeless and sophisticated masterpiece.",
+            "dimensions": "150x11",
+            "price": 95.77,
+            "date": "2022-08-12",
+            "color": "Orange",
+            "in_stock": true,
+            "picture_path": "https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674504977/5-4_z9mvyh.png",
+            "artist_id": 2
+        },
+        {
+            "description": "Mixed media canvas with patterns crafted using stencils, spray paint, and a variety of mark making tools.",
+            "dimensions": "33x37",
+            "price": 100.00,
+            "date": "2022-02-01",
+            "color": "Blue",
+            "in_stock": true,
+            "picture_path": "https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674504986/5-2_oz6lt5.png",
+            "artist_id": 2
+        },
+        {
+            "description": "Rich oil painting featuring bold hues & organic patterns created with palette knife & brushstrokes for a dynamic, textured masterpiece.",
+            "dimensions": "20x12",
+            "price": 95.77,
+            "date": "2022-12-08",
+            "color": "Red",
+            "in_stock": true,
+            "picture_path": "https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674763401/IMG_0407_dgiglt.png",
+            "artist_id": 3
+        },
+        {
+            "description": "Vibrant oil painting with bold colors and intricate patterns crafted using impasto and palette knife techniques for a striking visual impact.",
+            "dimensions": "45x45",
+            "price": 83.00,
+            "date": "2022-02-07",
+            "color": "Multi",
+            "in_stock": true,
+            "picture_path": "https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674009959/IMG_4237_ujp7tt.jpg",
+            "artist_id": 3
+        },
+        {
+            "description": "Luminous oil painting with a harmonious blend of colors & patterns created using layering & brushstrokes for a serene, ethereal masterpiece.",
+            "dimensions": "30x45",
+            "price": 74.00,
+            "date": "2022-02-07",
+            "color": "Blue",
+            "in_stock": true,
+            "picture_path": "https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674763401/IMG_0435_c6yik0.png",
+            "artist_id": 3
+        },
+        {
+            "description": "Luminous oil painting with a harmonious blend of colors & patterns created using layering & brushstrokes for a serene, ethereal masterpiece.",
+            "dimensions": "110x220",
+            "price": 50.00,
+            "date": "2022-08-30",
+            "color": "Black",
+            "in_stock": true,
+            "picture_path": "https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674504475/4-5_ndrppf.png",
+            "artist_id": 4
+        },
+        {
+            "description": "Rich oil painting featuring bold hues & organic patterns created with palette knife & brushstrokes for a dynamic, textured masterpiece",
+            "dimensions": "160x220",
+            "price": 63.81,
+            "date": "2022-08-30",
+            "color": "Green",
+            "in_stock": true,
+            "picture_path": "https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674504474/4-1_tvkisg.png",
+            "artist_id": 4
+        },
+        {
+            "description": "Vibrant oil painting with bold colors & intricate patterns crafted using impasto and palette knife techniques for a striking visual impact.",
+            "dimensions": "198x162",
+            "price": 250.00,
+            "date": "2022-08-30",
+            "color": "Red",
+            "in_stock": true,
+            "picture_path": "https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674504475/4-3_cg0zc0.png",
+            "artist_id": 4
+        },
+        {
+            "description": "Elegant oil painting, featuring a harmonious blend of muted colors and subtle brushstrokes for a timeless and sophisticated masterpiece.",
+            "dimensions": "6x10",
+            "price": 20.00,
+            "date": "2022-02-07",
+            "color": "Red",
+            "in_stock": true,
+            "picture_path": "https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674762490/7-1_rsg8ti.png",
+            "artist_id": 5
+        },
+        {
+            "description": "Luminous oil painting with a harmonious blend of colors & patterns created using layering & brushstrokes for a serene, ethereal masterpiece.",
+            "dimensions": "10x10",
+            "price": 20.00,
+            "date": "2022-07-06",
+            "color": "Black",
+            "in_stock": true,
+            "picture_path": "https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674762490/7-3_k7stuv.png",
+            "artist_id": 5
+        },
+        {
+            "description": "Expressive oil painting, featuring a vibrant color palette and bold brushstrokes for a dynamic and textured masterpiece",
+            "dimensions": "8x10",
+            "price": 20.00,
+            "date": "2022-05-12",
+            "color": "Yellow",
+            "in_stock": true,
+            "picture_path": "https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674762490/7-2_cqggh5.png",
+            "artist_id": 5
+        },
+        {
+            "description": "Rich oil painting featuring bold hues & organic patterns created with palette knife & brushstrokes for a dynamic, textured masterpiece",
+            "dimensions": "8x10",
+            "price": 20.00,
+            "date": "2022-05-12",
+            "color": "Black",
+            "in_stock": true,
+            "picture_path": "https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674762490/7-4_mw3vz5.png",
+            "artist_id": 5
+        },
+        {
+            "description": "Luminous painting with a harmonious blend of colors & patterns created using layering & brushstrokes for a serene, ethereal masterpiece.",
+            "dimensions": "150x115",
+            "price": 51.00,
+            "date": "2022-04-24",
+            "color": "Orange",
+            "in_stock": true,
+            "picture_path": "https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674505245/6-3_acomuf.png",
+            "artist_id": 6
+        },
+        {
+            "description": "Expressive oil painting, featuring a vibrant color palette and bold brushstrokes for a dynamic and textured masterpiece",
+            "dimensions": "115x70",
+            "price": 63.00,
+            "date": "2022-02-07",
+            "color": "Green",
+            "in_stock": true,
+            "picture_path": "https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674505245/6-4_wcnfom.png",
+            "artist_id": 6
+        },
+        {
+            "description": "Oil painting with a harmonious blend of warm and cool colors, created using layering and palette knife techniques for a striking visual impact.",
+            "dimensions": "50x30",
+            "price": 90.00,
+            "date": "2022-02-07",
+            "color": "Purple",
+            "in_stock": true,
+            "picture_path": "https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674505245/6-2_lvhihh.png",
+            "artist_id": 6
+        },
+        {
+            "description": "Rich oil painting featuring bold hues & organic patterns created with palette knife & brushstrokes for a dynamic, textured masterpiece",
+            "dimensions": "50x30",
+            "price": 67.14,
+            "date": "2022-02-01",
+            "color": "Red",
+            "in_stock": true,
+            "picture_path": "https://res.cloudinary.com/dxsxg4nkp/image/upload/v1674505245/6-1_dkoosx.png",
+            "artist_id": 6
+        }
+    ]
+}
