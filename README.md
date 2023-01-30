@@ -6,19 +6,13 @@ Galleria Milena is a web application that allows multiple artists to showcase an
 
 ## Background
 
----
-
 While there are great applications out there that help small and talented artists show off and sell their work, such as e-commerce platforms or marketplaces, most of these come with fees and costs which can be difficult to cover for a novice in the field. The inspiration for this web application stems from the talented Iranian based artist and friend Shirin Haghi. Using materials like pens, markers and paper, she makes beautiful mandalas come to life. This web application will help her and other artists showcase their art to the rest of the world and give them the opportunity to sell it and turn their passion into their profession.
 
 ## About the developer
 
----
-
 Galleria Milena was created by Sandra. Learn more about the developer on [LinkedIn](https://www.linkedin.com/in/sandramilenan/).
 
 ## Tech stack
-
----
 
 - **Database:** PostgreSQL, SQLAlchemy
 - **Backend:** Python 3, Flask
@@ -37,8 +31,6 @@ Galleria Milena was created by Sandra. Learn more about the developer on [Linked
   - Cloudinary Upload Widget
 
 ## Features
-
----
 
 ### Login as an artist
 
@@ -87,8 +79,6 @@ You can also shop if you are not logged in as a customer but you will not be abl
 Please enjoy browsing around Galleria Milena.
 
 ## Installation
-
----
 
 ### Requirements:
 
